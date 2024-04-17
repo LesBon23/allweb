@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -258,10 +259,10 @@ select.CatoBoxOne {
 
 <script>
 function showText() {
-  var title = document.getElementById("titleBox").value;
-  var imageUrl = document.getElementById("ImageBoxOne").value;
-  var description = document.getElementById("DescriptionBox").value;
-  var detailUrl = document.getElementById("DetailUrlBox").value;
+  var title = document.getElementById("titleBox").value.trim();
+  var imageUrl = document.getElementById("ImageBoxOne").value.trim();
+  var description = document.getElementById("DescriptionBox").value.trim();
+  var detailUrl = document.getElementById("DetailUrlBox").value.trim();
   var genre = document.getElementById("CatoBoxOne").value;
   var genreId = document.getElementById("CatoBoxTwo").value;
   var detailHtmlBox = document.getElementById("DetailHtmlBox");
@@ -280,8 +281,11 @@ function showText() {
   // Convert JSON object to string with pretty formatting
   var detailHtml = JSON.stringify(movieDetails, null, 4);
 
+  // Add empty line before opening curly bracket
+  detailHtml = detailHtml.replace(/^\{/, "\n{\n");
+
   // Add comma after closing curly bracket
-  detailHtml = detailHtml.replace(/\}$/, "},\n");
+  detailHtml = detailHtml.replace(/\}$/, "},");
 
   // Display details in DetailHtmlBox
   detailHtmlBox.value = detailHtml;
@@ -316,6 +320,7 @@ function showText() {
   //dataBox.appendChild(jsonElement);
 }
 </script>
+
 
 
 <script>
