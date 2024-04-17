@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Text Area</title>
+<style>
+/* CSS for styling */
+/* CSS for styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  flex-direction: column;
+  /*border: 4px solid red;*/
+}
+
+.textarea-container {
+  gap: 10px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  /*border: 4px solid red;*/
+}
+
+/* CSS for mobile responsiveness */
+   @media (min-width: 601px) {
+     .textarea-container {
+        gap: 10px;
+        width: 100%;
+        display: grid;
+    	grid-template-columns: repeat(2, 1fr);
+        justify-content: center;
+        align-items: center;
+      }
+   }
+
+.textBox {
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+/* CSS for mobile responsiveness */
+   @media (max-width: 600px) {
+     .textBox {
+        width: 100%;
+        height: 150px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: none;
+      }
+   }
+
+.CatoOption-container {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  gap: 10px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  /*border: 4px solid red;*/
+}
+
+.Detail-container {
+  gap: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: top;
+  /*border: 4px solid red;*/
+}
+
+/* CSS for mobile responsiveness */
+   @media (max-width: 1240px) {
+     .Detail-container {
+        gap: 10px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: top;
+        /*border: 4px solid red;*/
+      }
+   }
+
+.DataBox {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+#DataBox .responsive-image {
+  max-width: 100%;
+  height: 400px;
+  display: block;
+  margin: 0 auto;
+}
+
+.DetailHtmlBox {
+  height: 300px;
+  width: 800px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  position: relative;
+}
+
+select.CatoBoxOne {
+  height: 40px;
+  width: 25%;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+  outline: none;
+}
+
+/* CSS for mobile responsiveness */
+   @media (max-width: 890px) {
+     select.CatoBoxOne {
+        height: 40px;
+        width: 400px;
+        margin-bottom: 10px;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        color: #333;
+        font-size: 16px;
+        outline: none;
+      }
+   }
+
+.showText {
+  height: 40px;
+  width: 25%;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.showText:hover {
+  background-color: #0056b3;
+}
+
+/* CSS for mobile responsiveness */
+   @media (max-width: 890px) {
+     .showText {
+        height: 40px;
+        width: 400px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+   }
+   
+   /* Additional CSS for CopyBtn */
+.CopyBtn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.CopyBtn:hover {
+  background-color: #0056b3;
+}
+
+/* CSS for mobile responsiveness */
+   @media (max-width: 980px) {
+     .CopyBtn {
+        height: 40px;
+        width: 400px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+   }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="textarea-container">
+    <textarea class="textBox" id="titleBox" placeholder="Type Title here..."></textarea>
+    <textarea class="textBox" id="ImageBoxOne" placeholder="Past Image URL here..."></textarea>
+    <textarea class="textBox" id="DescriptionBox" placeholder="Type Description here..."></textarea>
+    <textarea class="textBox" id="DetailUrlBox" placeholder="Past Buttons URL here..."></textarea>
+  </div>
+  
+  <div class="CatoOption-container">
+  	<select class="CatoBoxOne" id="CatoBoxOne">
+      <option value="">Select Category 1</option>
+      <option value="Title 1">Title 1</option>
+      <option value="Title 2">Title 2</option>
+      <option value="Title 3">Title 3</option>
+    </select>
+    
+    <select class="CatoBoxOne" id="CatoBoxTwo">
+      <option value="">Select Category 2</option>
+      <option value="Title 1">Title 1</option>
+      <option value="Title 2">Title 2</option>
+      <option value="Title 3">Title 3</option>
+    </select>
+    
+  	<button class="showText" onclick="showText()">Show Data</button>
+  </div>
+  
+  <div class="Detail-container">
+    <div class="DataBox" id="DataBox" placeholder="Display All Data here..."></div>
+    <textarea class="DetailHtmlBox" id="DetailHtmlBox" placeholder="Display Details in HTML here..."></textarea>
+    <button class="CopyBtn" onclick="Copy()">Copy Data</button>
+  </div>
+</div>
+
+<script>
+	
+</script>
+
+<script>
+function showText() {
+  var title = document.getElementById("titleBox").value;
+  var imageUrl = document.getElementById("ImageBoxOne").value;
+  var description = document.getElementById("DescriptionBox").value;
+  var detailUrl = document.getElementById("DetailUrlBox").value;
+  var genre = document.getElementById("CatoBoxOne").value;
+  var genreId = document.getElementById("CatoBoxTwo").value;
+  var detailHtmlBox = document.getElementById("DetailHtmlBox");
+  var dataBox = document.getElementById("DataBox");
+
+  // Construct JSON object
+  var movieDetails = {
+    "title": title,
+    "description": description,
+    "genre": genre,
+    "genreId": genreId,
+    "image": imageUrl,
+    "link": detailUrl
+  };
+
+  // Convert JSON object to string with pretty formatting
+  var detailHtml = JSON.stringify(movieDetails, null, 4);
+
+  // Add comma after closing curly bracket
+  detailHtml = detailHtml.replace(/\}$/, "},\n");
+
+  // Display details in DetailHtmlBox
+  detailHtmlBox.value = detailHtml;
+
+  // Clear previous content in DataBox
+  dataBox.innerHTML = "";
+
+  // Display all entered data in DataBox
+  //var titleElement = document.createElement("h3");
+  //titleElement.textContent = title;
+  //dataBox.appendChild(titleElement);
+
+  var imageElement = document.createElement("img");
+  imageElement.src = imageUrl;
+  imageElement.classList.add("responsive-image");
+  dataBox.appendChild(imageElement);
+
+  //var descriptionElement = document.createElement("p");
+  //descriptionElement.textContent = description;
+  //dataBox.appendChild(descriptionElement);
+
+  //var genreElement = document.createElement("p");
+  //genreElement.textContent = genre;
+  //dataBox.appendChild(genreElement);
+
+  //var genreIdElement = document.createElement("p");
+  //genreIdElement.textContent = genreId;
+  //dataBox.appendChild(genreIdElement);
+
+  //var jsonElement = document.createElement("pre");
+  //jsonElement.textContent = "JSON Representation:\n" + detailHtml;
+  //dataBox.appendChild(jsonElement);
+}
+</script>
+
+
+<script>
+function Copy() {
+  // Get the textarea element
+  var detailHtmlBox = document.getElementById("DetailHtmlBox");
+
+  // Select the text within the textarea
+  detailHtmlBox.select();
+
+  // Copy the selected text to the clipboard
+  document.execCommand("copy");
+
+  // Highlight the text
+  detailHtmlBox.focus();
+  detailHtmlBox.setSelectionRange(0, detailHtmlBox.value.length);
+}
+</script>
+</body>
+</html>
