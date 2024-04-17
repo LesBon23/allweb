@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Round Corner Image Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #imageInput {
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        #imagePreviewContainer {
+            display: none;
+            text-align: center;
+        }
+
+        #imagePreview {
+            max-width: 100%;
+            height: auto;
+            display: none;
+            margin: 0 auto; /* Center the image */
+        }
+
+        .slider-container {
+            margin-top: 10px;
+        }
+
+        .slider {
+            width: 100%;
+        }
+
+        .value-box {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .value-box label {
+            margin-right: 10px;
+        }
+
+        .value-box input {
+            width: 100px;
+        }
+
+        #RoundButton,
+        #downloadButton {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #previewContainer {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #previewImage {
+            max-width: 100%;
+            height: auto;
+            display: none;
+            margin: 0 auto; /* Center the image */
+            border-radius: 10px; /* Rounded corners */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Round Corner Image Tool</h1>
+        <input type="file" id="imageInput" accept="image/*">
+        <div id="imagePreviewContainer">
+            <h2>Image:</h2>
+            <img id="imagePreview" src="" alt="Image Preview">
+        </div>
+        <div class="slider-container">
+            <label for="Roundslider">Round Value:</label>
+            <input type="range" min="0" max="1000" step="1" value="0" class="slider" id="Roundslider">
+            <div class="value-box">
+                <label for="Roundvalue">Round Value:</label>
+                <input type="number" min="0" max="1000" step="1" value="0" class="value" id="Roundvalue">
+            </div>
+        </div>
+        <button id="RoundButton">Round Corner Image</button>
+        <button id="downloadButton">Download Rounded Corner Image</button>
+        <div id="previewContainer">
+            <h2>Preview:</h2>
+            <img id="previewImage" src="" alt="Preview">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('imagePreview');
+    const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+    const Roundslider = document.getElementById('Roundslider');
+    const Roundvalue = document.getElementById('Roundvalue');
+    const roundButton = document.getElementById('RoundButton');
+    const downloadButton = document.getElementById('downloadButton');
+    const previewContainer = document.getElementById('previewContainer');
+    const previewImage = document.getElementById('previewImage');
+
+    imageInput.addEventListener('change', function () {
+        const file = this.files[0];
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = 'block';
+            imagePreviewContainer.style.display = 'block';
+            roundButton.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+    });
+
+    roundButton.addEventListener('click', function () {
+        updatePreviewImage();
+    });
+
+    function updatePreviewImage() {
+        const roundValue = Roundslider.value;
+        previewImage.style.borderRadius = `${roundValue}px`; // Applying the roundness to preview image
+        previewContainer.style.display = 'block';
+        previewImage.src = imagePreview.src;
+        previewImage.style.display = 'block';
+        downloadButton.style.display = 'block';
+    }
+
+    downloadButton.addEventListener('click', function () {
+        // Check if the image is fully loaded
+        if (previewImage.complete) {
+            downloadRoundedImage();
+        } else {
+            // If image is not fully loaded, wait for it to load before downloading
+            previewImage.onload = function () {
+                downloadRoundedImage();
+            };
+        }
+    });
+
+    function downloadRoundedImage() {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = previewImage.width;
+        canvas.height = previewImage.height;
+        
+        const roundValue = parseInt(Roundslider.value);
+        
+        // Draw the rounded image on the canvas
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(roundValue, 0);
+        ctx.lineTo(canvas.width - roundValue, 0);
+        ctx.quadraticCurveTo(canvas.width, 0, canvas.width, roundValue);
+        ctx.lineTo(canvas.width, canvas.height - roundValue);
+        ctx.quadraticCurveTo(canvas.width, canvas.height, canvas.width - roundValue, canvas.height);
+        ctx.lineTo(roundValue, canvas.height);
+        ctx.quadraticCurveTo(0, canvas.height, 0, canvas.height - roundValue);
+        ctx.lineTo(0, roundValue);
+        ctx.quadraticCurveTo(0, 0, roundValue, 0);
+        ctx.closePath();
+        ctx.clip();
+        ctx.drawImage(previewImage, 0, 0, canvas.width, canvas.height);
+        ctx.restore();
+        
+        // Create a link element and trigger download
+        const link = document.createElement('a');
+        link.download = 'rounded_image.png';
+        link.href = canvas.toDataURL();
+        link.click();
+    }
+
+    Roundslider.addEventListener('input', function () {
+        Roundvalue.value = this.value;
+        updatePreviewImage();
+    });
+
+    Roundvalue.addEventListener('input', function () {
+        Roundslider.value = this.value;
+        updatePreviewImage();
+    });
+});
+    </script>
+</body>
+</html>
