@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blur Image Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #imageInput {
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        #imagePreviewContainer {
+            display: none;
+            text-align: center;
+        }
+
+        #imagePreview {
+            max-width: 100%;
+            height: auto;
+            display: none;
+            margin: 0 auto; /* Center the image */
+        }
+
+        .slider-container {
+            margin-top: 10px;
+        }
+
+        .slider {
+            width: 100%;
+        }
+
+        .value-box {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .value-box label {
+            margin-right: 10px;
+        }
+
+        .value-box input {
+            width: 100px;
+        }
+
+        #blurButton,
+        #downloadButton {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #previewContainer {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #previewImage {
+            max-width: 100%;
+            height: auto;
+            display: none;
+            margin: 0 auto; /* Center the image */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Blur Image Tool</h1>
+        <input type="file" id="imageInput" accept="image/*">
+        <div id="imagePreviewContainer">
+            <h2>Image:</h2>
+            <img id="imagePreview" src="" alt="Image Preview">
+        </div>
+        <div class="slider-container">
+            <label for="blurSlider">Blur Value:</label>
+            <input type="range" min="0" max="500" step="0.01" value="0" class="slider" id="blurSlider">
+            <div class="value-box">
+                <label for="blurValue">Blur Value:</label>
+                <input type="number" min="0" max="500" step="0.01" value="0" class="value" id="blurValue">
+            </div>
+        </div>
+        <button id="blurButton">Blur Image</button>
+        <button id="downloadButton">Download Blurred Image</button>
+        <div id="previewContainer">
+            <h2>Preview:</h2>
+            <img id="previewImage" src="" alt="Preview">
+        </div>
+    </div>
+
+    <!-- JavaScript code would go here -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const imageInput = document.getElementById("imageInput");
+            const blurSlider = document.getElementById("blurSlider");
+            const blurValueInput = document.getElementById("blurValue");
+            const blurButton = document.getElementById("blurButton");
+            const downloadButton = document.getElementById("downloadButton");
+            const previewImage = document.getElementById("previewImage");
+            const imagePreview = document.getElementById("imagePreview");
+            const imagePreviewContainer = document.getElementById("imagePreviewContainer");
+            const previewContainer = document.getElementById("previewContainer");
+
+            let blurredImageDataURL = "";
+
+            imageInput.addEventListener("change", function () {
+                const file = this.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = "block";
+                    imagePreviewContainer.style.display = "block";
+                    blurButton.style.display = "block";
+                };
+
+                reader.readAsDataURL(file);
+            });
+
+            blurButton.addEventListener("click", function () {
+                const blurValue = blurSlider.value;
+                blurValueInput.value = blurValue;
+                applyBlur(blurValue);
+            });
+
+            function applyBlur(blurValue) {
+                const originalImage = new Image();
+                originalImage.src = imagePreview.src;
+                originalImage.onload = function () {
+                    const canvas = document.createElement("canvas");
+                    const ctx = canvas.getContext("2d");
+                    canvas.width = originalImage.width;
+                    canvas.height = originalImage.height;
+                    ctx.filter = `blur(${blurValue}px)`;
+                    ctx.drawImage(originalImage, 0, 0, canvas.width, canvas.height);
+                    blurredImageDataURL = canvas.toDataURL();
+                    previewImage.src = blurredImageDataURL;
+                    previewImage.style.display = "block";
+                    previewContainer.style.display = "block";
+                    downloadButton.style.display = "block";
+                };
+            }
+
+            blurSlider.addEventListener("input", function () {
+                const blurValue = this.value;
+                blurValueInput.value = blurValue;
+                applyBlur(blurValue);
+            });
+
+            blurValueInput.addEventListener("input", function () {
+                const blurValue = parseFloat(this.value);
+                blurSlider.value = blurValue;
+                applyBlur(blurValue);
+            });
+
+            downloadButton.addEventListener("click", function () {
+                const a = document.createElement("a");
+                a.href = blurredImageDataURL;
+                a.download = "blurred_image.png";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            });
+        });
+    </script>
+</body>
+</html>
