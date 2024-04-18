@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Placeholder Image Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #imageContainer {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            display: inline-block;
+        }
+        #placeholderImage {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Custom Placeholder Image Generator</h1>
+    <form id="imageForm">
+        <label for="width">Width (px):</label>
+        <input type="number" id="width" name="width" required value="600"><br><br>
+        <label for="height">Height (px):</label>
+        <input type="number" id="height" name="height" required value="200"><br><br>
+        <label for="textColor">Text Color:</label>
+        <input type="color" id="textColor" name="textColor"><br><br>
+        <label for="bgColor">Background Color:</label>
+        <input type="color" id="bgColor" name="bgColor"><br><br>
+        <label for="caption">Caption:</label>
+        <input type="text" id="caption" name="caption" value="600x200"><br><br>
+        <label for="fontFamily">Font Family:</label>
+        <select id="fontFamily" name="fontFamily">
+            <option value="Arial">Arial</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Courier New">Courier New</option>
+            <!-- Add more font options here -->
+        </select><br><br>
+        <label for="fontSize">Font Size:</label>
+        <input type="number" id="fontSize" name="fontSize" value="72"><br><br>
+        <input type="checkbox" id="bold" name="bold"> <label for="bold">Bold</label>
+        <input type="checkbox" id="italic" name="italic"> <label for="italic">Italic</label>
+        <input type="checkbox" id="underline" name="underline"> <label for="underline">Underline</label>
+        <input type="checkbox" id="linethrough" name="linethrough"> <label for="linethrough">Line Through</label>
+        <input type="checkbox" id="overline" name="overline"> <label for="overline">Overline</label><br><br>
+        <label for="stockColor">Stock Color:</label>
+        <input type="color" id="stockColor" name="stockColor"><br><br>
+        <label for="stockWidth">Stock Width (px):</label>
+        <input type="number" id="stockWidth" name="stockWidth" value="0"><br><br>
+        <label for="imageQuality">Image Quality:</label>
+        <input type="range" id="imageQuality" name="imageQuality" min="0" max="1" step="0.1" value="1"><br><br>
+        <label for="fileFormat">File Format:</label>
+        <select id="fileFormat" name="fileFormat">
+            <option value="jpeg">JPEG</option>
+            <option value="png">PNG</option>
+            <option value="svg+xml">SVG</option>
+            <option value="mp4">MP4</option>
+        </select><br><br>
+        <button type="submit">Generate Placeholder Image</button>
+    </form>
+
+    <div id="imageContainer">
+        <img id="placeholderImage" src="" alt="Placeholder Image">
+    </div>
+
+    <script>
+        document.getElementById('imageForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const width = document.getElementById('width').value;
+    const height = document.getElementById('height').value;
+    const textColor = document.getElementById('textColor').value;
+    const bgColor = document.getElementById('bgColor').value;
+    const caption = document.getElementById('caption').value;
+    const fontFamily = document.getElementById('fontFamily').value;
+    const fontSize = document.getElementById('fontSize').value;
+    const fontWeight = document.getElementById('bold').checked ? 'bold' : 'normal';
+    const fontStyle = document.getElementById('italic').checked ? 'italic' : 'normal';
+    const textDecoration = [];
+    if (document.getElementById('underline').checked) textDecoration.push('underline');
+    if (document.getElementById('linethrough').checked) textDecoration.push('line-through');
+    if (document.getElementById('overline').checked) textDecoration.push('overline');
+    const stockColor = document.getElementById('stockColor').value;
+    const stockWidth = document.getElementById('stockWidth').value;
+    const imageQuality = document.getElementById('imageQuality').value; // Get the image quality value
+    const fileFormat = document.getElementById('fileFormat').value;
+
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+
+    // Draw the background
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw the text
+    ctx.fillStyle = textColor;
+    ctx.font = `${fontWeight} ${fontStyle} ${fontSize}px ${fontFamily}`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    // Calculate text metrics to get accurate text width
+    const textMetrics = ctx.measureText(caption);
+    const textWidth = textMetrics.width;
+
+    // Calculate text position
+    const textX = canvas.width / 2;
+    const textY = canvas.height / 2;
+
+    // Draw decorations first
+    if (textDecoration.includes('underline')) {
+        ctx.beginPath();
+        ctx.moveTo(textX - textWidth / 2, textY + fontSize / 2);
+        ctx.lineTo(textX + textWidth / 2, textY + fontSize / 2);
+        ctx.strokeStyle = textColor;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    }
+    if (textDecoration.includes('line-through')) {
+        ctx.beginPath();
+        ctx.moveTo(textX - textWidth / 2, textY);
+        ctx.lineTo(textX + textWidth / 2, textY);
+        ctx.strokeStyle = textColor;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    }
+    if (textDecoration.includes('overline')) {
+        ctx.beginPath();
+        ctx.moveTo(textX - textWidth / 2, textY - fontSize / 2);
+        ctx.lineTo(textX + textWidth / 2, textY - fontSize / 2);
+        ctx.strokeStyle = textColor;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    }
+
+    // Draw the text after decorations
+    ctx.fillText(caption, textX, textY);
+
+    // Draw stock
+    ctx.strokeStyle = stockColor;
+    ctx.lineWidth = stockWidth;
+    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+    // Display the image
+    const imageData = canvas.toDataURL(`image/${fileFormat}`, imageQuality); // Include image quality
+    document.getElementById('placeholderImage').src = imageData;
+});
+
+    </script>
+</body>
+</html>
