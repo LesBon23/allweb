@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Thumbnail Downloader</title>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.thumbnails-container {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-around;
+    align-items: top;
+    width: 100%;
+    gap: 10px;
+}
+
+.thumbnail {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.thumbnail img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+}
+
+.download-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.download-button:hover {
+    background-color: #45a049;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+        <h1>YouTube Thumbnail Downloader</h1>
+        <p>A free tool to download YouTube video thumbnails.</p>
+        <input type="text" id="videoUrl" placeholder="Enter YouTube Video URL">
+        <button onclick="generateThumbnails()">Generate Thumbnails</button>
+        <div id="thumbnails" class="thumbnails-container"></div>
+    </div>
+
+<script>
+    function generateThumbnails() {
+    const videoUrl = document.getElementById('videoUrl').value;
+    const thumbnailsContainer = document.getElementById('thumbnails');
+    thumbnailsContainer.innerHTML = '';
+
+    if (!videoUrl) {
+        alert('Please enter a valid YouTube video URL.');
+        return;
+    }
+
+    const thumbnailSizes = [
+        { label: '4K (3840x2160)', size: 'maxresdefault' },
+        { label: '1440p (2560x1440)', size: 'maxresdefault' },
+        { label: 'Full HD (1920x1080)', size: 'maxresdefault' },
+        { label: 'Full HD (1280x720)', size: 'maxresdefault' },
+        { label: 'Standard (640x480)', size: 'sddefault' },
+        { label: 'Medium (480x360)', size: 'hqdefault' },
+        { label: 'Normal (340x180)', size: 'mqdefault' },
+        { label: 'Small (120x90)', size: 'default' }
+    ];
+
+    thumbnailSizes.forEach((thumbSize) => {
+        const thumbnailUrl = `https://img.youtube.com/vi/${getVideoId(videoUrl)}/${thumbSize.size}.jpg`;
+
+        const thumbnailElement = document.createElement('div');
+        thumbnailElement.classList.add('thumbnail');
+        thumbnailElement.id = thumbSize.label.replace(/\s+/g, '-').toLowerCase(); // Assigning ID based on label
+
+
+        const imgAndLabelContainer = document.createElement('div');
+        imgAndLabelContainer.classList.add('img-label-container');
+
+        const imgElement = document.createElement('img');
+        imgElement.src = thumbnailUrl;
+        imgElement.alt = `Thumbnail - ${thumbSize.label}`;
+
+        const labelElement = document.createElement('p');
+        labelElement.classList.add('thumbnail-label');
+        labelElement.textContent = thumbSize.label;
+
+        const downloadButton = document.createElement('button');
+        downloadButton.textContent = 'Download';
+        downloadButton.classList.add('download-button');
+        downloadButton.addEventListener('click', () => downloadThumbnail(thumbnailUrl, thumbSize.label));
+
+        imgAndLabelContainer.appendChild(imgElement);
+        imgAndLabelContainer.appendChild(labelElement);
+        thumbnailElement.appendChild(imgAndLabelContainer);
+        thumbnailElement.appendChild(downloadButton);
+        thumbnailsContainer.appendChild(thumbnailElement);
+    });
+}
+
+function getVideoId(url) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+
+    if (match && match[2].length === 11) {
+        return match[2];
+    } else {
+        alert('Invalid YouTube video URL');
+        return '';
+    }
+}
+</script>
+
+</body>
+</html>
