@@ -221,10 +221,26 @@ select.CatoBoxOne {
 
 <div class="container">
   <div class="textarea-container">
+    
     <textarea class="textBox" id="titleBox" placeholder="Type Title here..."></textarea>
+    
     <textarea class="textBox" id="ImageBoxOne" placeholder="Past Image URL here..."></textarea>
-    <textarea class="textBox" id="DescriptionBox" placeholder="Type Description here..."></textarea>
-    <textarea class="textBox" id="DetailUrlBox" placeholder="Past Buttons URL here..."></textarea>
+    
+    <textarea class="textBox" id="DescriptionOneBox" placeholder="Type 1st Description here..."></textarea>
+    
+    <textarea class="textBox" id="TailVideoBox" placeholder="Paste Video URL here..."></textarea>
+    
+    <textarea class="textBox" id="DescriptionTwoBox" placeholder="Type 2nd Description here..."></textarea>
+    
+    <textarea class="textBox" id="MultiPhotoBox" placeholder="Paste Multi Photos URL here..."></textarea>
+    
+    <textarea class="textBox" id="URLVideoBox" placeholder="Paste URL video for Create Two Hyperlink Buttons here..."></textarea>
+    
+    <textarea class="textBox" id="DescriptionThardBox" placeholder="Type 3rd Description here..."></textarea>
+    
+    <textarea class="textBox" id="DetailUrlBox" placeholder="Detaile Page URL here..."></textarea>
+    
+    <textarea class="textBox" id="CatoFiloBox" placeholder="Paste HTML file here..."></textarea>
   </div>
   
   <div class="CatoOption-container">
@@ -246,8 +262,11 @@ select.CatoBoxOne {
   </div>
   
   <div class="Detail-container">
+    
     <div class="DataBox" id="DataBox" placeholder="Display All Data here..."></div>
+    
     <textarea class="DetailHtmlBox" id="DetailHtmlBox" placeholder="Display Details in HTML here..."></textarea>
+    
     <button class="CopyBtn" onclick="Copy()">Copy Data</button>
   </div>
 </div>
@@ -260,7 +279,7 @@ select.CatoBoxOne {
 function showText() {
   var title = document.getElementById("titleBox").value.trim();
   var imageUrl = document.getElementById("ImageBoxOne").value.trim();
-  var description = document.getElementById("DescriptionBox").value.trim();
+  var description = document.getElementById("DescriptionOneBox").value.trim();
   var detailUrl = document.getElementById("DetailUrlBox").value.trim();
   var genre = document.getElementById("CatoBoxOne").value;
   var genreId = document.getElementById("CatoBoxTwo").value;
