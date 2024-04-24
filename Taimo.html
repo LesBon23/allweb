@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Text Area</title>
-    <style>
-        
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Text Area</title>
+<style>
 /* CSS for styling */
 /* CSS for styling */
 body {
@@ -215,29 +214,70 @@ select.CatoBoxOne {
         transition: background-color 0.3s ease;
       }
    }
-    </style>
+
+</style>
 </head>
 <body>
 
 <div class="container">
-    <div class="textarea-container">
-        <textarea class="textBox" id="titleBox" placeholder="Type Title here..."></textarea>
-        <textarea class="textBox" id="ImageBoxOne" placeholder="Paste Image URL here..."></textarea>
-        <textarea class="textBox" id="videoBox" placeholder="Paste Video URL here..."></textarea>
-        <textarea class="textBox" id="URLVideoBox" placeholder="Paste URL video for Create Two Hyperlink Buttons here..."></textarea>
-        <textarea class="textBox" id="DescriptionOneBox" placeholder="Type 1st Description here..."></textarea>
-        <textarea class="textBox" id="DescriptionTwoBox" placeholder="Type 2nd Description here..."></textarea>
-        <textarea class="textBox" id="DescriptionThreeBox" placeholder="Type 3rd Description here..."></textarea>
-        <textarea class="textBox" id="CatoFiloBox" placeholder="Paste HTML here..."></textarea>
-    </div>
+  <div class="textarea-container">
+    
+    <textarea class="textBox" id="titleBox" placeholder="Type Title here..."></textarea>
+    
+    <textarea class="textBox" id="ImageBoxOne" placeholder="Past Image URL here..."></textarea>
+    
+    <textarea class="textBox" id="DescriptionOneBox" placeholder="Type 1st Description here..."></textarea>
+    
+    <textarea class="textBox" id="videoBox" placeholder="Paste Video URL here..."></textarea>
+    
+    <textarea class="textBox" id="DescriptionTwoBox" placeholder="Type 2nd Description here..."></textarea>
+    
+    <textarea class="textBox" id="MultiPhotoBox" placeholder="Paste Multi Photos URL here..."></textarea>
+    
+    <textarea class="textBox" id="URLVideoBox" placeholder="Paste URL video for Create Two Hyperlink Buttons here..."></textarea>
+    
+    <textarea class="textBox" id="DescriptionThreeBox" placeholder="Type 3rd Description here..."></textarea>
+    
+    <textarea class="textBox" id="DetailUrlBox" placeholder="Detaile Page URL here..."></textarea>
+    
+    <textarea class="textBox" id="CatoFiloBox" placeholder="Paste HTML file here..."></textarea>
+  </div>
   
-    <div class="CatoOption-container">
-        <button class="showText" onclick="showText()">Show Data</button>
-    </div>
+  <div class="CatoOption-container">
+  	<select class="CatoBoxOne" id="CatoBoxOne">
+      <option value="">Select Category 1</option>
+      <option value="action">action</option>
+      <option value="domedy">comedy</option>
+      <option value="drama">drama</option>
+    </select>
+    
+    <select class="CatoBoxOne" id="CatoBoxTwo">
+      <option value="">Select Category 2</option>
+      <option value="action">action</option>
+      <option value="comedy">comedy</option>
+      <option value="drama">drama</option>
+    </select>
+    
+  	<button class="showText" onclick="showText()">Show Data</button>
+    <button class="showText" onclick="showData()">Show HTML file</button>
+  </div>
+  
+  <div class="Detail-container">
+    
+    <div class="DataBox" id="DataBox" placeholder="Display All Data here..."></div>
+    
+    <textarea class="DetailHtmlBox" id="DetailHtmlBox" placeholder="Display Details in HTML here..."></textarea>
+    
+    <button class="CopyBtn" onclick="Copy()">Copy Data</button>
+  </div>
 </div>
 
 <script>
-    function showText() {
+	
+</script>
+
+<script>
+    function showData() {
         // Get the values from text areas
         var title = document.getElementById('titleBox').value;
         var imageUrl = document.getElementById('ImageBoxOne').value;
@@ -247,6 +287,13 @@ select.CatoBoxOne {
         var descriptionThree = document.getElementById('DescriptionThreeBox').value;
         var urlVideo = document.getElementById('URLVideoBox').value.trim();
 
+        // Construct the Main Data HTML content
+        var mainDataHtml = '<div class="card-Container" id="CardContainer">\n\n</div>\n\n';
+        mainDataHtml += '<div class="page-num-Box">\n';
+        mainDataHtml += '<ul id="paginationlinks"></ul>\n';
+        mainDataHtml += '<button class="last-btn" id="lastBtn">Last</button>\n';
+        mainDataHtml += '</div>\n\n';
+
         // Construct the HTML content inside the detail-bottom div
         var detailBottomHtml = '<h1 class="DetailPageHeading" id="TitleHead">\n' + title + '</h1>\n\n';
         detailBottomHtml += '<img class="ThumnailPhoto" id="movieImage" src="' + imageUrl + '" alt="">\n\n';
@@ -254,25 +301,108 @@ select.CatoBoxOne {
         detailBottomHtml += '<iframe width="100%" height="400px" src="' + videoUrl + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>\n\n';
         detailBottomHtml += '<p class="Description" id="descriptionTwo">' + descriptionTwo + '</p>\n\n';
 
-        if (urlVideo !== '') {
-            detailBottomHtml += '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 1</button>\n\n';
-            detailBottomHtml += '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 2</button>\n\n';
-        } else {
-            alert("Please provide a URL for the video.");
-        }
+        // Add Helight-Phots section
+        detailBottomHtml += '<div class="Helight-Phots" id="HelightPhots">\n\n</div>\n\n';
+
+        // Add buttons inside the detail-bottom section
+        detailBottomHtml += '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 1</button>\n\n';
+        detailBottomHtml += '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 2</button>\n\n';
 
         detailBottomHtml += '<p class="Description" id="descriptionThree">' + descriptionThree + '</p>\n\n';
 
         // Wrap the HTML content in the detail-bottom div
-        var finalHtml = '<div class="detail-bottom">\n\n' + detailBottomHtml + '</div>';
+        var detailBottomWithBoxThree = '<div class="detail-bottom">\n\n' + detailBottomHtml + '</div>\n\n';
+
+        // Add the sec-card-Container HTML content
+        var secCardContainerHtml = '<div class="sec-card-Container" id="secCardContainer"></div>\n\n';
+
+        // Combine Main Data, detail-bottom, and sec-card-Container HTML content
+        var finalHtmlContent = '<main class="movies-card-Box">\n\n' + mainDataHtml + detailBottomWithBoxThree + secCardContainerHtml + '</main>';
 
         // Set the HTML content to the CatoFiloBox element
         var htmlContent = document.getElementById('CatoFiloBox');
-        htmlContent.innerHTML = finalHtml;
+        htmlContent.innerHTML = finalHtmlContent;
     }
 </script>
 
 
 
+
+<script>
+  function showText() {
+    // Get the content of titleBox and remove spaces
+    var title = document.getElementById("titleBox").value.trim().replace(/\s/g, "");
+
+    // Construct the URL based on the title content
+    var url = "https://senmamovies.github.io/senmamovies/" + title + ".html";
+
+    // Display the constructed URL in the DetailUrlBox
+    var detailUrlBox = document.getElementById("DetailUrlBox");
+    detailUrlBox.value = url;
+
+    // Call the function to display detailed movie information
+    displayMovieDetails();
+}
+
+  function displayMovieDetails() {
+    var title = document.getElementById("titleBox").value.trim();
+    var imageUrl = document.getElementById("ImageBoxOne").value.trim();
+    var descriptionLines = document.getElementById("DescriptionOneBox").value.trim().split('\n').map(line => line.trim()); // Split and trim lines
+    var description = descriptionLines.join(' '); // Join lines without adding extra line breaks
+    var genre = document.getElementById("CatoBoxOne").value.trim();
+    var genreId = document.getElementById("CatoBoxTwo").value.trim();
+    var detailUrl = document.getElementById("DetailUrlBox").value.trim();
+    var detailHtmlBox = document.getElementById("DetailHtmlBox");
+    var dataBox = document.getElementById("DataBox");
+
+    // JSON object
+    var movieDetails = {
+      "title": title,
+      "description": description,
+      "genre": genre,
+      "genreId": genreId,
+      "image": imageUrl,
+      "link": detailUrl
+    };
+
+    // Convert JSON object to string with pretty formatting
+    var detailHtml = JSON.stringify(movieDetails, null, 4);
+
+    // Add empty line before opening curly bracket
+    detailHtml = detailHtml.replace(/^\{/, "\n{");
+
+    // Add comma after closing curly bracket
+    detailHtml = detailHtml.replace(/\}$/, "},");
+
+    // Display details in DetailHtmlBox
+    detailHtmlBox.value = detailHtml;
+
+    // Clear previous content in DataBox
+    dataBox.innerHTML = "";
+
+    // Display image in DataBox
+    var imageElement = document.createElement("img");
+    imageElement.src = imageUrl;
+    imageElement.classList.add("responsive-image");
+    dataBox.appendChild(imageElement);
+}
+</script>
+
+<script>
+function Copy() {
+  // Get the textarea element
+  var detailHtmlBox = document.getElementById("DetailHtmlBox");
+
+  // Select the text within the textarea
+  detailHtmlBox.select();
+
+  // Copy the selected text to the clipboard
+  document.execCommand("copy");
+
+  // Highlight the text
+  detailHtmlBox.focus();
+  detailHtmlBox.setSelectionRange(0, detailHtmlBox.value.length);
+}
+</script>
 </body>
 </html>
