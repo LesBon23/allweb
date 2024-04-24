@@ -228,7 +228,7 @@ select.CatoBoxOne {
     
     <textarea class="textBox" id="DescriptionOneBox" placeholder="Type 1st Description here..."></textarea>
     
-    <textarea class="textBox" id="TailVideoBox" placeholder="Paste Video URL here..."></textarea>
+    <textarea class="textBox" id="videoBox" placeholder="Paste Video URL here..."></textarea>
     
     <textarea class="textBox" id="DescriptionTwoBox" placeholder="Type 2nd Description here..."></textarea>
     
@@ -236,7 +236,7 @@ select.CatoBoxOne {
     
     <textarea class="textBox" id="URLVideoBox" placeholder="Paste URL video for Create Two Hyperlink Buttons here..."></textarea>
     
-    <textarea class="textBox" id="DescriptionThardBox" placeholder="Type 3rd Description here..."></textarea>
+    <textarea class="textBox" id="DescriptionThreeBox" placeholder="Type 3rd Description here..."></textarea>
     
     <textarea class="textBox" id="DetailUrlBox" placeholder="Detaile Page URL here..."></textarea>
     
@@ -259,6 +259,7 @@ select.CatoBoxOne {
     </select>
     
   	<button class="showText" onclick="showText()">Show Data</button>
+    <button class="showText" onclick="showData()">Show HTML file</button>
   </div>
   
   <div class="Detail-container">
@@ -276,70 +277,125 @@ select.CatoBoxOne {
 </script>
 
 <script>
-function showText() {
-  var title = document.getElementById("titleBox").value.trim();
-  var imageUrl = document.getElementById("ImageBoxOne").value.trim();
-  var description = document.getElementById("DescriptionOneBox").value.trim();
-  var detailUrl = document.getElementById("DetailUrlBox").value.trim();
-  var genre = document.getElementById("CatoBoxOne").value;
-  var genreId = document.getElementById("CatoBoxTwo").value;
-  var detailHtmlBox = document.getElementById("DetailHtmlBox");
-  var dataBox = document.getElementById("DataBox");
+    function showData() {
+        // Get the values from text areas
+        var title = document.getElementById('titleBox').value;
+        var imageUrl = document.getElementById('ImageBoxOne').value;
+        var videoUrl = document.getElementById('videoBox').value;
+        var descriptionOne = document.getElementById('DescriptionOneBox').value;
+        var descriptionTwo = document.getElementById('DescriptionTwoBox').value;
+        var descriptionThree = document.getElementById('DescriptionThreeBox').value;
+        var urlVideo = document.getElementById('URLVideoBox').value.trim();
 
-  // Construct JSON object
-  var movieDetails = {
-    "title": title,
-    "description": description,
-    "genre": genre,
-    "genreId": genreId,
-    "image": imageUrl,
-    "link": detailUrl
-  };
+        // Get multiple URLs from the MultiPhotoBox textarea
+        var multiPhotoUrls = document.getElementById('MultiPhotoBox').value.trim().split('\n');
 
-  // Convert JSON object to string with pretty formatting
-  var detailHtml = JSON.stringify(movieDetails, null, 4);
+        // Construct the Main Data HTML content
+        var mainDataHtml = '<div class="card-Container" id="CardContainer">\n\n</div>\n\n';
+        mainDataHtml += '<div class="page-num-Box">\n';
+        mainDataHtml += '<ul id="paginationlinks"></ul>\n';
+        mainDataHtml += '<button class="last-btn" id="lastBtn">Last</button>\n';
+        mainDataHtml += '</div>\n\n';
 
-  // Add empty line before opening curly bracket
-  detailHtml = detailHtml.replace(/^\{/, "\n{\n");
+        // Construct the HTML content inside the detail-bottom div
+        var detailBottomHtml = '<h1 class="DetailPageHeading" id="TitleHead">\n' + title + '</h1>\n\n';
+        detailBottomHtml += '<img class="ThumnailPhoto" id="movieImage" src="' + imageUrl + '" alt="">\n\n';
+        detailBottomHtml += '<p class="Description" id="descriptionOne">' + descriptionOne + '</p>\n\n';
+        detailBottomHtml += '<iframe width="100%" height="400px" src="' + videoUrl + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>\n\n';
+        detailBottomHtml += '<p class="Description" id="descriptionTwo">' + descriptionTwo + '</p>\n\n';
 
-  // Add comma after closing curly bracket
-  detailHtml = detailHtml.replace(/\}$/, "},");
+        // Add Helight-Phots section
+        detailBottomHtml += '<div class="Helight-Phots" id="HelightPhots">\n';
+        
+        // Add multiple HyperPhoto elements based on the URLs from MultiPhotoBox
+        for (var i = 0; i < multiPhotoUrls.length; i++) {
+            detailBottomHtml += '<a class="Hyper-Photo" id="HyperPhoto" href="' + multiPhotoUrls[i] + '">\n';
+            detailBottomHtml += '<img class="Movie-Highlight-Image" id="MovieHighlightImage" src="' + multiPhotoUrls[i] + '" alt="">\n';
+            detailBottomHtml += '</a>\n\n';
+        }
+        
+        detailBottomHtml += '</div>\n\n';
 
-  // Display details in DetailHtmlBox
-  detailHtmlBox.value = detailHtml;
+        // Add buttons inside the detail-bottom section
+        detailBottomHtml += '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 1</button>\n\n';
+        detailBottomHtml += '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 2</button>\n\n';
 
-  // Clear previous content in DataBox
-  dataBox.innerHTML = "";
+        detailBottomHtml += '<p class="Description" id="descriptionThree">' + descriptionThree + '</p>\n\n';
 
-  // Display all entered data in DataBox
-  //var titleElement = document.createElement("h3");
-  //titleElement.textContent = title;
-  //dataBox.appendChild(titleElement);
+        // Wrap the HTML content in the detail-bottom div
+        var detailBottomWithBoxThree = '<div class="detail-bottom">\n\n' + detailBottomHtml + '</div>\n\n';
 
-  var imageElement = document.createElement("img");
-  imageElement.src = imageUrl;
-  imageElement.classList.add("responsive-image");
-  dataBox.appendChild(imageElement);
+        // Add the sec-card-Container HTML content
+        var secCardContainerHtml = '<div class="sec-card-Container" id="secCardContainer"></div>\n\n';
 
-  //var descriptionElement = document.createElement("p");
-  //descriptionElement.textContent = description;
-  //dataBox.appendChild(descriptionElement);
+        // Combine Main Data, detail-bottom, and sec-card-Container HTML content
+        var finalHtmlContent = '<main class="movies-card-Box">\n\n' + mainDataHtml + detailBottomWithBoxThree + secCardContainerHtml + '</main>';
 
-  //var genreElement = document.createElement("p");
-  //genreElement.textContent = genre;
-  //dataBox.appendChild(genreElement);
-
-  //var genreIdElement = document.createElement("p");
-  //genreIdElement.textContent = genreId;
-  //dataBox.appendChild(genreIdElement);
-
-  //var jsonElement = document.createElement("pre");
-  //jsonElement.textContent = "JSON Representation:\n" + detailHtml;
-  //dataBox.appendChild(jsonElement);
-}
+        // Set the HTML content to the CatoFiloBox element
+        var htmlContent = document.getElementById('CatoFiloBox');
+        htmlContent.innerHTML = finalHtmlContent;
+    }
 </script>
 
+<script>
+  function showText() {
+    // Get the content of titleBox and remove spaces
+    var title = document.getElementById("titleBox").value.trim().replace(/\s/g, "");
 
+    // Construct the URL based on the title content
+    var url = "https://senmamovies.github.io/senmamovies/" + title + ".html";
+
+    // Display the constructed URL in the DetailUrlBox
+    var detailUrlBox = document.getElementById("DetailUrlBox");
+    detailUrlBox.value = url;
+
+    // Call the function to display detailed movie information
+    displayMovieDetails();
+}
+
+  function displayMovieDetails() {
+    var title = document.getElementById("titleBox").value.trim();
+    var imageUrl = document.getElementById("ImageBoxOne").value.trim();
+    var descriptionLines = document.getElementById("DescriptionOneBox").value.trim().split('\n').map(line => line.trim()); // Split and trim lines
+    var description = descriptionLines.join(' '); // Join lines without adding extra line breaks
+    var genre = document.getElementById("CatoBoxOne").value.trim();
+    var genreId = document.getElementById("CatoBoxTwo").value.trim();
+    var detailUrl = document.getElementById("DetailUrlBox").value.trim();
+    var detailHtmlBox = document.getElementById("DetailHtmlBox");
+    var dataBox = document.getElementById("DataBox");
+
+    // JSON object
+    var movieDetails = {
+      "title": title,
+      "description": description,
+      "genre": genre,
+      "genreId": genreId,
+      "image": imageUrl,
+      "link": detailUrl
+    };
+
+    // Convert JSON object to string with pretty formatting
+    var detailHtml = JSON.stringify(movieDetails, null, 4);
+
+    // Add empty line before opening curly bracket
+    detailHtml = detailHtml.replace(/^\{/, "\n{");
+
+    // Add comma after closing curly bracket
+    detailHtml = detailHtml.replace(/\}$/, "},");
+
+    // Display details in DetailHtmlBox
+    detailHtmlBox.value = detailHtml;
+
+    // Clear previous content in DataBox
+    dataBox.innerHTML = "";
+
+    // Display image in DataBox
+    var imageElement = document.createElement("img");
+    imageElement.src = imageUrl;
+    imageElement.classList.add("responsive-image");
+    dataBox.appendChild(imageElement);
+}
+</script>
 
 <script>
 function Copy() {
