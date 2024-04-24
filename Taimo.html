@@ -287,6 +287,9 @@ select.CatoBoxOne {
         var descriptionThree = document.getElementById('DescriptionThreeBox').value;
         var urlVideo = document.getElementById('URLVideoBox').value.trim();
 
+        // Get multiple URLs from the MultiPhotoBox textarea
+        var multiPhotoUrls = document.getElementById('MultiPhotoBox').value.trim().split('\n');
+
         // Construct the Main Data HTML content
         var mainDataHtml = '<div class="card-Container" id="CardContainer">\n\n</div>\n\n';
         mainDataHtml += '<div class="page-num-Box">\n';
@@ -302,7 +305,16 @@ select.CatoBoxOne {
         detailBottomHtml += '<p class="Description" id="descriptionTwo">' + descriptionTwo + '</p>\n\n';
 
         // Add Helight-Phots section
-        detailBottomHtml += '<div class="Helight-Phots" id="HelightPhots">\n\n</div>\n\n';
+        detailBottomHtml += '<div class="Helight-Phots" id="HelightPhots">\n';
+        
+        // Add multiple HyperPhoto elements based on the URLs from MultiPhotoBox
+        for (var i = 0; i < multiPhotoUrls.length; i++) {
+            detailBottomHtml += '<a class="Hyper-Photo" id="HyperPhoto" href="' + multiPhotoUrls[i] + '">\n';
+            detailBottomHtml += '<img class="Movie-Highlight-Image" id="MovieHighlightImage" src="' + multiPhotoUrls[i] + '" alt="">\n';
+            detailBottomHtml += '</a>\n\n';
+        }
+        
+        detailBottomHtml += '</div>\n\n';
 
         // Add buttons inside the detail-bottom section
         detailBottomHtml += '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 1</button>\n\n';
@@ -324,9 +336,6 @@ select.CatoBoxOne {
         htmlContent.innerHTML = finalHtmlContent;
     }
 </script>
-
-
-
 
 <script>
   function showText() {
