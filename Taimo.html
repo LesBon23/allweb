@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Text Area</title>
+    <style>
+        
+/* CSS for styling */
+/* CSS for styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  flex-direction: column;
+  /*border: 4px solid red;*/
+}
+
+.textarea-container {
+  gap: 10px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  /*border: 4px solid red;*/
+}
+
+/* CSS for mobile responsiveness */
+   @media (min-width: 601px) {
+     .textarea-container {
+        gap: 10px;
+        width: 100%;
+        display: grid;
+    	grid-template-columns: repeat(2, 1fr);
+        justify-content: center;
+        align-items: center;
+      }
+   }
+
+.textBox {
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+/* CSS for mobile responsiveness */
+   @media (max-width: 600px) {
+     .textBox {
+        width: 100%;
+        height: 150px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: none;
+      }
+   }
+
+.CatoOption-container {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  gap: 10px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  /*border: 4px solid red;*/
+}
+
+.Detail-container {
+  gap: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: top;
+  /*border: 4px solid red;*/
+}
+
+/* CSS for mobile responsiveness */
+   @media (max-width: 1240px) {
+     .Detail-container {
+        gap: 10px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: top;
+        /*border: 4px solid red;*/
+      }
+   }
+
+.DataBox {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+#DataBox .responsive-image {
+  max-width: 100%;
+  height: 400px;
+  display: block;
+  margin: 0 auto;
+}
+
+.DetailHtmlBox {
+  height: 300px;
+  width: 800px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  position: relative;
+}
+
+select.CatoBoxOne {
+  height: 40px;
+  width: 25%;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+  outline: none;
+}
+
+/* CSS for mobile responsiveness */
+   @media (max-width: 890px) {
+     select.CatoBoxOne {
+        height: 40px;
+        width: 400px;
+        margin-bottom: 10px;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        color: #333;
+        font-size: 16px;
+        outline: none;
+      }
+   }
+
+.showText {
+  height: 40px;
+  width: 25%;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.showText:hover {
+  background-color: #0056b3;
+}
+
+/* CSS for mobile responsiveness */
+   @media (max-width: 890px) {
+     .showText {
+        height: 40px;
+        width: 400px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+   }
+   
+   /* Additional CSS for CopyBtn */
+.CopyBtn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.CopyBtn:hover {
+  background-color: #0056b3;
+}
+
+/* CSS for mobile responsiveness */
+   @media (max-width: 980px) {
+     .CopyBtn {
+        height: 40px;
+        width: 400px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+   }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="textarea-container">
+        <textarea class="textBox" id="titleBox" placeholder="Type Title here..."></textarea>
+        <textarea class="textBox" id="ImageBoxOne" placeholder="Paste Image URL here..."></textarea>
+        <textarea class="textBox" id="videoBox" placeholder="Paste Video URL here..."></textarea>
+        <textarea class="textBox" id="URLVideoBox" placeholder="Paste URL video for Create Two Hyperlink Buttons here..."></textarea>
+        <textarea class="textBox" id="DescriptionOneBox" placeholder="Type 1st Description here..."></textarea>
+        <textarea class="textBox" id="DescriptionTwoBox" placeholder="Type 2nd Description here..."></textarea>
+        <textarea class="textBox" id="DescriptionThreeBox" placeholder="Type 3rd Description here..."></textarea>
+        <textarea class="textBox" id="CatoFiloBox" placeholder="Paste HTML here..."></textarea>
+    </div>
+  
+    <div class="CatoOption-container">
+        <button class="showText" onclick="showText()">Show Data</button>
+    </div>
+</div>
+
+<script>
+    function showText() {
+        // Get the values from text areas
+        var title = document.getElementById('titleBox').value;
+        var imageUrl = document.getElementById('ImageBoxOne').value;
+        var videoUrl = document.getElementById('videoBox').value;
+        var htmlContent = document.getElementById('CatoFiloBox');
+        var descriptionOne = document.getElementById('DescriptionOneBox').value;
+        var descriptionTwo = document.getElementById('DescriptionTwoBox').value;
+        var descriptionThree = document.getElementById('DescriptionThreeBox').value;
+
+        // Construct the HTML content
+        var imageTag = '<img class="ThumnailPhoto" id="movieImage" src="' + imageUrl + '" alt="">\n';
+        var videoIframe = '<iframe width="100%" height="400px" src="' + videoUrl + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        var finalHtml = '<h1 class="DetailPageHeading" id="TitleHead">\n' + title + '</h1>\n' + imageTag + '\n' + videoIframe;
+        var descriptionHtml = '<p class="Description" id="descriptionOne">' + descriptionOne + '</p>\n'
+                            + '<p class="Description" id="descriptionTwo">' + descriptionTwo + '</p>\n'
+                            + '<p class="Description" id="descriptionThree">' + descriptionThree + '</p>\n';
+
+        var urlVideo = document.getElementById('URLVideoBox').value.trim();
+        if (urlVideo !== '') {
+            var button1 = '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 1</button>\n';
+            var button2 = '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 2</button>\n';
+            var buttonsHTML = button1 + button2;
+            htmlContent.value = finalHtml + descriptionHtml + buttonsHTML;
+        } else {
+            // If URL is not provided, just display the title, image, and descriptions
+            htmlContent.value = finalHtml + descriptionHtml;
+            alert("Please provide a URL for the video.");
+        }
+    }
+</script>
+
+</body>
+</html>
