@@ -246,28 +246,29 @@ select.CatoBoxOne {
         var descriptionOne = document.getElementById('DescriptionOneBox').value;
         var descriptionTwo = document.getElementById('DescriptionTwoBox').value;
         var descriptionThree = document.getElementById('DescriptionThreeBox').value;
+        var urlVideo = document.getElementById('URLVideoBox').value.trim();
 
         // Construct the HTML content
-        var imageTag = '<img class="ThumnailPhoto" id="movieImage" src="' + imageUrl + '" alt="">\n';
-        var videoIframe = '<iframe width="100%" height="400px" src="' + videoUrl + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-        var finalHtml = '<h1 class="DetailPageHeading" id="TitleHead">\n' + title + '</h1>\n' + imageTag + '\n' + videoIframe;
-        var descriptionHtml = '<p class="Description" id="descriptionOne">' + descriptionOne + '</p>\n'
-                            + '<p class="Description" id="descriptionTwo">' + descriptionTwo + '</p>\n'
-                            + '<p class="Description" id="descriptionThree">' + descriptionThree + '</p>\n';
+        var finalHtml = '<h1 class="DetailPageHeading" id="TitleHead">\n' + title + '</h1>\n\n';
+        finalHtml += '<img class="ThumnailPhoto" id="movieImage" src="' + imageUrl + '" alt="">\n\n';
+        finalHtml += '<p class="Description" id="descriptionOne">' + descriptionOne + '</p>\n\n';
+        finalHtml += '<iframe width="100%" height="400px" src="' + videoUrl + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>\n\n';
+        finalHtml += '<p class="Description" id="descriptionTwo">' + descriptionTwo + '</p>\n\n';
 
-        var urlVideo = document.getElementById('URLVideoBox').value.trim();
         if (urlVideo !== '') {
-            var button1 = '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 1</button>\n';
-            var button2 = '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 2</button>\n';
-            var buttonsHTML = button1 + button2;
-            htmlContent.value = finalHtml + descriptionHtml + buttonsHTML;
+            finalHtml += '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 1</button>\n\n';
+            finalHtml += '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 2</button>\n\n';
         } else {
-            // If URL is not provided, just display the title, image, and descriptions
-            htmlContent.value = finalHtml + descriptionHtml;
             alert("Please provide a URL for the video.");
         }
+
+        finalHtml += '<p class="Description" id="descriptionThree">' + descriptionThree + '</p>\n\n';
+
+        // Set the HTML content to the CatoFiloBox element
+        htmlContent.innerHTML = finalHtml;
     }
 </script>
+
 
 </body>
 </html>
