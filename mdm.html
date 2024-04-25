@@ -291,7 +291,7 @@ select.CatoBoxOne {
         var multiPhotoUrls = document.getElementById('MultiPhotoBox').value.trim().split('\n');
 
         // Construct the Main Data HTML content
-        var mainDataHtml = '<div class="card-Container" id="CardContainer">\n\n</div>\n\n';
+        var mainDataHtml = '<div class="card-Container" id="CardContainer"></div>\n\n';
         mainDataHtml += '<div class="page-num-Box">\n';
         mainDataHtml += '<ul id="paginationlinks"></ul>\n';
         mainDataHtml += '<button class="last-btn" id="lastBtn">Last</button>\n';
@@ -329,13 +329,17 @@ select.CatoBoxOne {
         var secCardContainerHtml = '<div class="sec-card-Container" id="secCardContainer"></div>\n\n';
 
         // Combine Main Data, detail-bottom, and sec-card-Container HTML content
-        var finalHtmlContent = '<main class="movies-card-Box">\n\n' + mainDataHtml + detailBottomWithBoxThree + secCardContainerHtml + '</main>';
+        var moviesCardBoxHtml = '<main class="movies-card-Box">\n\n' + mainDataHtml + detailBottomWithBoxThree + secCardContainerHtml + '</main>\n\n';
+
+        // Add the movies-card-Box inside Box-Three
+        var boxThreeHtml = '<div class="Box-Three">\n\n' + moviesCardBoxHtml + '</div>';
 
         // Set the HTML content to the CatoFiloBox element
         var htmlContent = document.getElementById('CatoFiloBox');
-        htmlContent.innerHTML = finalHtmlContent;
+        htmlContent.innerHTML = boxThreeHtml;
     }
 </script>
+
 
 <script>
   function showText() {
