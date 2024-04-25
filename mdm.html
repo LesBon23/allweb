@@ -316,11 +316,18 @@ select.CatoBoxOne {
         
         detailBottomHtml += '</div>\n\n';
 
-        // Add buttons inside the detail-bottom section
-        detailBottomHtml += '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 1</button>\n\n';
-        detailBottomHtml += '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 2</button>\n\n';
-
         detailBottomHtml += '<p class="Description" id="descriptionThree">' + descriptionThree + '</p>\n\n';
+
+        // Generate multiple buttons with different classes based on URLs from URLVideoBox
+        var urls = urlVideo.split('\n');
+        var buttonsHtml = '';
+        for (var j = 0; j < urls.length; j++) {
+            var buttonClass = 'HyperBtn' + String.fromCharCode(65 + j); // A:65, B:66, C:67, ...
+            buttonsHtml += '<button class="' + buttonClass + '" onclick="window.location.href=\'' + urls[j] + '\'">Button ' + (j + 1) + '</button>\n\n';
+        }
+
+        // Insert buttons before descriptionThree
+        detailBottomHtml = detailBottomHtml.replace('<p class="Description" id="descriptionThree">', buttonsHtml + '<p class="Description" id="descriptionThree">');
 
         // Wrap the HTML content in the detail-bottom div
         var detailBottomWithBoxThree = '<div class="detail-bottom">\n\n' + detailBottomHtml + '</div>\n\n';
@@ -339,6 +346,7 @@ select.CatoBoxOne {
         htmlContent.innerHTML = boxThreeHtml;
     }
 </script>
+
 
 
 <script>
