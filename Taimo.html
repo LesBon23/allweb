@@ -289,6 +289,52 @@ select.CatoBoxOne {
 
         // Get multiple URLs from the MultiPhotoBox textarea
         var multiPhotoUrls = document.getElementById('MultiPhotoBox').value.trim().split('\n');
+        
+        var bodyHeader = '<header></header>\n\n';
+        
+        var bodyHeader = '<header>\n\n';
+        bodyHeader += '<div class="header-top">\n\n';
+        bodyHeader += '<h1>Senma Movies</h1>\n\n';
+        bodyHeader += '<a class="open-btn" href="">\n\n';
+        bodyHeader += '<img src="" alt="Movie Website Logo">\n\n';
+        bodyHeader += '</a>\n\n';
+        bodyHeader += '</div>\n\n';
+        bodyHeader += '<div class="header-bottom">\n\n';
+        bodyHeader += '<div class="header-right" id="headerRight">\n\n';
+        bodyHeader += '<button class="close-btn" id="closeBtn">\n\n';
+        bodyHeader += '<i class="fa-solid fa-xmark"></i>\n\n';
+        bodyHeader += '</button>\n\n';
+        bodyHeader += '<input type="text" id="searchInput" placeholder="Search...">\n\n';
+        bodyHeader += '<button class="search-btn" onclick="searchMovies()">Search</button>\n\n';
+        bodyHeader += '</div>\n\n';
+        bodyHeader += '<div class="header-left" id="headerLeft">\n\n';
+        bodyHeader += '<nav>\n\n';
+        bodyHeader += '<ul>\n\n';
+        bodyHeader += '<li>\n\n';
+        bodyHeader += '<a href="#">\n\n';
+        bodyHeader += '<i class="fa-solid fa-house"></i>\n\n';
+        bodyHeader += '</a>\n\n';
+        bodyHeader += '</li>\n\n';
+        bodyHeader += '<li>\n\n';
+        bodyHeader += '<a href="#">\n\n';
+        bodyHeader += '<i class="fa-solid fa-phone"></i>\n\n';
+        bodyHeader += '</a>\n\n';
+        bodyHeader += '</li>\n\n';
+        bodyHeader += '<li>\n\n';
+        bodyHeader += '<a href="#">\n\n';
+        bodyHeader += '<i class="fa-solid fa-circle-info"></i>\n\n';
+        bodyHeader += '</a>\n\n';
+        bodyHeader += '</li>\n\n';
+        bodyHeader += '<li>\n\n';
+        bodyHeader += '<button class="cato-btn" id="catoBtn">\n\n';
+        bodyHeader += '<i class="fa-solid fa-bars"></i>\n\n';
+        bodyHeader += '</button>\n\n';
+        bodyHeader += '</li>\n\n';
+        bodyHeader += '</ul\n\n';
+        bodyHeader += '</nav>\n\n';
+        bodyHeader += '</div>\n\n';
+        bodyHeader += '</div>\n\n';
+        bodyHeader += '</header>\n\n';
 
         // Construct the Main Data HTML content
         var mainDataHtml = '<div class="card-Container" id="CardContainer"></div>\n\n';
@@ -316,11 +362,18 @@ select.CatoBoxOne {
         
         detailBottomHtml += '</div>\n\n';
 
-        // Add buttons inside the detail-bottom section
-        detailBottomHtml += '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 1</button>\n\n';
-        detailBottomHtml += '<button class="HyperBtns" onclick="window.location.href=\'' + urlVideo + '\'">Button 2</button>\n\n';
-
         detailBottomHtml += '<p class="Description" id="descriptionThree">' + descriptionThree + '</p>\n\n';
+
+        // Generate multiple buttons with different classes based on URLs from URLVideoBox
+        var urls = urlVideo.split('\n');
+        var buttonsHtml = '';
+        for (var j = 0; j < urls.length; j++) {
+            var buttonClass = 'HyperBtn' + String.fromCharCode(65 + j); // A:65, B:66, C:67, ...
+            buttonsHtml += '<button class="' + buttonClass + '" onclick="window.location.href=\'' + urls[j] + '\'">Button ' + (j + 1) + '</button>\n\n';
+        }
+
+        // Insert buttons before descriptionThree
+        detailBottomHtml = detailBottomHtml.replace('<p class="Description" id="descriptionThree">', buttonsHtml + '<p class="Description" id="descriptionThree">');
 
         // Wrap the HTML content in the detail-bottom div
         var detailBottomWithBoxThree = '<div class="detail-bottom">\n\n' + detailBottomHtml + '</div>\n\n';
@@ -334,12 +387,14 @@ select.CatoBoxOne {
         // Add the movies-card-Box inside Box-Three
         var boxThreeHtml = '<div class="Box-Three">\n\n' + moviesCardBoxHtml + '</div>';
 
+        // Set the HTML content to the body element
+        var bodyInnerHTML = '<body>\n\n' + bodyHeader + boxThreeHtml + '\n\n</body>';
+        
         // Set the HTML content to the CatoFiloBox element
         var htmlContent = document.getElementById('CatoFiloBox');
-        htmlContent.innerHTML = boxThreeHtml;
+        htmlContent.innerHTML = bodyInnerHTML;
     }
 </script>
-
 
 <script>
   function showText() {
