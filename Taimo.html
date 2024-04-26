@@ -281,6 +281,7 @@ select.CatoBoxOne {
     
   	<button class="showText" onclick="showText()">Show Data</button>
     <button class="showText" onclick="showData()">Show HTML file</button>
+    <button class="showText" onclick="downloadBtn()">Download HTML file</button>
   </div>
   
   <div class="Detail-container">
@@ -551,6 +552,18 @@ function Copy() {
   // Highlight the text
   detailHtmlBox.focus();
   detailHtmlBox.setSelectionRange(0, detailHtmlBox.value.length);
+}
+</script>
+
+<script>
+	function downloadBtn() {
+  var title = document.getElementById("titleBox").value.trim().replace(/\s+/g, ''); // Remove spaces and get title
+  var content = document.getElementById("CatoFiloBox").value; // Get content of CatoFiloBox
+  var blob = new Blob([content], { type: "text/html" }); // Create a blob with HTML content
+  var link = document.createElement("a"); // Create a link element
+  link.download = title + ".html"; // Set the download filename
+  link.href = window.URL.createObjectURL(blob); // Set the URL of the blob
+  link.click(); // Simulate click on the link to initiate download
 }
 </script>
 </body>
