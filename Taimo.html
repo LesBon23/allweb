@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -345,6 +346,10 @@ select.CatoBoxOne {
         secButtonsContainerBox += '<p>Advertisement</p>\n\n';
         secButtonsContainerBox += '</div>\n\n';
         
+        var bodyAdvaBox = '<div class="adva-box">\n\n';
+        bodyAdvaBox += '<p>Advertisement</p>\n\n';
+        bodyAdvaBox += '</div>\n\n';
+        
         // Construct the Main Data HTML content
         var mainDataHtml = '<div class="card-Container" id="CardContainer"></div>\n\n';
         mainDataHtml += '<div class="page-num-Box">\n';
@@ -397,7 +402,7 @@ select.CatoBoxOne {
         var boxThreeHtml = '<div class="Box-Three">\n\n' + moviesCardBoxHtml + '</div>';
 
         // Set the HTML content to the body element
-        var bodyInnerHTML = '<body>\n\n' + bodyHeader + bodyPopuBox + secButtonsContainerBox + boxThreeHtml + '\n\n</body>';
+        var bodyInnerHTML = '<body>\n\n' + bodyHeader + bodyPopuBox + secButtonsContainerBox + bodyAdvaBox + boxThreeHtml + '\n\n</body>';
         
         // Set the HTML content to the CatoFiloBox element
         var htmlContent = document.getElementById('CatoFiloBox');
