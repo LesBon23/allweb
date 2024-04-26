@@ -335,7 +335,16 @@ select.CatoBoxOne {
         bodyHeader += '</div>\n\n';
         bodyHeader += '</div>\n\n';
         bodyHeader += '</header>\n\n';
-
+        
+        var bodyPopuBox = '<div class="Popu" id="">\n\n';
+        bodyPopuBox += '<h1>Top Trending Weekly</h1>\n\n';
+        bodyPopuBox += '<div class="Pop-Movies" id="PopMovies"></div>\n\n';
+        bodyPopuBox += '</div>\n\n';
+        
+        var secButtonsContainerBox = '<div class="SecCato-Box" id="secButtonsContainer">\n\n';
+        secButtonsContainerBox += '<p>Advertisement</p>\n\n';
+        secButtonsContainerBox += '</div>\n\n';
+        
         // Construct the Main Data HTML content
         var mainDataHtml = '<div class="card-Container" id="CardContainer"></div>\n\n';
         mainDataHtml += '<div class="page-num-Box">\n';
@@ -388,7 +397,7 @@ select.CatoBoxOne {
         var boxThreeHtml = '<div class="Box-Three">\n\n' + moviesCardBoxHtml + '</div>';
 
         // Set the HTML content to the body element
-        var bodyInnerHTML = '<body>\n\n' + bodyHeader + boxThreeHtml + '\n\n</body>';
+        var bodyInnerHTML = '<body>\n\n' + bodyHeader + bodyPopuBox + secButtonsContainerBox + boxThreeHtml + '\n\n</body>';
         
         // Set the HTML content to the CatoFiloBox element
         var htmlContent = document.getElementById('CatoFiloBox');
