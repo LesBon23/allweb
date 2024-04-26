@@ -241,6 +241,27 @@ select.CatoBoxOne {
     <textarea class="textBox" id="DetailUrlBox" placeholder="Detaile Page URL here..."></textarea>
     
     <textarea class="textBox" id="CatoFiloBox" placeholder="Paste HTML file here..."></textarea>
+    
+    <textarea class="textBox" id="scriptBox" placeholder="Type 3rd Description here...">
+      <script>
+    	
+    </script>
+    
+    
+    <script src="https://senmamovies.github.io/senmamovies/maincards.js"></script>
+    
+    <script src="https://senmamovies.github.io/senmamovies/MainSystem.js"></script>
+    
+    
+    <script src="https://senmamovies.github.io/senmamovies/catoopenclose.js"></script>
+    
+    
+    <script src="https://senmamovies.github.io/senmamovies/catos.js"></script>
+    
+      <script>
+    	
+    </script>
+    </textarea>
   </div>
   
   <div class="CatoOption-container">
@@ -286,6 +307,7 @@ select.CatoBoxOne {
         var descriptionTwo = document.getElementById('DescriptionTwoBox').value;
         var descriptionThree = document.getElementById('DescriptionThreeBox').value;
         var urlVideo = document.getElementById('URLVideoBox').value.trim();
+        var JSscritoBox = document.getElementById('scriptBox').value;
 
         // Get multiple URLs from the MultiPhotoBox textarea
         var multiPhotoUrls = document.getElementById('MultiPhotoBox').value.trim().split('\n');
@@ -419,7 +441,7 @@ select.CatoBoxOne {
         bodyFooterBox += '<footer>\n\n';
 
         // Set the HTML content to the body element
-        var bodyInnerHTML = '<body>\n\n' + bodyHeader + bodyPopuBox + secButtonsContainerBox + bodyAdvaBox + boxThreeHtml + bodyFooterBox + '\n\n</body>\n';
+        var bodyInnerHTML = '<body>\n\n' + bodyHeader + bodyPopuBox + secButtonsContainerBox + bodyAdvaBox + boxThreeHtml + bodyFooterBox + JSscritoBox + '\n</body>\n';
 
         // Set the HTML content to the body element
         var htmlfiloHeaderMetOne = '<meta charset="UTF-8">\n';
