@@ -420,10 +420,38 @@ select.CatoBoxOne {
 
         // Set the HTML content to the body element
         var bodyInnerHTML = '<body>\n\n' + bodyHeader + bodyPopuBox + secButtonsContainerBox + bodyAdvaBox + boxThreeHtml + bodyFooterBox + '\n\n</body>';
+
+        // Set the HTML content to the body element
+        var htmlfiloHeaderMetOne = '<meta charset="UTF-8">\n';
+
+        // Set the HTML content to the body element
+        var htmlfiloHeaderMetTwo = '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n';
+
+        // Set the HTML content to the body element
+        var htmlfiloHeaderLinko = '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">\n';
+
+        // Set the HTML content to the body element
+        var htmlfiloHeaderTitlo = '<title>';
+        htmlfiloHeaderTitlo += 'Movie Website';
+        htmlfiloHeaderTitlo += '</title>\n';
+
+        // Set the HTML content to the body element
+        var htmlfiloStylo = '<link rel="stylesheet" href="https://senmamovies.github.io/senmamovies/secondstylesSecond.css">\n';
+
+        // Set the HTML content to the body element
+        var htmlfiloHeaderStylo = '<style>\n';
+        htmlfiloHeaderStylo += '	Movie Website\n';
+        htmlfiloHeaderStylo += '</style>\n';
+        
+        // Set the HTML content to the body element
+        var htmlfiloHeader = '<head>\n' + htmlfiloHeaderMetOne + htmlfiloHeaderMetTwo + htmlfiloHeaderLinko + htmlfiloHeaderTitlo + htmlfiloStylo + htmlfiloHeaderStylo + '\n\n</head>\n\n';
+
+        // Set the HTML content to the body element
+        var htmlfilo = '<html>\n' + htmlfiloHeader + bodyInnerHTML + '</html>';
         
         // Set the HTML content to the CatoFiloBox element
         var htmlContent = document.getElementById('CatoFiloBox');
-        htmlContent.innerHTML = bodyInnerHTML;
+        htmlContent.innerHTML = htmlfilo;
     }
 </script>
 
