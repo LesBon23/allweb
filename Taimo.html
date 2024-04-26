@@ -412,10 +412,14 @@ select.CatoBoxOne {
         BoxThreeMoviesCategoryBox += '</div>\n\n';
 
         // Add the movies-card-Box inside Box-Three
-        var boxThreeHtml = '<div class="Box-Three">\n\n' + moviesCardBoxHtml + BoxThreeMoviesCategoryBox + '</div>';
+        var boxThreeHtml = '<div class="Box-Three">\n\n' + moviesCardBoxHtml + BoxThreeMoviesCategoryBox + '</div>\n\n';
+        
+        var bodyFooterBox = '<footer>\n\n';
+        bodyFooterBox += '<p>&copy; 2024 Movie Website. All rights reserved.</p>\n\n';
+        bodyFooterBox += '<footer>\n\n';
 
         // Set the HTML content to the body element
-        var bodyInnerHTML = '<body>\n\n' + bodyHeader + bodyPopuBox + secButtonsContainerBox + bodyAdvaBox + boxThreeHtml + '\n\n</body>';
+        var bodyInnerHTML = '<body>\n\n' + bodyHeader + bodyPopuBox + secButtonsContainerBox + bodyAdvaBox + boxThreeHtml + bodyFooterBox + '\n\n</body>';
         
         // Set the HTML content to the CatoFiloBox element
         var htmlContent = document.getElementById('CatoFiloBox');
