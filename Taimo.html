@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -319,7 +320,7 @@ select.CatoBoxOne {
         bodyHeader += '<div class="header-top">\n\n';
         bodyHeader += '<h1>Senma Movies</h1>\n\n';
         bodyHeader += '<a class="open-btn" href="">\n\n';
-        bodyHeader += '<img src="" alt="Movie Website Logo">\n\n';
+        bodyHeader += '<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgH-A7doWtqT62LztWTBS5JgKoPpYnOiuzYJXLrZxXMZsRTr-YRlGsxviPnHUKHeRX8oIL59sONYSwFwB7O7Q71mebHOj7th8ckr6u27kkCk80DGjM94ZFDPyxfLkpLS1uRT8qlIyM5wxTaM2gDx3AX0_WZPDrYWfzqjMCfyt0Hy_bLpPb5Oa1CHtAmQGU/s1600/a1.png" alt="Movie Website Logo">\n\n';
         bodyHeader += '</a>\n\n';
         bodyHeader += '</div>\n\n';
         bodyHeader += '<div class="header-bottom">\n\n';
@@ -382,9 +383,9 @@ select.CatoBoxOne {
         // Construct the HTML content inside the detail-bottom div
         var detailBottomHtml = '<h1 class="DetailPageHeading" id="TitleHead">\n' + title + '</h1>\n\n';
         detailBottomHtml += '<img class="ThumnailPhoto" id="movieImage" src="' + imageUrl + '" alt="">\n\n';
-        detailBottomHtml += '<p class="Description" id="descriptionOne">' + descriptionOne + '</p>\n\n';
+        detailBottomHtml += '<p class="descriptionOne" id="descriptionOne">' + descriptionOne + '</p>\n\n';
         detailBottomHtml += '<iframe width="100%" height="400px" src="' + videoUrl + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>\n\n';
-        detailBottomHtml += '<p class="Description" id="descriptionTwo">' + descriptionTwo + '</p>\n\n';
+        detailBottomHtml += '<p class="descriptionTwo" id="descriptionTwo">' + descriptionTwo + '</p>\n\n';
 
         // Add Helight-Phots section
         detailBottomHtml += '<div class="Helight-Phots" id="HelightPhots">\n';
@@ -409,10 +410,10 @@ select.CatoBoxOne {
         }
 
         // Insert buttons before descriptionThree
-        detailBottomHtml = detailBottomHtml.replace('<p class="Description" id="descriptionThree">', buttonsHtml + '<p class="Description" id="descriptionThree">');
+        detailBottomHtml = detailBottomHtml.replace('<p class="descriptionThree" id="descriptionThree">', buttonsHtml + '<p class="Description" id="descriptionThree">');
 
         // Wrap the HTML content in the detail-bottom div
-        var detailBottomWithBoxThree = '<div class="detail-bottom">\n\n' + detailBottomHtml + '</div>\n\n';
+        var detailBottomWithBoxThree = '<div class="movie-detail" id="movieDetail">\n\n' + detailBottomHtml + '</div>\n\n';
 
         // Add the sec-card-Container HTML content
         var secCardContainerHtml = '<div class="sec-card-Container" id="secCardContainer"></div>\n\n';
@@ -423,14 +424,14 @@ select.CatoBoxOne {
         var BoxThreeMoviesCategoryBox = '<div class="movies-category-box" id="moviesCategoryBox">\n\n';
         BoxThreeMoviesCategoryBox += '<div class="cato-top-box">\n\n';
         BoxThreeMoviesCategoryBox += '<h2>Top Trending</h2>\n\n';
-        BoxThreeMoviesCategoryBox += '</div">\n\n';
+        BoxThreeMoviesCategoryBox += '</div>\n\n';
         BoxThreeMoviesCategoryBox += '<div class="thard-card-Container" id="thardCardContainer"></div>\n\n';
         BoxThreeMoviesCategoryBox += '<div class="cato-top-box-two">\n\n';
         BoxThreeMoviesCategoryBox += '<h2>Categories</h2>\n\n';
         BoxThreeMoviesCategoryBox += '<button class="cato-close-btn" id="catoCloseBtn">\n\n';
         BoxThreeMoviesCategoryBox += '<i class="fa-solid fa-xmark"></i>\n\n';
         BoxThreeMoviesCategoryBox += '</button>\n\n';
-        BoxThreeMoviesCategoryBox += '</div">\n\n';
+        BoxThreeMoviesCategoryBox += '</div>\n\n';
         BoxThreeMoviesCategoryBox += '<ul id="buttons-container"></ul>\n\n';
         BoxThreeMoviesCategoryBox += '</div>\n\n';
 
