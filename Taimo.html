@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -166,6 +167,19 @@ select.CatoBoxOne {
   transition: background-color 0.3s ease;
 }
 
+.scriptBox {
+  height: 40px;
+  width: 25%;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  display: none;
+}
+
 .showText:hover {
   background-color: #0056b3;
 }
@@ -182,6 +196,19 @@ select.CatoBoxOne {
         cursor: pointer;
         font-size: 16px;
         transition: background-color 0.3s ease;
+      }
+      
+      .scriptBox {
+        height: 40px;
+        width: 400px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        display: none;
       }
    }
    
@@ -243,7 +270,7 @@ select.CatoBoxOne {
     
     <textarea class="textBox" id="CatoFiloBox" placeholder="Paste HTML file here..."></textarea>
     
-    <textarea class="textBox" id="scriptBox" placeholder="Type 3rd Description here...">
+    <textarea class="scriptBox" id="scriptBox" placeholder="Type 3rd Description here...">
       <script>
     	
     </script>
@@ -301,182 +328,180 @@ select.CatoBoxOne {
 
 <script>
     function showData() {
-        // Get the values from text areas
-        var title = document.getElementById('titleBox').value;
-        var imageUrl = document.getElementById('ImageBoxOne').value;
-        var videoUrl = document.getElementById('videoBox').value;
-        var descriptionOne = document.getElementById('DescriptionOneBox').value;
-        var descriptionTwo = document.getElementById('DescriptionTwoBox').value;
-        var descriptionThree = document.getElementById('DescriptionThreeBox').value;
-        var urlVideo = document.getElementById('URLVideoBox').value.trim();
-        var JSscritoBox = document.getElementById('scriptBox').value;
+    // Get the values from text areas
+    var title = document.getElementById('titleBox').value;
+    var imageUrl = document.getElementById('ImageBoxOne').value;
+    var videoUrl = document.getElementById('videoBox').value;
+    var descriptionOne = document.getElementById('DescriptionOneBox').value;
+    var descriptionTwo = document.getElementById('DescriptionTwoBox').value;
+    var descriptionThree = document.getElementById('DescriptionThreeBox').value;
+    var urlVideo = document.getElementById('URLVideoBox').value.trim();
+    var JSscritoBox = document.getElementById('scriptBox').value;
 
-        // Get multiple URLs from the MultiPhotoBox textarea
-        var multiPhotoUrls = document.getElementById('MultiPhotoBox').value.trim().split('\n');
-        
-        var bodyHeader = '<header></header>\n\n';
-        
-        var bodyHeader = '<header>\n\n';
-        bodyHeader += '<div class="header-top">\n\n';
-        bodyHeader += '<h1>Senma Movies</h1>\n\n';
-        bodyHeader += '<a class="open-btn" href="">\n\n';
-        bodyHeader += '<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgH-A7doWtqT62LztWTBS5JgKoPpYnOiuzYJXLrZxXMZsRTr-YRlGsxviPnHUKHeRX8oIL59sONYSwFwB7O7Q71mebHOj7th8ckr6u27kkCk80DGjM94ZFDPyxfLkpLS1uRT8qlIyM5wxTaM2gDx3AX0_WZPDrYWfzqjMCfyt0Hy_bLpPb5Oa1CHtAmQGU/s1600/a1.png" alt="Movie Website Logo">\n\n';
-        bodyHeader += '</a>\n\n';
-        bodyHeader += '</div>\n\n';
-        bodyHeader += '<div class="header-bottom">\n\n';
-        bodyHeader += '<div class="header-right" id="headerRight">\n\n';
-        bodyHeader += '<button class="close-btn" id="closeBtn">\n\n';
-        bodyHeader += '<i class="fa-solid fa-xmark"></i>\n\n';
-        bodyHeader += '</button>\n\n';
-        bodyHeader += '<input type="text" id="searchInput" placeholder="Search...">\n\n';
-        bodyHeader += '<button class="search-btn" onclick="searchMovies()">Search</button>\n\n';
-        bodyHeader += '</div>\n\n';
-        bodyHeader += '<div class="header-left" id="headerLeft">\n\n';
-        bodyHeader += '<nav>\n\n';
-        bodyHeader += '<ul>\n\n';
-        bodyHeader += '<li>\n\n';
-        bodyHeader += '<a href="#">\n\n';
-        bodyHeader += '<i class="fa-solid fa-house"></i>\n\n';
-        bodyHeader += '</a>\n\n';
-        bodyHeader += '</li>\n\n';
-        bodyHeader += '<li>\n\n';
-        bodyHeader += '<a href="#">\n\n';
-        bodyHeader += '<i class="fa-solid fa-phone"></i>\n\n';
-        bodyHeader += '</a>\n\n';
-        bodyHeader += '</li>\n\n';
-        bodyHeader += '<li>\n\n';
-        bodyHeader += '<a href="#">\n\n';
-        bodyHeader += '<i class="fa-solid fa-circle-info"></i>\n\n';
-        bodyHeader += '</a>\n\n';
-        bodyHeader += '</li>\n\n';
-        bodyHeader += '<li>\n\n';
-        bodyHeader += '<button class="cato-btn" id="catoBtn">\n\n';
-        bodyHeader += '<i class="fa-solid fa-bars"></i>\n\n';
-        bodyHeader += '</button>\n\n';
-        bodyHeader += '</li>\n\n';
-        bodyHeader += '</ul\n\n';
-        bodyHeader += '</nav>\n\n';
-        bodyHeader += '</div>\n\n';
-        bodyHeader += '</div>\n\n';
-        bodyHeader += '</header>\n\n';
-        
-        var bodyPopuBox = '<div class="Popu" id="">\n\n';
-        bodyPopuBox += '<h1>Top Trending Weekly</h1>\n\n';
-        bodyPopuBox += '<div class="Pop-Movies" id="PopMovies"></div>\n\n';
-        bodyPopuBox += '</div>\n\n';
-        
-        var secButtonsContainerBox = '<div class="SecCato-Box" id="secButtonsContainer">\n\n';
-        secButtonsContainerBox += '<p>Advertisement</p>\n\n';
-        secButtonsContainerBox += '</div>\n\n';
-        
-        var bodyAdvaBox = '<div class="adva-box">\n\n';
-        bodyAdvaBox += '<p>Advertisement</p>\n\n';
-        bodyAdvaBox += '</div>\n\n';
-        
-        // Construct the Main Data HTML content
-        var mainDataHtml = '<div class="card-Container" id="CardContainer"></div>\n\n';
-        mainDataHtml += '<div class="page-num-Box">\n';
-        mainDataHtml += '<ul id="paginationlinks"></ul>\n';
-        mainDataHtml += '<button class="last-btn" id="lastBtn">Last</button>\n';
-        mainDataHtml += '</div>\n\n';
+    // Get multiple URLs from the MultiPhotoBox textarea
+    var multiPhotoUrls = document.getElementById('MultiPhotoBox').value.trim().split('\n');
+    
+    var bodyHeader = '<header>\n\n';
+    bodyHeader += '<div class="header-top">\n\n';
+    bodyHeader += '<h1>Senma Movies</h1>\n\n';
+    bodyHeader += '<a class="open-btn" href="">\n\n';
+    bodyHeader += '<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgH-A7doWtqT62LztWTBS5JgKoPpYnOiuzYJXLrZxXMZsRTr-YRlGsxviPnHUKHeRX8oIL59sONYSwFwB7O7Q71mebHOj7th8ckr6u27kkCk80DGjM94ZFDPyxfLkpLS1uRT8qlIyM5wxTaM2gDx3AX0_WZPDrYWfzqjMCfyt0Hy_bLpPb5Oa1CHtAmQGU/s1600/a1.png" alt="Movie Website Logo">\n\n';
+    bodyHeader += '</a>\n\n';
+    bodyHeader += '</div>\n\n';
+    bodyHeader += '<div class="header-bottom">\n\n';
+    bodyHeader += '<div class="header-right" id="headerRight">\n\n';
+    bodyHeader += '<button class="close-btn" id="closeBtn">\n\n';
+    bodyHeader += '<i class="fa-solid fa-xmark"></i>\n\n';
+    bodyHeader += '</button>\n\n';
+    bodyHeader += '<input type="text" id="searchInput" placeholder="Search...">\n\n';
+    bodyHeader += '<button class="search-btn" onclick="searchMovies()">Search</button>\n\n';
+    bodyHeader += '</div>\n\n';
+    bodyHeader += '<div class="header-left" id="headerLeft">\n\n';
+    bodyHeader += '<nav>\n\n';
+    bodyHeader += '<ul>\n\n';
+    bodyHeader += '<li>\n\n';
+    bodyHeader += '<a href="#">\n\n';
+    bodyHeader += '<i class="fa-solid fa-house"></i>\n\n';
+    bodyHeader += '</a>\n\n';
+    bodyHeader += '</li>\n\n';
+    bodyHeader += '<li>\n\n';
+    bodyHeader += '<a href="#">\n\n';
+    bodyHeader += '<i class="fa-solid fa-phone"></i>\n\n';
+    bodyHeader += '</a>\n\n';
+    bodyHeader += '</li>\n\n';
+    bodyHeader += '<li>\n\n';
+    bodyHeader += '<a href="#">\n\n';
+    bodyHeader += '<i class="fa-solid fa-circle-info"></i>\n\n';
+    bodyHeader += '</a>\n\n';
+    bodyHeader += '</li>\n\n';
+    bodyHeader += '<li>\n\n';
+    bodyHeader += '<button class="cato-btn" id="catoBtn">\n\n';
+    bodyHeader += '<i class="fa-solid fa-bars"></i>\n\n';
+    bodyHeader += '</button>\n\n';
+    bodyHeader += '</li>\n\n';
+    bodyHeader += '</ul\n\n';
+    bodyHeader += '</nav>\n\n';
+    bodyHeader += '</div>\n\n';
+    bodyHeader += '</div>\n\n';
+    bodyHeader += '</header>\n\n';
+    
+    var bodyPopuBox = '<div class="Popu" id="">\n\n';
+    bodyPopuBox += '<h1>Top Trending Weekly</h1>\n\n';
+    bodyPopuBox += '<div class="Pop-Movies" id="PopMovies"></div>\n\n';
+    bodyPopuBox += '</div>\n\n';
+    
+    var secButtonsContainerBox = '<div class="SecCato-Box" id="secButtonsContainer">\n\n';
+    secButtonsContainerBox += '<p>Advertisement</p>\n\n';
+    secButtonsContainerBox += '</div>\n\n';
+    
+    var bodyAdvaBox = '<div class="adva-box">\n\n';
+    bodyAdvaBox += '<p>Advertisement</p>\n\n';
+    bodyAdvaBox += '</div>\n\n';
+    
+    // Construct the Main Data HTML content
+    var mainDataHtml = '<div class="card-Container" id="CardContainer"></div>\n\n';
+    mainDataHtml += '<div class="page-num-Box">\n';
+    mainDataHtml += '<ul id="paginationlinks"></ul>\n';
+    mainDataHtml += '<button class="last-btn" id="lastBtn">Last</button>\n';
+    mainDataHtml += '</div>\n\n';
 
-        // Construct the HTML content inside the detail-bottom div
-        var detailBottomHtml = '<h1 class="DetailPageHeading" id="TitleHead">\n' + title + '</h1>\n\n';
-        detailBottomHtml += '<img class="ThumnailPhoto" id="movieImage" src="' + imageUrl + '" alt="">\n\n';
-        detailBottomHtml += '<p class="descriptionOne" id="descriptionOne">' + descriptionOne + '</p>\n\n';
-        detailBottomHtml += '<iframe width="100%" height="400px" src="' + videoUrl + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>\n\n';
-        detailBottomHtml += '<p class="descriptionTwo" id="descriptionTwo">' + descriptionTwo + '</p>\n\n';
+    // Construct the HTML content inside the detail-bottom div
+    var detailBottomHtml = '<h1 class="DetailPageHeading" id="TitleHead">\n' + title + '</h1>\n\n';
+    detailBottomHtml += '<img class="ThumnailPhoto" id="movieImage" src="' + imageUrl + '" alt="">\n\n';
+    detailBottomHtml += '<p class="descriptionOne" id="descriptionOne">' + descriptionOne + '</p>\n\n';
+    detailBottomHtml += '<iframe width="100%" height="400px" src="' + videoUrl + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>\n\n';
+    detailBottomHtml += '<p class="descriptionTwo" id="descriptionTwo">' + descriptionTwo + '</p>\n\n';
 
-        // Add Helight-Phots section
-        detailBottomHtml += '<div class="Helight-Phots" id="HelightPhots">\n';
-        
-        // Add multiple HyperPhoto elements based on the URLs from MultiPhotoBox
-        for (var i = 0; i < multiPhotoUrls.length; i++) {
-            detailBottomHtml += '<a class="Hyper-Photo" id="HyperPhoto" href="' + multiPhotoUrls[i] + '">\n';
-            detailBottomHtml += '<img class="Movie-Highlight-Image" id="MovieHighlightImage" src="' + multiPhotoUrls[i] + '" alt="">\n';
-            detailBottomHtml += '</a>\n\n';
-        }
-        
-        detailBottomHtml += '</div>\n\n';
-
-        detailBottomHtml += '<p class="Description" id="descriptionThree">' + descriptionThree + '</p>\n\n';
-
-        // Generate multiple buttons with different classes based on URLs from URLVideoBox
-        var urls = urlVideo.split('\n');
-        var buttonsHtml = '';
-        for (var j = 0; j < urls.length; j++) {
-            var buttonClass = 'HyperBtn' + String.fromCharCode(65 + j); // A:65, B:66, C:67, ...
-            buttonsHtml += '<button class="' + buttonClass + '" onclick="window.location.href=\'' + urls[j] + '\'">Button ' + (j + 1) + '</button>\n\n';
-        }
-
-        // Insert buttons before descriptionThree
-        detailBottomHtml = detailBottomHtml.replace('<p class="descriptionThree" id="descriptionThree">', buttonsHtml + '<p class="Description" id="descriptionThree">');
-
-        // Wrap the HTML content in the detail-bottom div
-        var detailBottomWithBoxThree = '<div class="movie-detail" id="movieDetail">\n\n' + detailBottomHtml + '</div>\n\n';
-
-        // Add the sec-card-Container HTML content
-        var secCardContainerHtml = '<div class="sec-card-Container" id="secCardContainer"></div>\n\n';
-
-        // Combine Main Data, detail-bottom, and sec-card-Container HTML content
-        var moviesCardBoxHtml = '<main class="movies-card-Box">\n\n' + mainDataHtml + detailBottomWithBoxThree + secCardContainerHtml + '</main>\n\n';
-        
-        var BoxThreeMoviesCategoryBox = '<div class="movies-category-box" id="moviesCategoryBox">\n\n';
-        BoxThreeMoviesCategoryBox += '<div class="cato-top-box">\n\n';
-        BoxThreeMoviesCategoryBox += '<h2>Top Trending</h2>\n\n';
-        BoxThreeMoviesCategoryBox += '</div>\n\n';
-        BoxThreeMoviesCategoryBox += '<div class="thard-card-Container" id="thardCardContainer"></div>\n\n';
-        BoxThreeMoviesCategoryBox += '<div class="cato-top-box-two">\n\n';
-        BoxThreeMoviesCategoryBox += '<h2>Categories</h2>\n\n';
-        BoxThreeMoviesCategoryBox += '<button class="cato-close-btn" id="catoCloseBtn">\n\n';
-        BoxThreeMoviesCategoryBox += '<i class="fa-solid fa-xmark"></i>\n\n';
-        BoxThreeMoviesCategoryBox += '</button>\n\n';
-        BoxThreeMoviesCategoryBox += '</div>\n\n';
-        BoxThreeMoviesCategoryBox += '<ul id="buttons-container"></ul>\n\n';
-        BoxThreeMoviesCategoryBox += '</div>\n\n';
-
-        // Add the movies-card-Box inside Box-Three
-        var boxThreeHtml = '<div class="Box-Three">\n\n' + moviesCardBoxHtml + BoxThreeMoviesCategoryBox + '</div>\n\n';
-        
-        var bodyFooterBox = '<footer>\n\n';
-        bodyFooterBox += '<p>&copy; 2024 Movie Website. All rights reserved.</p>\n\n';
-        bodyFooterBox += '<footer>\n\n';
-
-        // Set the HTML content to the body element
-        var bodyInnerHTML = '<body>\n\n' + bodyHeader + bodyPopuBox + secButtonsContainerBox + bodyAdvaBox + boxThreeHtml + bodyFooterBox + JSscritoBox + '\n</body>\n';
-
-        // Set the HTML content to the body element
-        var htmlfiloHeaderMetOne = '<meta charset="UTF-8">\n';
-
-        // Set the HTML content to the body element
-        var htmlfiloHeaderMetTwo = '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n';
-
-        // Set the HTML content to the body element
-        var htmlfiloHeaderLinko = '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">\n';
-
-        // Set the HTML content to the body element
-        var htmlfiloHeaderTitlo = '<title>';
-        htmlfiloHeaderTitlo += 'Movie Website';
-        htmlfiloHeaderTitlo += '</title>\n';
-
-        // Set the HTML content to the body element
-        var htmlfiloStylo = '<link rel="stylesheet" href="https://senmamovies.github.io/senmamovies/detailPages.css">\n';
-
-        // Set the HTML content to the body element
-        var htmlfiloHeaderStylo = '<style>\n';
-        htmlfiloHeaderStylo += '	Movie Website\n';
-        htmlfiloHeaderStylo += '</style>\n';
-        
-        // Set the HTML content to the body element
-        var htmlfiloHeader = '<head>\n' + htmlfiloHeaderMetOne + htmlfiloHeaderMetTwo + htmlfiloHeaderLinko + htmlfiloHeaderTitlo + htmlfiloStylo + htmlfiloHeaderStylo + '\n\n</head>\n';
-
-        // Set the HTML content to the body element
-        var htmlfilo = '<html>\n' + htmlfiloHeader + bodyInnerHTML + '</html>';
-        
-        // Set the HTML content to the CatoFiloBox element
-        var htmlContent = document.getElementById('CatoFiloBox');
-        htmlContent.innerHTML = htmlfilo;
+    // Add Helight-Phots section
+    detailBottomHtml += '<div class="Helight-Phots" id="HelightPhots">\n';
+    
+    // Add multiple HyperPhoto elements based on the URLs from MultiPhotoBox
+    for (var i = 0; i < multiPhotoUrls.length; i++) {
+        detailBottomHtml += '<a class="Hyper-Photo" id="HyperPhoto" href="' + multiPhotoUrls[i] + '">\n';
+        detailBottomHtml += '<img class="Movie-Highlight-Image" id="MovieHighlightImage" src="' + multiPhotoUrls[i] + '" alt="">\n';
+        detailBottomHtml += '</a>\n\n';
     }
+    
+    detailBottomHtml += '</div>\n\n';
+
+    detailBottomHtml += '<p class="descriptionThree" id="descriptionThree">' + descriptionThree + '</p>\n\n';
+
+    // Generate multiple buttons with different classes based on URLs from URLVideoBox
+    var urls = urlVideo.split('\n');
+    var buttonsHtml = '';
+    for (var j = 0; j < urls.length; j++) {
+        var buttonClass = 'HyperBtn' + String.fromCharCode(65 + j); // A:65, B:66, C:67, ...
+        buttonsHtml += '<button class="' + buttonClass + '" onclick="window.location.href=\'' + urls[j] + '\'"></button>\n\n';
+    }
+
+    // Insert buttons before descriptionThree
+    detailBottomHtml = detailBottomHtml.replace('<p class="descriptionThree" id="descriptionThree">', buttonsHtml + '<p class="descriptionThree" id="descriptionThree">');
+
+    // Wrap the HTML content in the detail-bottom div
+    var detailBottomWithBoxThree = '<div class="movie-detail" id="movieDetail">\n\n' + detailBottomHtml + '</div>\n\n';
+
+    // Add the sec-card-Container HTML content
+    var secCardContainerHtml = '<div class="sec-card-Container" id="secCardContainer"></div>\n\n';
+
+    // Combine Main Data, detail-bottom, and sec-card-Container HTML content
+    var moviesCardBoxHtml = '<main class="movies-card-Box">\n\n' + mainDataHtml + detailBottomWithBoxThree + secCardContainerHtml + '</main>\n\n';
+    
+    var BoxThreeMoviesCategoryBox = '<div class="movies-category-box" id="moviesCategoryBox">\n\n';
+    BoxThreeMoviesCategoryBox += '<div class="cato-top-box">\n\n';
+    BoxThreeMoviesCategoryBox += '<h2>Top Trending</h2>\n\n';
+    BoxThreeMoviesCategoryBox += '</div>\n\n';
+    BoxThreeMoviesCategoryBox += '<div class="thard-card-Container" id="thardCardContainer"></div>\n\n';
+    BoxThreeMoviesCategoryBox += '<div class="cato-top-box-two">\n\n';
+    BoxThreeMoviesCategoryBox += '<h2>Categories</h2>\n\n';
+    BoxThreeMoviesCategoryBox += '<button class="cato-close-btn" id="catoCloseBtn">\n\n';
+    BoxThreeMoviesCategoryBox += '<i class="fa-solid fa-xmark"></i>\n\n';
+    BoxThreeMoviesCategoryBox += '</button>\n\n';
+    BoxThreeMoviesCategoryBox += '</div>\n\n';
+    BoxThreeMoviesCategoryBox += '<ul id="buttons-container"></ul>\n\n';
+    BoxThreeMoviesCategoryBox += '</div>\n\n';
+
+    // Add the movies-card-Box inside Box-Three
+    var boxThreeHtml = '<div class="Box-Three">\n\n' + moviesCardBoxHtml + BoxThreeMoviesCategoryBox + '</div>\n\n';
+    
+    var bodyFooterBox = '<footer>\n\n';
+    bodyFooterBox += '<p>&copy; 2024 Movie Website. All rights reserved.</p>\n\n';
+    bodyFooterBox += '<footer>\n\n';
+
+    // Set the HTML content to the body element
+    var bodyInnerHTML = '<body>\n\n' + bodyHeader + bodyPopuBox + secButtonsContainerBox + bodyAdvaBox + boxThreeHtml + bodyFooterBox + JSscritoBox + '\n</body>\n';
+
+    // Set the HTML content to the body element
+    var htmlfiloHeaderMetOne = '<meta charset="UTF-8">\n';
+
+    // Set the HTML content to the body element
+    var htmlfiloHeaderMetTwo = '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n';
+
+    // Set the HTML content to the body element
+    var htmlfiloHeaderLinko = '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">\n';
+
+    // Set the HTML content to the body element
+    var htmlfiloHeaderTitlo = '<title>';
+    htmlfiloHeaderTitlo += 'Movie Website';
+    htmlfiloHeaderTitlo += '</title>\n';
+
+    // Set the HTML content to the body element
+    var htmlfiloStylo = '<link rel="stylesheet" href="https://senmamovies.github.io/senmamovies/detailPages.css">\n';
+
+    // Set the HTML content to the body element
+    var htmlfiloHeaderStylo = '<style>\n';
+    htmlfiloHeaderStylo += '	Movie Website\n';
+    htmlfiloHeaderStylo += '</style>\n';
+    
+    // Set the HTML content to the body element
+    var htmlfiloHeader = '<head>\n' + htmlfiloHeaderMetOne + htmlfiloHeaderMetTwo + htmlfiloHeaderLinko + htmlfiloHeaderTitlo + htmlfiloStylo + htmlfiloHeaderStylo + '\n\n</head>\n';
+
+    // Set the HTML content to the body element
+    var htmlfilo = '<html>\n' + htmlfiloHeader + bodyInnerHTML + '</html>';
+    
+    // Set the HTML content to the CatoFiloBox element
+    var htmlContent = document.getElementById('CatoFiloBox');
+    htmlContent.innerHTML = htmlfilo;
+}
 </script>
 
 <script>
