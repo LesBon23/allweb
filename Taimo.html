@@ -495,6 +495,7 @@ select.CatoBoxOne {
     var detailBottomHtml = '<h1 class="DetailPageHeading" id="TitleHead">\n' + title + '</h1>\n\n';
     detailBottomHtml += '<img class="ThumnailPhoto" id="movieImage" src="' + imageUrl + '" alt="">\n\n';
     detailBottomHtml += '<p class="descriptionOne" id="descriptionOne">' + descriptionOne + '</p>\n\n';
+    detailBottomHtml += '<h1 class="trailerh1">Trailer</h1>\n\n';
     detailBottomHtml += '<div class="VideoPlayOne">\n	<iframe class="epi" src="' + videoUrl + '" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0">\n	</iframe>\n</div>\n\n';
     detailBottomHtml += '<p class="descriptionTwo" id="descriptionTwo">' + descriptionTwo + '</p>\n\n';
 
@@ -578,7 +579,7 @@ select.CatoBoxOne {
     var htmlfiloStylo = '<link rel="stylesheet" href="https://senmamovies.github.io/senmamovies/detailPages.css">\n';
 
     // Set the HTML content to the body element
-    var htmlfiloHeaderStylo = '<style>\n' + CSron + '</style>\n';
+    var htmlfiloHeaderStylo = '<style>\n' + CSron + '\n</style>\n';
     
     // Set the HTML content to the body element
     var htmlfiloHeader = '<head>\n' + htmlfiloHeaderMetOne + htmlfiloHeaderMetTwo + htmlfiloHeaderMetThree + htmlfiloHeaderMetFour + htmlfiloHeaderMetFive + htmlfiloHeaderLinko + htmlfiloHeaderTitlo + htmlfiloStylo + htmlfiloHeaderStylo + '\n\n</head>\n';
