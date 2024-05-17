@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -270,6 +271,84 @@ select.CatoBoxOne {
     
     <textarea class="textBox" id="Auther" placeholder="Type Auther here...">Senma Movies</textarea>
     
+    <textarea class="textBox" id="CSro" placeholder="Type CSS here...">
+
+          #movieDetail .trailerh1 {
+            width: 100%;
+            text-align: left;
+            margin: 0px;
+          }
+          
+          
+          .VideoPlayOne {
+              width: 100%;
+              max-width: 1920px;
+              position: relative;
+              padding-bottom: 56.25%; /* 16:9 aspect ratio */
+              overflow: hidden;
+          }
+
+          .VideoPlayOne iframe {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+          }
+
+
+          .VideoPlayOne .epi {
+              border-radius: 10px;
+          }
+          
+          .Helight-Phots {
+            border-radius: 5px;
+            display: grid; /* or display: flex; */
+            grid-template-columns: repeat(1, 1fr); /* Three equal columns */
+            padding: 0px;
+            margin: 0px;
+            justify-content: center; 
+            align-items: start;
+            /* border: 1px solid red; */
+            overflow: hidden;
+            width: 100%;
+          }
+
+          #movieDetail button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 22px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: 3px solid gray;
+            color: #fff;
+            border-radius: 0px;
+            transition: background-color 0.3s;
+          }
+
+          #movieDetail button:hover {
+            background-color: #0056b3;
+          }
+          
+          #movieDetail .HyperBtnA {
+          	background-color: green;
+            width: 250px;
+            transition: background-color 0.3s;
+          }
+          
+          #movieDetail .HyperBtnB {
+          	background-color: red;
+            width: 250px;
+            transition: background-color 0.3s;
+          }
+          
+          #movieDetail .HyperBtnC {
+          	background-color: green;
+            width: 250px;
+            transition: background-color 0.3s;
+          }</textarea>
+    
     <textarea class="textBox" id="DetailUrlBox" placeholder="Detaile Page URL here..."></textarea>
     
     <textarea class="textBox" id="CatoFiloBox" placeholder="Paste HTML file here..."></textarea>
@@ -300,7 +379,7 @@ select.CatoBoxOne {
   	<select class="CatoBoxOne" id="CatoBoxOne">
       <option value="">Select Category 1</option>
       <option value="action">action</option>
-      <option value="domedy">comedy</option>
+      <option value="comedy">comedy</option>
       <option value="drama">drama</option>
     </select>
     
@@ -342,6 +421,7 @@ select.CatoBoxOne {
     var metrodescription = document.getElementById('MetaDescription').value;
     var metroKeywords = document.getElementById('MetaKeywords').value;
     var Arthero = document.getElementById('Auther').value;
+    var CSron = document.getElementById('CSro').value;
     var urlVideo = document.getElementById('URLVideoBox').value.trim();
     var JSscritoBox = document.getElementById('scriptBox').value;
 
@@ -499,9 +579,7 @@ select.CatoBoxOne {
     var htmlfiloStylo = '<link rel="stylesheet" href="https://senmamovies.github.io/senmamovies/detailPages.css">\n';
 
     // Set the HTML content to the body element
-    var htmlfiloHeaderStylo = '<style>\n';
-    htmlfiloHeaderStylo += '	Movie Website\n';
-    htmlfiloHeaderStylo += '</style>\n';
+    var htmlfiloHeaderStylo = '<style>\n' + CSron + '</style>\n';
     
     // Set the HTML content to the body element
     var htmlfiloHeader = '<head>\n' + htmlfiloHeaderMetOne + htmlfiloHeaderMetTwo + htmlfiloHeaderMetThree + htmlfiloHeaderMetFour + htmlfiloHeaderMetFive + htmlfiloHeaderLinko + htmlfiloHeaderTitlo + htmlfiloStylo + htmlfiloHeaderStylo + '\n\n</head>\n';
