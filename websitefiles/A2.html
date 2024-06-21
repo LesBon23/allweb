@@ -1431,7 +1431,7 @@ function displayMovies(containerId, start, end, moviesToDisplay) {
 function createMovieCard(movie) {
     const movieCard = document.createElement('a');
     movieCard.classList.add('movie-card');
-    movieCard.href = `file:///F:/Improtent/DetailPage.html?movie=${movie.TiltId}`; // Set href to open in the same tab with genreId
+    movieCard.href = `https://lesbon23.github.io/allweb/websitefiles/DetailPage.html?movie=${movie.TiltId}`; // Set href to open in the same tab with genreId
 
     const imageContainer = document.createElement('div');
     imageContainer.classList.add('image-container');
@@ -1465,7 +1465,7 @@ function createMovieCard(movie) {
     movieCard.addEventListener('click', function(event) {
         if (event.ctrlKey || event.metaKey) {
             event.preventDefault();
-            window.open(`file:///F:/Improtent/DetailPage.html?movie=${movie.TiltId}`, '_blank');
+            window.open(`https://lesbon23.github.io/allweb/websitefiles/DetailPage.html?movie=${movie.TiltId}`, '_blank');
         } else {
             // Allow default action (open in the same tab)
         }
