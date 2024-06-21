@@ -1,5 +1,3 @@
-
-
     // Function to parse query parameters from URL
     function parseQueryParameters(url) {
         var queryParameters = {};
@@ -32,7 +30,7 @@
             sessionStorage.setItem('filteredData', JSON.stringify(filteredData));
 
             // Construct the new URL with the search query
-            var newURL = 'file:///F:/NewFolder/NewFolderTwo/NewAjmal/Newfolder/Monisto.html?search=' + encodeURIComponent(searchQuery);
+            var newURL = 'https://lesbon23.github.io/allweb/websitefiles/Monisto.html?search=' + encodeURIComponent(searchQuery);
 
             // Redirect to the new URL
             window.location.href = newURL;
@@ -51,7 +49,7 @@
         dataToDisplay.forEach(movie => {
             const movieCard = document.createElement('a');
             movieCard.classList.add('movie-card');
-            movieCard.href = `file:///F:/Improtent/DetailPage.html?movie=${movie.TiltId}`;
+            movieCard.href = `https://lesbon23.github.io/allweb/websitefiles/DetailPage.html?movie=${movie.TiltId}`;
 
             const imageContainer = document.createElement('div'); // Create a container for the image
             imageContainer.classList.add('image-container'); // Add a class for styling
