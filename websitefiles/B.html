@@ -200,10 +200,9 @@
     <script>
         function searchData() {
             const query = document.getElementById('searchInput').value;
-            window.location.href = `https://lesbon23.github.io/allweb/websitefiles/B.html?search=${encodeURIComponent(query)}`;
+            window.location.href = `file:///F:/Improtent/ImportantOW/New/B.html?search=${encodeURIComponent(query)}`;
         }
 
-        // Function to get URL parameter by name
         function getUrlParameter(name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
             const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
@@ -211,11 +210,10 @@
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
         }
 
-        // Function to create a movie card element
         function createMovieCard(movie) {
             const movieCard = document.createElement('a');
             movieCard.classList.add('movie-card');
-            movieCard.href = `https://lesbon23.github.io/allweb/websitefiles/DetailPage.html?movie=${movie.TiltId}`; // Set href to open in the same tab with TiltId
+            movieCard.href = `file:///F:/Improtent/DetailPage.html?movie=${movie.TiltId}`; // Set href to open in the same tab with TiltId
 
             const imageContainer = document.createElement('div');
             imageContainer.classList.add('image-container');
@@ -250,7 +248,7 @@
                 // Check if Ctrl or Cmd is pressed
                 if (event.ctrlKey || event.metaKey) {
                     event.preventDefault();
-                    window.open(`https://lesbon23.github.io/allweb/websitefiles/DetailPage.html?movie=${movie.TiltId}`, '_blank');
+                    window.open(`file:///F:/Improtent/DetailPage.html?movie=${movie.TiltId}`, '_blank');
                 } else {
                     // Allow default action (open in the same tab)
                 }
@@ -262,11 +260,20 @@
         function filterMovies(query) {
             const filteredMovies = movies.filter(movie => 
                 movie.title.toLowerCase().includes(query.toLowerCase()) ||
-                movie.description.toLowerCase().includes(query.toLowerCase()) ||
-                movie.genre.toLowerCase().includes(query.toLowerCase()) ||
-                movie.genreId.toLowerCase().includes(query.toLowerCase()) ||
-                movie.TiltId.toLowerCase().includes(query.toLowerCase())
+                movie.heading?.toLowerCase().includes(query.toLowerCase()) ||
+                movie.descriptionone?.toLowerCase().includes(query.toLowerCase()) ||
+                movie.descriptiontwo?.toLowerCase().includes(query.toLowerCase()) ||
+                movie.descriptionThree?.toLowerCase().includes(query.toLowerCase()) ||
+                movie.MetaDescriptionOne?.toLowerCase().includes(query.toLowerCase()) ||
+                movie.MetaKeywords?.toLowerCase().includes(query.toLowerCase()) ||
+                movie.MetaName?.toLowerCase().includes(query.toLowerCase()) ||
+                movie.description?.toLowerCase().includes(query.toLowerCase()) ||
+                movie.genre?.toLowerCase().includes(query.toLowerCase()) ||
+                movie.genreId?.toLowerCase().includes(query.toLowerCase()) ||
+                movie.TiltId?.toLowerCase().includes(query.toLowerCase())
             );
+
+            console.log("Filtered Movies:", filteredMovies);
 
             const container = document.getElementById('CardContainer');
             container.innerHTML = ''; // Clear previous movies
