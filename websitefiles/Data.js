@@ -11,23 +11,23 @@ const movies = [
         "MotiesimageTwo": "https://via.placeholder.com/200",
         "MotiesimageThree": "https://via.placeholder.com/200",
         "MotiesimageFour": "https://via.placeholder.com/200",
-        "HeyperButtonOne": {
+        "WatchOnline": {
             "url": "https://via.placeholder.com/200",
             "text": "Watch Online"
         },
-        "HeyperButtonTwo": {
+        "DownloadNow": {
             "url": "https://via.placeholder.com/200",
-            "text": "Download Online"
+            "text": "Download Now"
         },
-        "HeyperButtonThree": {
+        "Share": {
             "url": "https://via.placeholder.com/200",
             "text": "Share"
         },
-        "HeyperButtonFour": {
+        "Comment": {
             "url": "https://via.placeholder.com/200",
             "text": "Comment"
         },
-        "HeyperButtonFive": {
+        "Subscribe": {
             "url": "https://via.placeholder.com/200",
             "text": "Subscribe"
         },
@@ -58,13 +58,13 @@ const movies = [
         
         "MotiesimageOne": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTGEH1kkJ8FSBBFW4DUQxuuD6AwJc5nG0XwuVINL-pObe1b9fXwzdNUQPRuTZeG28bpztLSxq_oiS_jWgzFBaBStRMwa4nBXH3yvPrWfr8QbRJp-TjkI-AFqyd-p0yiZVOaUVfQ1lWXxWqeLPaMAbCZTxSvwgnXOtWwHSlha5mFkvA_I5lRx3SC2WHO3k/s1600/Bachna.Ae.Haseeno.2008.1080p.Bluray.Hindi.2.0.x264.ESub_s.jpg",
         
-        "HeyperButtonOne": {
+        "WatchOnline": {
             "url": "https://via.placeholder.com/200",
             "text": "Watch Online"
         },
-        "HeyperButtonTwo": {
+        "DownloadNow": {
             "url": "https://via.placeholder.com/200",
-            "text": "Download Online"
+            "text": "Download Now"
         },
         "MetaDescriptionOne": "Hi I'm Nouman Iftikhar Qureshi.",
         "MetaKeywords": "Nouman, Iftikhar, Qureshi.",
@@ -87,27 +87,27 @@ const movies = [
         "MotiesimageTwo": "https://via.placeholder.com/200",
         "MotiesimageThree": "https://via.placeholder.com/200",
         "MotiesimageFour": "https://via.placeholder.com/200",
-        "HeyperButtonOne": {
+        "WatchOnline": {
             "url": "https://via.placeholder.com/200",
             "text": "Watch Online"
         },
-        "HeyperButtonTwo": {
+        "DownloadNow": {
             "url": "https://via.placeholder.com/200",
             "text": "Download Online"
         },
-        "HeyperButtonThree": {
+        "Share": {
             "url": "https://via.placeholder.com/200",
             "text": "Share"
         },
-        "HeyperButtonFour": {
+        "Comment": {
             "url": "https://via.placeholder.com/200",
             "text": "Comment"
         },
-        "HeyperButtonFive": {
+        "Subscribe": {
             "url": "https://via.placeholder.com/200",
             "text": "Subscribe"
         },
-        "HeyperButtonSix": {
+        "Like": {
             "url": "https://via.placeholder.com/200",
             "text": "Like"
         },
