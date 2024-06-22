@@ -3,7 +3,7 @@ const movies = [
     {
         "title": "Nouman Iftikhar Qureshi",
         "heading": "Nouman Iftikhar Qureshi",
-        "Mainimage": "https://via.placeholder.com/200",
+        "Mainimage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh_K3nm3XTfNaWzoXgjhXR-YvxPi6ael6gplsqmM8mbFB9cKY-eWmAaKeSQNUcAmLdBOjuhcf9hqcvuGY6x8fqDh-FG53rz3_A-AYLzWmgtal_BCxIcoz9VKQTh1bSo_a5u_IhpoWNQ32p6V8Q9bcxcAN1gUOM4ouGZB1IMnoBEdHspw1s4Mx705EIN9rQ/s1600/Untitled.jpg",
         "descriptionone": "Nouman Iftikhar Qureshi description",
         "tailvideo": "https://www.youtube.com/embed/cgX8lO8yQF0?si=obD6Paw7nrAqi9_m",
         "descriptiontwo": "Nouman Iftikhar Qureshi description",
@@ -39,12 +39,12 @@ const movies = [
         "description": "Nouman Iftikhar Qureshi description",
         "genre": "Action",
         "genreId": "action", // Genre ID
-        "image": "https://via.placeholder.com/200",
+        "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh_K3nm3XTfNaWzoXgjhXR-YvxPi6ael6gplsqmM8mbFB9cKY-eWmAaKeSQNUcAmLdBOjuhcf9hqcvuGY6x8fqDh-FG53rz3_A-AYLzWmgtal_BCxIcoz9VKQTh1bSo_a5u_IhpoWNQ32p6V8Q9bcxcAN1gUOM4ouGZB1IMnoBEdHspw1s4Mx705EIN9rQ/s1600/Untitled.jpg",
         "link": "https://senmamovies.github.io/senmamovies/moviedetail.html",
         "TiltId": "A1B1C1"
     },
     {
-        "title": "The Godfather",
+        "title": "Bachna Ae Haseeno",
         "heading": "Bachna Ae Haseeno",
         "Mainimage": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgMpsPQ8iwe3XZAiG4pmuLBKXWuxPqoK1Q5z5d1G9Q49gQ-BedZlzj38Y3ErFZVBzK31ZV8c97AJ4QjYHLZSsyGKTjcaRoKBk9swCt2uYtxmhxqf1sPfkOcygzYVHu4itODtl6QGbzyJ_Fsh3V6_5VVqR_ezH6Cyl0ub-vpkByuWasjet4fM3eW5p4JTbQ/s1600/Bachna-Ae-Haseeno.jpg",
         
@@ -73,7 +73,7 @@ const movies = [
         "description": "The Godfather description",
         "genre": "Action",
         "genreId": "action", // Genre ID
-        "image": "https://via.placeholder.com/200",
+        "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgMpsPQ8iwe3XZAiG4pmuLBKXWuxPqoK1Q5z5d1G9Q49gQ-BedZlzj38Y3ErFZVBzK31ZV8c97AJ4QjYHLZSsyGKTjcaRoKBk9swCt2uYtxmhxqf1sPfkOcygzYVHu4itODtl6QGbzyJ_Fsh3V6_5VVqR_ezH6Cyl0ub-vpkByuWasjet4fM3eW5p4JTbQ/s1600/Bachna-Ae-Haseeno.jpg",
         "TiltId": "A2B2C2"
     },
     {
