@@ -200,7 +200,7 @@
     <script>
         function searchData() {
             const query = document.getElementById('searchInput').value;
-            window.location.href = `file:///F:/Improtent/ImportantOW/New/B.html?search=${encodeURIComponent(query)}`;
+            window.location.href = `https://lesbon23.github.io/allweb/websitefiles/B.html?search=${encodeURIComponent(query)}`;
         }
 
         function getUrlParameter(name) {
@@ -213,7 +213,7 @@
         function createMovieCard(movie) {
             const movieCard = document.createElement('a');
             movieCard.classList.add('movie-card');
-            movieCard.href = `file:///F:/Improtent/DetailPage.html?movie=${movie.TiltId}`; // Set href to open in the same tab with TiltId
+            movieCard.href = `https://lesbon23.github.io/allweb/websitefiles/DetailPage.html?movie=${movie.TiltId}`; // Set href to open in the same tab with TiltId
 
             const imageContainer = document.createElement('div');
             imageContainer.classList.add('image-container');
@@ -248,7 +248,7 @@
                 // Check if Ctrl or Cmd is pressed
                 if (event.ctrlKey || event.metaKey) {
                     event.preventDefault();
-                    window.open(`file:///F:/Improtent/DetailPage.html?movie=${movie.TiltId}`, '_blank');
+                    window.open(`https://lesbon23.github.io/allweb/websitefiles/DetailPage.html?movie=${movie.TiltId}`, '_blank');
                 } else {
                     // Allow default action (open in the same tab)
                 }
