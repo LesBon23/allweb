@@ -1,4 +1,4 @@
-    // Function to create genre buttons
+// Function to create genre buttons
     function createGenreLinks() {
         const categoryBox = document.getElementById('CategoryBox');
 
@@ -16,7 +16,7 @@
         uniqueGenres.forEach(movie => {
             const link = document.createElement('a');
             link.textContent = movie.genreId.charAt(0).toUpperCase() + movie.genreId.slice(1);
-            link.href = `https://lesbon23.github.io/allweb/websitefiles/A2.html?movie=${movie.genreId}`;
+            link.href = `file:///F:/Improtent/Importent0Z/A2.html?movie=${movie.genreId}`;
 
             // Default behavior: Open in the same tab
             link.target = '_self';
@@ -29,14 +29,20 @@
                 link.classList.add('comedy-button');
             } else if (movie.genreId === 'drama') {
                 link.classList.add('drama-button');
-            } else if (movie.genreId === 'series') {
-                link.classList.add('series-button');
-            }
-
-            // Aap yahan condition specify kar sakte hain
-            // Example: if (someCondition) { link.target = '_blank'; }
-            if (movie.genreId === 'someOtherCondition') {
-                link.target = '_blank';
+            } else if (movie.genreId === 'romance') {
+                link.classList.add('romance-button');
+            } else if (movie.genreId === 'Romance Drama') {
+                link.classList.add('romance-drama-button'); // Corrected condition for "romance drama"
+            } else if (movie.genreId === 'Comedy Drama') {
+                link.classList.add('comedy-drama-button'); // Corrected condition for "comedy drama"
+            } else if (movie.genreId === 'Drama Sports') {
+                link.classList.add('drama-sports-button'); // Corrected condition for "comedy drama"
+            } else if (movie.genreId === 'Action Adventure') {
+                link.classList.add('action-adventure-button'); // Corrected condition for "comedy drama"
+            } else if (movie.genreId === 'Biographical Sports') {
+                link.classList.add('biographical-sports-button'); // Corrected condition for "comedy drama"
+            } else if (movie.genreId === 'Drama Comedy') {
+                link.classList.add('drama-comedy-button'); // Corrected condition for "comedy drama"
             }
 
             categoryBox.appendChild(link);
