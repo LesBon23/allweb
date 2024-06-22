@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetching data from JS data file and displaying it</title>
+    <link rel="stylesheet" href="styles"> <!-- Link to your CSS file -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center; /* Center items horizontally */
+            align-items: top;
+            flex-direction: column;
+        }
+        
+        .mainBox {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center; /* Center items horizontally */
+            align-items: top;
+            flex-direction: column;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .headingOne {
+            margin: 20px auto;
+        }
+        
+        .Card-Container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Three equal columns */
+            gap: 25px;
+            margin: auto;
+            justify-content: center; /* Center items horizontally */
+            align-items: start; /* Center items vertically */
+            /*margin: 20px auto;*/
+            /*border: 2px solid red;*/
+        }
+
+        /* CSS for mobile responsiveness */
+        @media (max-width: 1366px) {
+            .Card-Container {
+                display: flex;
+                gap: 15px;
+                width: 100%;
+                padding: 1em;
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Movie Card Styles */
+        .movie-card {
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            border: 5px solid #EF9D25;
+            margin: 10px;
+        }
+
+        .image-container {
+            position: relative;
+            width: 250px;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .movie-card:hover .image-container img {
+            transform: scale(1.2);
+        }
+
+        .text-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 0px 0px 0px 0px;
+            display: flex;
+            justify-content: end;
+            flex-direction: column;
+            align-items: center;
+            height: 80%;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 255, 0));
+        }
+
+        .text-container:hover {
+            cursor: pointer;
+        }
+
+        .text-container:hover ~ .image-container img {
+            transform: scale(1.2);
+        }
+
+        .text-container h3 {
+            text-align: center;
+            width: 100%;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .text-container p {
+            text-align: left;
+            width: 100%;
+            padding: 0px 0px;
+            font-size: 14px;
+            color: #fff;
+            text-align: center;
+            margin-top: 10px;
+            font-style: italic;
+            text-decoration: underline;
+        }
+
+        .description {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        .genreId {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            display: none;
+        }
+        
+        input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            margin-left: 10px;
+            font-size: 16px;
+            width: 300px; /* Adjusted width for mobile */
+        }
+
+        .search-btn {
+            padding: 10px 5px;
+            border: none;
+            background-color: #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .search-btn:hover {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="mainBox">
+        <h1 class="headingOne">Search File Box</h1>
+        
+        <div class="SearchBox">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button class="search-btn" onclick="searchData()">Search</button>
+        </div>
+        
+        <div class="Card-Container" id="CardContainer"></div>
+            
+      	<div class="page-num-Box">
+            <div id="paginationBox"></div>
+            <button class="last-btn"  id="lastBtn">Last</button>
+        </div>
+        
+    </div>
+    
+    <script src="file:///F:/Improtent/Data.js"></script>
+
+    <script>
+        function searchData() {
+            const query = document.getElementById('searchInput').value;
+            window.location.href = `file:///C:/Users/hp/Downloads/NewFolder/B.html?search=${encodeURIComponent(query)}`;
+        }
+    </script>
+    
+    <script>
+// Function to display a specific range of movies
+function displayMovies(containerId, start, end) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = ''; // Clear previous movies
+
+    for (let i = start; i <= end && i < movies.length; i++) {
+        const movie = movies[i];
+        const movieCard = createMovieCard(movie);
+        container.appendChild(movieCard);
+    }
+}
+
+// Function to create a movie card element
+function createMovieCard(movie) {
+    const movieCard = document.createElement('a');
+    movieCard.classList.add('movie-card');
+    movieCard.href = `file:///F:/Improtent/DetailPage.html?movie=${movie.TiltId}`; // Set href to open in the same tab with TiltId
+
+    const imageContainer = document.createElement('div');
+    imageContainer.classList.add('image-container');
+
+    const image = document.createElement('img');
+    image.src = movie.image;
+    image.alt = movie.title;
+
+    const textContainer = document.createElement('div');
+    textContainer.classList.add('text-container');
+
+    const title = document.createElement('h3');
+    title.textContent = movie.title;
+
+    const description = document.createElement('p');
+    description.textContent = movie.description;
+    description.classList.add('description');
+
+    const genre = document.createElement('p');
+    genre.textContent = movie.genre;
+    genre.classList.add('genre');
+
+    imageContainer.appendChild(image);
+    movieCard.appendChild(imageContainer);
+    textContainer.appendChild(title);
+    textContainer.appendChild(description);
+    textContainer.appendChild(genre);
+    movieCard.appendChild(textContainer);
+
+    // Add click event listener to open B.html
+    movieCard.addEventListener('click', function(event) {
+        // Check if Ctrl or Cmd is pressed
+        if (event.ctrlKey || event.metaKey) {
+            event.preventDefault();
+            window.open(`file:///F:/Improtent/DetailPage.html?movie=${movie.TiltId}`, '_blank');
+        } else {
+            // Allow default action (open in the same tab)
+        }
+    });
+
+    return movieCard;
+}
+
+// Function to generate hyperlink pagination buttons
+function generatePaginationButtons() {
+    const paginationBox = document.getElementById('paginationBox');
+    paginationBox.innerHTML = ''; // Clear previous pagination buttons
+
+    const numPages = Math.ceil(movies.length / 6); // 6 movies per page
+    for (let i = 0; i < numPages; i++) {
+        const pageLink = document.createElement('a');
+        pageLink.href = `?page=${i + 1}`;
+        pageLink.textContent = i + 1;
+        if (i === 0) {
+            pageLink.classList.add('active');
+        }
+        pageLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            const start = i * 6;
+            const end = start + 5;
+            displayMovies('CardContainer', start, end);
+
+            // Remove active class from all pagination links
+            const allLinks = paginationBox.querySelectorAll('a');
+            allLinks.forEach(link => link.classList.remove('active'));
+
+            // Add active class to the clicked link
+            pageLink.classList.add('active');
+            history.pushState(null, '', `?page=${i + 1}`);
+        });
+        paginationBox.appendChild(pageLink);
+    }
+}
+
+// Function to get URL parameter by name
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    const results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+// Function to highlight the active page link
+function highlightActivePage() {
+    const page = getUrlParameter('page') || 1;
+    const paginationBox = document.getElementById('paginationBox');
+    const allLinks = paginationBox.querySelectorAll('a');
+    allLinks.forEach(link => {
+        if (link.href.includes(`?page=${page}`)) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
+
+// On page load, display the appropriate set of movies based on the URL parameter
+document.addEventListener('DOMContentLoaded', function() {
+    const page = getUrlParameter('page') || 1;
+    const start = (page - 1) * 6;
+    const end = start + 5;
+    displayMovies('CardContainer', start, end);
+
+    // Generate hyperlink pagination buttons
+    generatePaginationButtons();
+
+    // Highlight the active page link
+    highlightActivePage();
+
+    // Additional displays and intervals
+    displayMovies('secCardContainer', 0, 4);
+    displayMovies('thardCardContainer', 0, 4);
+    displayMovies('PopMovies', 0, 4);
+});
+
+// Handle popstate event to update active class when using browser navigation
+window.addEventListener('popstate', function() {
+    const page = getUrlParameter('page') || 1;
+    const start = (page - 1) * 6;
+    const end = start + 5;
+    displayMovies('CardContainer', start, end);
+    highlightActivePage();
+});
+</script>
+</body>
+</html>
