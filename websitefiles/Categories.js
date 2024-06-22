@@ -16,7 +16,7 @@
         uniqueGenres.forEach(movie => {
             const link = document.createElement('a');
             link.textContent = movie.genreId.charAt(0).toUpperCase() + movie.genreId.slice(1);
-            link.href = `file:///F:/Improtent/Importent0Z/A2.html?movie=${movie.genreId}`;
+            link.href = `https://lesbon23.github.io/allweb/websitefiles/A2.html?movie=${movie.genreId}`;
 
             // Default behavior: Open in the same tab
             link.target = '_self';
