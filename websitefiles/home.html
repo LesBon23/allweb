@@ -884,46 +884,45 @@
 
 
         /* Style for pagination links container */
-#paginationBox {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
+        #paginationBox {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
 
-/* Style for individual pagination links */
-#paginationBox a {
-    display: inline-block;
-    padding: 8px 12px;
-    background-color: #f0f0f0;
-    color: #333;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+        /* Style for individual pagination links */
+        #paginationBox a {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #f0f0f0;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-/* Hover effect for pagination links */
-#paginationBox a:hover {
-    background-color: #ccc;
-    color: #000;
-}
+        /* Hover effect for pagination links */
+        #paginationBox a:hover {
+            background-color: #ccc;
+            color: #000;
+        }
 
-/* Active page link style */
-#paginationBox a.active {
-    background-color: #007bff;
-    color: #fff;
-}
+        /* Active page link style */
+        #paginationBox a.active {
+            background-color: #007bff;
+            color: #fff;
+        }
 
-/* Responsive styles */
-@media (max-width: 500px) {
-    #paginationBox {
-        flex-wrap: wrap;
-    }
+        /* Responsive styles */
+        @media (max-width: 500px) {
+            #paginationBox {
+                flex-wrap: wrap;
+            }
 
-    #paginationBox a {
-        margin-bottom: 5px;
-    }
-}
-
+            #paginationBox a {
+                margin-bottom: 5px;
+            }
+        }
 
         .last-btn {
             padding: 10px 15px;
@@ -1374,27 +1373,95 @@
             background-color: #0056b3;
           }
           
-          
-    .action-button {
-        background-color: #FF0000; /* Red */
-        color: #fff;
-    }
-    .comedy-button {
-        background-color: #00FF00; /* Green */
-        color: #000;
-    }
-    .drama-button {
-        background-color: #0000FF; /* Blue */
-        color: #fff;
-    }
-    .genre-button {
-        display: inline-block;
-        padding: 10px 20px;
-        margin: 5px;
-        text-decoration: none;
-        border-radius: 4px;
-        text-align: center;
-    }
+          .action-button {
+              background-color: #FF0000; /* Red */
+              color: #fff;
+          }
+          .action-button:hover {
+              background-color: #FF6666; /* Light red on hover */
+          }
+
+          .comedy-button {
+              background-color: #00FF00; /* Green */
+              color: #000;
+          }
+          .comedy-button:hover {
+              background-color: #33FF33; /* Light green on hover */
+          }
+
+          .drama-button {
+              background-color: #0000FF; /* Blue */
+              color: #fff;
+          }
+          .drama-button:hover {
+              background-color: #3333FF; /* Light blue on hover */
+          }
+
+          .romance-button {
+              background-color: #FF7F3E; /* Orange */
+              color: #fff;
+          }
+          .romance-button:hover {
+              background-color: #FFA366; /* Light orange on hover */
+          }
+
+          .romance-drama-button {
+              background-color: #071952; /* Dark blue */
+              color: #fff;
+          }
+          .romance-drama-button:hover {
+              background-color: #2D3A5E; /* Slightly lighter dark blue on hover */
+          }
+
+          .comedy-drama-button {
+              background-color: #597445; /* Dark green */
+              color: #fff;
+          }
+          .comedy-drama-button:hover {
+              background-color: #73985A; /* Lighter dark green on hover */
+          }
+
+          .drama-sports-button {
+              background-color: #5A639C; /* Purple */
+              color: #fff;
+          }
+          .drama-sports-button:hover {
+              background-color: #7B89B8; /* Light purple on hover */
+          }
+
+          .action-adventure-button {
+              background-color: #FF7F3E; /* Orange */
+              color: #fff;
+          }
+          .action-adventure-button:hover {
+              background-color: #FFA366; /* Light orange on hover */
+          }
+
+          .biographical-sports-button {
+              background-color: #1679AB; /* Light blue */
+              color: #fff;
+          }
+          .biographical-sports-button:hover {
+              background-color: #3C8CC6; /* Lighter blue on hover */
+          }
+
+          .drama-comedy-button {
+              background-color: #FF6969; /* Light red */
+              color: #fff;
+          }
+          .drama-comedy-button:hover {
+              background-color: #FF8C8C; /* Lighter red on hover */
+          }
+
+          .genre-button {
+              display: inline-block;
+              padding: 10px 20px;
+              margin: 5px;
+              text-decoration: none;
+              border-radius: 4px;
+              text-align: center;
+              white-space: nowrap; /* Prevent text wrapping */
+          }
     </style>
 </head>
 <body>
@@ -1663,9 +1730,9 @@ document.addEventListener('DOMContentLoaded', function() {
     highlightActivePage();
 
     // Additional displays and intervals
-    displayMovies('secCardContainer', 0, 4);
-    displayMovies('thardCardContainer', 0, 4);
-    displayMovies('PopMovies', 0, 4);
+    displayMovies('secCardContainer', 0, 3);
+    displayMovies('thardCardContainer', 0, 3);
+    displayMovies('PopMovies', 0, 3);
 });
 
 // Handle popstate event to update active class when using browser navigation
