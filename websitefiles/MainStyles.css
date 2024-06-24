@@ -1406,6 +1406,14 @@
               background-color: #2D3A5E; /* Slightly lighter dark blue on hover */
           }
 
+          .action-comedy-button {
+              background-color: #B6C7AA; /* Dark blue */
+              color: #fff;
+          }
+          .action-comedy-button:hover {
+              background-color: #2D3A5E; /* Slightly lighter dark blue on hover */
+          }
+
           .comedy-drama-button {
               background-color: #597445; /* Dark green */
               color: #fff;
