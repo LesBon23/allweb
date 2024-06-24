@@ -46,8 +46,8 @@ const movies = [
 {
     "title": "Julayi",
     "heading": "Julayi",
-    "image": "https://en.m.wikipedia.org/wiki/File:Julai_poster.jpg",
-    "Mainimage": "https://en.m.wikipedia.org/wiki/File:Julai_poster.jpg",
+    "image": "https://upload.wikimedia.org/wikipedia/en/2/2d/Julai_poster.jpg",
+    "Mainimage": "https://upload.wikimedia.org/wikipedia/en/2/2d/Julai_poster.jpg",
     "tailvideo": "https://www.youtube.com/embed/jxYa6VkL4Oc?si=VupHKeIkiijbFz-1",
     "description": "Julayi (transl. Vagabond) is a 2012 Indian Telugu-language action comedy film written and directed by Trivikram Srinivas,[citation needed] and produced by S. Radha Krishna under Haarika & Hassine Creations banner. The film stars an ensemble cast including Allu Arjun, Ileana D'Cruz, Sonu Sood, Rajendra Prasad, Rao Ramesh, Kota Srinivasa Rao, Brahmaji, Tanikella Bharani and Sheetal Menon. The soundtrack was composed by Devi Sri Prasad, with cinematography handled by Chota K. Naidu and his brother Shyam K. Naidu, and editing done by Prawin Pudi.",
     "descriptionone": "Julayi (transl. Vagabond) is a 2012 Indian Telugu-language action comedy film written and directed by Trivikram Srinivas,[citation needed] and produced by S. Radha Krishna under Haarika & Hassine Creations banner. The film stars an ensemble cast including Allu Arjun, Ileana D'Cruz, Sonu Sood, Rajendra Prasad, Rao Ramesh, Kota Srinivasa Rao, Brahmaji, Tanikella Bharani and Sheetal Menon. The soundtrack was composed by Devi Sri Prasad, with cinematography handled by Chota K. Naidu and his brother Shyam K. Naidu, and editing done by Prawin Pudi.\n\nThe film was released worldwide on 9 August 2012 to positive reviews, and was commercially successful. The film has garnered the Nandi Award for Best Popular Feature Film.[1] It was remade into Tamil titled as Saagasam.",
