@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Text Example</title>
+<style>
+/* CSS for styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.textBox {
+  height: 100px;
+  width: 800px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  position: relative;
+}
+
+.DetailHtmlBox {
+  height: 300px;
+  width: 800px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  position: relative;
+}
+
+.showText {
+  height: 40px;
+  width: 25%;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.showText:hover {
+  background-color: #0056b3;
+}
+</style>
+</head>
+<body>
+    <textarea class="textBox" id="titleBox" placeholder="Type Title here..."></textarea>
+    <textarea class="textBox" id="ImageBoxOne" placeholder="Paste Image URL here..."></textarea>
+    <textarea class="textBox" id="videoBox" placeholder="Paste Trailer Video URL here..."></textarea>
+    <textarea class="textBox" id="DescriptionBoxM" placeholder="Type Main Description here..."></textarea>
+    <textarea class="textBox" id="DescriptionOneBox" placeholder="Type 1st Description here..."></textarea>
+    <textarea class="textBox" id="DescriptionTwoBox" placeholder="Type 2nd Description here..."></textarea>
+    <textarea class="textBox" id="DescriptionThreeBox" placeholder="Type 3rd Description here..."></textarea>
+    <textarea class="textBox" id="MetaNameBox" placeholder="Type Auther here..."></textarea>
+    <textarea class="textBox" id="MetaDescriptionBox" placeholder="Type Meta Description here..."></textarea>
+    <textarea class="textBox" id="MetaKeywordsBox" placeholder="Type Meta Keywords here..."></textarea>
+    <textarea class="textBox" id="GenreOne" placeholder="Type genre here..."></textarea>
+    <textarea class="textBox" id="GenreTwo" placeholder="Type genreId here..."></textarea>
+    <textarea class="textBox" id="MultiPhotosolumsBox" placeholder="Type Coulms no here..."></textarea>
+    <textarea class="textBox" id="TiltIdBox" placeholder="Type Tilt id here..."></textarea>
+    <textarea class="textBox" id="MultiPhotoBox" placeholder="Paste Multi Photos URL here (separate by new lines)..."></textarea>
+    
+    
+    <button class="showText" onclick="showText()">Show Data</button>
+    <textarea class="DetailHtmlBox" id="DetailHtmlBox" placeholder="Display Data here..."></textarea>
+    
+
+    <script>
+        // Function to convert number to words
+        function numberToWords(num) {
+            const ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
+            const teens = ["Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
+            const tens = ["", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+            
+            if (num <= 10) {
+                return ones[num];
+            } else if (num > 10 && num < 20) {
+                return teens[num - 11];
+            } else if (num >= 20) {
+                let tensPart = Math.floor(num / 10);
+                let onesPart = num % 10;
+                return tens[tensPart] + (onesPart > 0 ? ones[onesPart] : '');
+            } else {
+                return num;
+            }
+        }
+
+        function showText() {
+            // Get the values from the textareas
+            var titleText = document.getElementById('titleBox').value;
+            var imageUrl = document.getElementById('ImageBoxOne').value;
+            var videoUrl = document.getElementById('videoBox').value;
+            var descriptionText = document.getElementById('DescriptionBoxM').value;
+            var descriptionTextOne = document.getElementById('DescriptionOneBox').value;
+            var descriptionTwo = document.getElementById('DescriptionTwoBox').value;
+            var descriptionTextThree = document.getElementById('DescriptionThreeBox').value;
+            var MetaNameText = document.getElementById('MetaNameBox').value;
+            var MetaDescriptionText = document.getElementById('MetaDescriptionBox').value;
+            var MetaKeywordsText = document.getElementById('MetaKeywordsBox').value;
+            var GenreText = document.getElementById('GenreOne').value;
+            var GenreIdText = document.getElementById('GenreTwo').value;
+            var MultiPhotosolumsText = document.getElementById('MultiPhotosolumsBox').value;
+            var TiltIdText = document.getElementById('TiltIdBox').value;
+            var multiPhotoText = document.getElementById('MultiPhotoBox').value;
+
+            // Split multiPhotoText by new lines to get the URLs
+            var photoUrls = multiPhotoText.split('\n').map(url => url.trim()).filter(url => url);
+
+            // Format the text into JSON
+            var movieData = {
+                "title": titleText,
+                "heading": titleText,
+                "image": imageUrl,
+                "Mainimage": imageUrl,
+                "tailvideo": videoUrl,
+                "description": descriptionText,
+                "descriptionone": descriptionTextOne,
+                "descriptiontwo": descriptionTwo,
+                "descriptionThree": descriptionTextThree,
+                "MetaName": MetaNameText,
+                "MetaDescriptionOne": MetaDescriptionText,
+                "MetaKeywords": MetaKeywordsText,
+                "genre": GenreText,
+                "genreId": GenreIdText,
+                "ColumsOfHelightDivBox": MultiPhotosolumsText,
+                "TiltId": TiltIdText,
+            };
+
+            // Assign the photo URLs to appropriate keys
+            for (var i = 0; i < photoUrls.length; i++) {
+                var key = "Motiesimage" + numberToWords(i + 1);
+                movieData[key] = photoUrls[i];
+            }
+
+            // Convert the movieData object to a formatted string
+            var formattedText = JSON.stringify(movieData, null, 4);
+
+            // Add empty line before opening curly brace and comma after closing curly brace
+            formattedText = formattedText.replace('{', '\n{').replace('}', '},');
+
+            // Display the formatted text in the DetailHtmlBox
+            document.getElementById('DetailHtmlBox').value = formattedText;
+        }
+    </script>
+</body>
+</html>
