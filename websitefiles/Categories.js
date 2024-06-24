@@ -43,6 +43,8 @@
                 link.classList.add('biographical-sports-button'); // Corrected condition for "comedy drama"
             } else if (movie.genreId === 'Drama Comedy') {
                 link.classList.add('drama-comedy-button'); // Corrected condition for "comedy drama"
+            } else if (movie.genreId === 'Actiom Comedy') {
+                link.classList.add('action-comedy-button'); // Corrected condition for "comedy drama"
             }
 
             categoryBox.appendChild(link);
