@@ -98,7 +98,16 @@ const movies = [
     "Motiesimage6th": "https://via.placeholder.com/800",
     "Motiesimage7th": "https://via.placeholder.com/800",
     "Motiesimage8th": "https://via.placeholder.com/800",
-    "Motiesimage9th": "https://via.placeholder.com/800"
+    "Motiesimage9th": "https://via.placeholder.com/800",
+    "Motiesimage10th": "https://via.placeholder.com/800",
+    "Motiesimage11th": "https://via.placeholder.com/800",
+    "Motiesimage12th": "https://via.placeholder.com/800",
+    "Motiesimage13th": "https://via.placeholder.com/800",
+    "Motiesimage14th": "https://via.placeholder.com/800",
+    "Motiesimage15th": "https://via.placeholder.com/800",
+    "Motiesimage16th": "https://via.placeholder.com/800",
+    "Motiesimage17th": "https://via.placeholder.com/800",
+    "Motiesimage18th": "https://via.placeholder.com/800"
 },
     {
         "title": "Bachna Ae Haseeno",
