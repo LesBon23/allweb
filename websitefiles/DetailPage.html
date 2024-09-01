@@ -1633,10 +1633,10 @@
             document.title = movie.heading;
             document.getElementById('heading').innerText = movie.heading;
             document.getElementById('mainImage').src = movie.Mainimage;
-            document.getElementById('descriptionOne').innerText = movie.descriptionone;
+            document.getElementById('descriptionOne').innerHTML = movie.descriptionone;
             document.getElementById('tailVideo').src = movie.tailvideo;
-            document.getElementById('descriptionTwo').innerText = movie.descriptiontwo;
-            document.getElementById('descriptionThree').innerText = movie.descriptionThree;
+            document.getElementById('descriptionTwo').innerHTML = movie.descriptiontwo;
+            document.getElementById('descriptionThree').innerHTML = movie.descriptionThree;
 
             // Update meta tags
             document.querySelector('title').setAttribute('content', movie.MovieTitle);
