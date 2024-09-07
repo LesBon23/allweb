@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Resizer Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            background-color: #f3f4f6;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .controls label {
+            margin-right: 10px;
+        }
+
+        .controls input[type="number"] {
+            width: 60px;
+        }
+
+        .controls input[type="checkbox"] {
+            margin-left: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        img {
+            max-width: 100%;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        canvas {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Resizer Tool</h1>
+        <input type="file" id="fileInput" accept="image/*">
+        <input type="text" id="urlInput" placeholder="Enter image URL">
+        <img id="displayImage" src="" alt="Selected Image" style="display: none;">
+        <div class="controls">
+            <div>
+                <label for="widthInput">Width:</label>
+                <input type="number" id="widthInput" placeholder="Width">
+            </div>
+            <div>
+                <label for="heightInput">Height:</label>
+                <input type="number" id="heightInput" placeholder="Height">
+            </div>
+            <div>
+                <label>
+                    Maintain Aspect Ratio:
+                    <input type="checkbox" id="aspectRatio" checked>
+                </label>
+            </div>
+        </div>
+        <button id="resizeButton">Resize Image</button>
+        <img id="resizedImage" src="" alt="Resized Image" style="display: none;">
+        <button id="downloadButton" style="display: none;">Download Resized Image</button>
+        <canvas id="canvas"></canvas>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const urlInput = document.getElementById('urlInput');
+        const widthInput = document.getElementById('widthInput');
+        const heightInput = document.getElementById('heightInput');
+        const aspectRatioCheckbox = document.getElementById('aspectRatio');
+        const resizeButton = document.getElementById('resizeButton');
+        const downloadButton = document.getElementById('downloadButton');
+        const displayImage = document.getElementById('displayImage');
+        const resizedImage = document.getElementById('resizedImage');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let image = new Image();
+
+        fileInput.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    image.src = event.target.result;
+                    displayImage.src = event.target.result;
+                    displayImage.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        urlInput.addEventListener('input', function () {
+            image.src = urlInput.value;
+            displayImage.src = urlInput.value;
+            displayImage.style.display = 'block';
+        });
+
+        image.onload = function () {
+            widthInput.value = image.width;
+            heightInput.value = image.height;
+        };
+
+        widthInput.addEventListener('input', function () {
+            if (aspectRatioCheckbox.checked) {
+                heightInput.value = Math.round((image.height / image.width) * widthInput.value);
+            }
+        });
+
+        heightInput.addEventListener('input', function () {
+            if (aspectRatioCheckbox.checked) {
+                widthInput.value = Math.round((image.width / image.height) * heightInput.value);
+            }
+        });
+
+        resizeButton.addEventListener('click', function () {
+            if (image.src) {
+                const width = parseInt(widthInput.value, 10);
+                const height = parseInt(heightInput.value, 10);
+                canvas.width = width;
+                canvas.height = height;
+                ctx.drawImage(image, 0, 0, width, height);
+
+                // Display the resized image
+                resizedImage.src = canvas.toDataURL('image/png');
+                resizedImage.style.display = 'block';
+
+                downloadButton.style.display = 'block'; // Show download button after resize
+            } else {
+                alert('Please upload an image or enter a valid image URL.');
+            }
+        });
+
+        downloadButton.addEventListener('click', function () {
+            canvas.toBlob(function (blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'resized-image.png';
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+        });
+    </script>
+</body>
+</html>
