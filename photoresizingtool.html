@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Resizer Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            background-color: #f3f4f6;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"],
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .controls label {
+            margin-right: 10px;
+        }
+
+        .controls input[type="number"] {
+            width: 60px;
+        }
+
+        .controls input[type="checkbox"] {
+            margin-left: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        img,
+        #resizedImage {
+            max-width: 100%;
+            margin-bottom: 20px;
+            display: block;
+            border-radius: 0;
+        }
+
+        canvas {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Resizer Tool</h1>
+        <input type="file" id="fileInput" accept="image/*">
+        <input type="text" id="urlInput" placeholder="Enter image URL">
+        <img id="displayImage" src="" alt="Selected Image" style="display: none;">
+        <div class="controls">
+            <div>
+                <label for="widthInput">Width:</label>
+                <input type="number" id="widthInput" placeholder="Width">
+            </div>
+            <div>
+                <label for="heightInput">Height:</label>
+                <input type="number" id="heightInput" placeholder="Height">
+            </div>
+            <div>
+                <label for="borderRadiusInput">Border Radius:</label>
+                <input type="number" id="borderRadiusInput" placeholder="Radius">
+                <select id="borderRadiusUnit">
+                    <option value="px">px</option>
+                    <option value="%">%</option>
+                </select>
+            </div>
+            <div>
+                <label>
+                    Maintain Aspect Ratio:
+                    <input type="checkbox" id="aspectRatio" checked>
+                </label>
+            </div>
+        </div>
+        <button id="resizeButton">Resize Image</button>
+        <img id="resizedImage" src="" alt="Resized Image" style="display: none;">
+        <button id="downloadButton" style="display: none;">Download Resized Image</button>
+        <canvas id="canvas"></canvas>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const urlInput = document.getElementById('urlInput');
+        const widthInput = document.getElementById('widthInput');
+        const heightInput = document.getElementById('heightInput');
+        const aspectRatioCheckbox = document.getElementById('aspectRatio');
+        const resizeButton = document.getElementById('resizeButton');
+        const downloadButton = document.getElementById('downloadButton');
+        const displayImage = document.getElementById('displayImage');
+        const resizedImage = document.getElementById('resizedImage');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const borderRadiusInput = document.getElementById('borderRadiusInput');
+        const borderRadiusUnit = document.getElementById('borderRadiusUnit');
+        let image = new Image();
+
+        fileInput.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    image.src = event.target.result;
+                    displayImage.src = event.target.result;
+                    displayImage.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        urlInput.addEventListener('input', function () {
+            image.src = urlInput.value;
+            displayImage.src = urlInput.value;
+            displayImage.style.display = 'block';
+        });
+
+        image.onload = function () {
+            widthInput.value = image.width;
+            heightInput.value = image.height;
+        };
+
+        widthInput.addEventListener('input', function () {
+            if (aspectRatioCheckbox.checked) {
+                heightInput.value = Math.round((image.height / image.width) * widthInput.value);
+            }
+        });
+
+        heightInput.addEventListener('input', function () {
+            if (aspectRatioCheckbox.checked) {
+                widthInput.value = Math.round((image.width / image.height) * heightInput.value);
+            }
+        });
+
+        resizeButton.addEventListener('click', function () {
+            if (image.src) {
+                const width = parseInt(widthInput.value, 10);
+                const height = parseInt(heightInput.value, 10);
+                const borderRadiusValue = parseInt(borderRadiusInput.value, 10) || 0;
+                const unit = borderRadiusUnit.value;
+
+                canvas.width = width;
+                canvas.height = height;
+                ctx.clearRect(0, 0, width, height);
+                ctx.save();
+                ctx.beginPath();
+
+                if (unit === '%') {
+                    const radiusX = (borderRadiusValue / 100) * width;
+                    const radiusY = (borderRadiusValue / 100) * height;
+                    ctx.moveTo(radiusX, 0);
+                    ctx.lineTo(width - radiusX, 0);
+                    ctx.quadraticCurveTo(width, 0, width, radiusY);
+                    ctx.lineTo(width, height - radiusY);
+                    ctx.quadraticCurveTo(width, height, width - radiusX, height);
+                    ctx.lineTo(radiusX, height);
+                    ctx.quadraticCurveTo(0, height, 0, height - radiusY);
+                    ctx.lineTo(0, radiusY);
+                    ctx.quadraticCurveTo(0, 0, radiusX, 0);
+                } else {
+                    ctx.moveTo(borderRadiusValue, 0);
+                    ctx.lineTo(width - borderRadiusValue, 0);
+                    ctx.quadraticCurveTo(width, 0, width, borderRadiusValue);
+                    ctx.lineTo(width, height - borderRadiusValue);
+                    ctx.quadraticCurveTo(width, height, width - borderRadiusValue, height);
+                    ctx.lineTo(borderRadiusValue, height);
+                    ctx.quadraticCurveTo(0, height, 0, height - borderRadiusValue);
+                    ctx.lineTo(0, borderRadiusValue);
+                    ctx.quadraticCurveTo(0, 0, borderRadiusValue, 0);
+                }
+
+                ctx.closePath();
+                ctx.clip();
+
+                ctx.drawImage(image, 0, 0, width, height);
+
+                resizedImage.src = canvas.toDataURL('image/png');
+                resizedImage.style.display = 'block';
+                resizedImage.style.borderRadius = `${borderRadiusValue}${unit}`;
+
+                downloadButton.style.display = 'block';
+                ctx.restore();
+            } else {
+                alert('Please upload an image or enter a valid image URL.');
+            }
+        });
+
+        downloadButton.addEventListener('click', function () {
+            canvas.toBlob(function (blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'resized-image.png';
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+        });
+    </script>
+</body>
+</html>
