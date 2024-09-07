@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Resizer Tool</title>
+    <style>
+    * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.responsive-iframe {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.responsive-iframe iframe {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 0;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HTML Iframe Generator and Styler</h1>
+        <p>Ye free tool aapko iframe tags ka HTML code banane main madad karega. Bas URL, size, scrolling aur border set karen aur "Generate Iframe" button dabain.</p>
+        
+        <div class="form-group">
+            <label for="url">URL:</label>
+            <input type="text" id="url" placeholder="https://">
+        </div>
+        
+        <div class="form-group">
+            <label for="width">Width:</label>
+            <input type="number" id="width" value="100">
+            <select id="widthUnit">
+                <option value="%">%</option>
+                <option value="px">px</option>
+                <option value="auto">auto</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="height">Height:</label>
+            <input type="number" id="height" value="100">
+            <select id="heightUnit">
+                <option value="px">px</option>
+                <option value="%">%</option>
+                <option value="auto">auto</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="scrolling">Scrolling:</label>
+            <select id="scrolling">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="border">Border:</label>
+            <select id="border" onchange="toggleBorderInput()">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+            <input type="number" id="borderWidth" placeholder="Border width in px" style="display: none;">
+        </div>
+
+        <div class="form-group">
+            <label for="borderRadius">Border Radius:</label>
+            <input type="number" id="borderRadius" placeholder="Enter border radius in px">
+        </div>
+
+        <button onclick="generateIframe()">Generate Iframe</button>
+
+        <h3>Generated Iframe Code:</h3>
+        <textarea id="iframeCode" rows="5" readonly></textarea>
+
+        <h3>Iframe Preview:</h3>
+        <div class="responsive-iframe">
+            <iframe id="iframePreview"></iframe>
+        </div>
+    </div>
+
+
+    <script>
+    function generateIframe() {
+    var url = document.getElementById("url").value;
+    var width = document.getElementById("width").value;
+    var widthUnit = document.getElementById("widthUnit").value;
+    var height = document.getElementById("height").value;
+    var heightUnit = document.getElementById("heightUnit").value;
+    var scrolling = document.getElementById("scrolling").value;
+    var border = document.getElementById("border").value;
+    var borderWidth = document.getElementById("borderWidth").value;
+    var borderRadius = document.getElementById("borderRadius").value;
+
+    // Set border style
+    var borderStyle = (border === "yes") ? `${borderWidth}px solid black` : "none";
+    
+    // Set border radius
+    var borderRadiusStyle = borderRadius ? `${borderRadius}px` : "0";
+
+    // If width or height is set to "auto", ignore the numeric value
+    width = (widthUnit === "auto") ? "auto" : width + widthUnit;
+    height = (heightUnit === "auto") ? "auto" : height + heightUnit;
+
+    // Generate iframe code
+    var iframeCode = `<iframe src="${url}" width="${width}" height="${height}" scrolling="${scrolling}" style="border:${borderStyle}; border-radius:${borderRadiusStyle};"></iframe>`;
+    
+    // Display generated iframe code
+    document.getElementById("iframeCode").value = iframeCode;
+
+    // Display iframe preview
+    var iframePreview = document.getElementById("iframePreview");
+    iframePreview.src = url;
+    iframePreview.style.width = width;
+    iframePreview.style.height = height;
+    iframePreview.setAttribute("scrolling", scrolling);
+    iframePreview.style.border = borderStyle;
+    iframePreview.style.borderRadius = borderRadiusStyle;
+}
+
+// Show/hide border input based on border selection
+function toggleBorderInput() {
+    var border = document.getElementById("border").value;
+    var borderWidthInput = document.getElementById("borderWidth");
+
+    if (border === "yes") {
+        borderWidthInput.style.display = "block";
+    } else {
+        borderWidthInput.style.display = "none";
+    }
+}
+    </script>
+</body>
+</html>
