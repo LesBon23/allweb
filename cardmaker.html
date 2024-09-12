@@ -95,53 +95,55 @@
 
     if (url) {
         let videoId = '';
-        
-        // Handling both formats of URLs
-        if (url.includes('youtu.be')) {
-            videoId = url.split('/').pop().split('?')[0];
-        } else if (url.includes('youtube.com/watch')) {
-            videoId = new URL(url).searchParams.get('v');
-        }
 
-        if (videoId) {
-            const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        try {
+            // Handling both formats of URLs
+            if (url.includes('youtu.be')) {
+                videoId = url.split('/').pop().split('?')[0];
+            } else if (url.includes('youtube.com/watch')) {
+                const parsedUrl = new URL(url);
+                videoId = parsedUrl.searchParams.get('v');
+            }
 
-            const img = document.createElement('img');
-            img.src = thumbnailUrl;
-            img.alt = 'Generated Thumbnail';
-            imageContainer.appendChild(img);
+            if (videoId) {
+                const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 
-            const imgTagHTML = `<div style="border: 1px solid gray; padding: 0px; margin: 0px; border-radius:8px;">
-<img id="clickImage" 
-    src="${thumbnailUrl}" 
-    alt="Responsive Image" 
-    style="max-width: 100%; height: auto; cursor: pointer; border-radius: 8px;" 
-    onclick="handleImageClick()">
+                const img = document.createElement('img');
+                img.src = thumbnailUrl;
+                img.alt = 'Generated Thumbnail';
+                imageContainer.appendChild(img);
 
-<div style="padding-left:5px; padding-bottom:20px;">
-<h1 id="clickHeading" 
-    style="font-size: 24px; cursor: pointer; text-decoration: underline; text-decoration-color: #007BFF; color: #007BFF;" 
-    onmouseover="this.style.textDecorationColor = '#0056b3'; this.style.color = '#0056b3';" 
-    onmouseout="this.style.textDecorationColor = '#007BFF'; this.style.color = '#007BFF';" 
-    onclick="handleHeadingClick()">${title}</h1>
+                const imgTagHTML = `<div style="border: 1px solid gray; padding: 0px; margin: 0px; border-radius:8px;">
+                <img id="clickImage" 
+                    src="${thumbnailUrl}" 
+                    alt="Responsive Image" 
+                    style="max-width: 100%; height: auto; cursor: pointer; border-radius: 8px;" 
+                    onclick="handleImageClick()">
 
-<div id="message" style="font-size: 18px;"></div>
-</div>
-</div>\n\n<script>\n// bento JS coding\nlet clickCountImage = 0;\nlet clickCountHeading = 0;\n\nfunction handleImageClick() {\nclickCountImage++;\nlet messageDiv = document.getElementById('message');\n\nif (clickCountImage === 1) {\nwindow.open('${fastURL}', '_blank');\n} else if (clickCountImage === 2 || clickCountImage === 3) {\nmessageDiv.textContent = ''; \nsetTimeout(() => {\nmessageDiv.textContent = 'again click'; \n}, 100); \n} else if (clickCountImage === 4) {\nmessageDiv.textContent = ''; \nwindow.open('${secendURLs}', '_blank'); \n} else if (clickCountImage > 4) {\nwindow.open('${secendURLs}', '_blank'); \n}\n}\n\nfunction handleHeadingClick() {\nclickCountHeading++;\nlet messageDiv = document.getElementById('message');\n\nif (clickCountHeading === 1) {\nwindow.open('${fastURL}', '_blank');\n} else if (clickCountHeading === 2 || clickCountHeading === 3) {\nmessageDiv.textContent = ''; \nsetTimeout(() => {\nmessageDiv.textContent = 'again click'; \n}, 100); \n} else if (clickCountHeading === 4) {\nmessageDiv.textContent = ''; \nwindow.open('${secendURLs}', '_blank'); \n} else if (clickCountHeading > 4) {\nwindow.open('${secendURLs}', '_blank'); \n}\n}\n<\/script>`;
+                <div style="padding-left:5px; padding-bottom:20px;">
+                <h1 id="clickHeading" 
+                    style="font-size: 24px; cursor: pointer; text-decoration: underline; text-decoration-color: #007BFF; color: #007BFF;" 
+                    onmouseover="this.style.textDecorationColor = '#0056b3'; this.style.color = '#0056b3';" 
+                    onmouseout="this.style.textDecorationColor = '#007BFF'; this.style.color = '#007BFF';" 
+                    onclick="handleHeadingClick()">${title}</h1>
 
-            codeOutput.value = imgTagHTML;
-            previewContainer.innerHTML = imgTagHTML; // Show preview of the HTML
-        } else {
-            imageContainer.innerHTML = '<p>Invalid YouTube video URL.</p>';
-            codeOutput.value = '';
-            previewContainer.innerHTML = '';
+                <div id="message" style="font-size: 18px;"></div>
+                </div>
+                </div>\n\n<script>\n// bento JS coding\nlet clickCountImage = 0;\nlet clickCountHeading = 0;\nlet timerActive = false; // timer ko check karne ke liye flag\n\nfunction resetClicks() {\nclickCountImage = 0;\nclickCountHeading = 0;\ntimerActive = false; // reset karte waqt timer ko bhi stop karna hai\n}\n\nfunction startTimer() {\ntimerActive = true; // timer shuru hone par flag ko true karenge\nsetTimeout(() => {\nresetClicks(); // 1 minute ke baad clicks reset ho jayenge\n}, 60000); // 60000ms = 1 minute\n}\n\nfunction handleImageClick() {\nclickCountImage++;\nlet messageDiv = document.getElementById('message');\n\nif (clickCountImage === 1) {\nwindow.open('${fastURL}', '_blank');\n} else if (clickCountImage === 2) {\nmessageDiv.textContent = '';\nsetTimeout(() => {\nmessageDiv.textContent = 'again click';\n\n}, 100);\n\n} else if (clickCountImage === 3) {\nmessageDiv.textContent = '';\nwindow.open('${secendURLs}', '_blank');\nif (!timerActive) {\nstartTimer(); // timer sirf 3rd click ke baad shuru hoga\n}\n\n} else if (clickCountImage > 3 && timerActive) {\nwindow.open('${secendURLs}', '_blank'); // 3rd click ke baad sirf doosra URL open hoga\n}\n}\n\nfunction handleHeadingClick() {\nclickCountHeading++;\nlet messageDiv = document.getElementById('message');\n\nif (clickCountHeading === 1) {\nwindow.open('${fastURL}', '_blank');\n\n} else if (clickCountHeading === 2) {\nmessageDiv.textContent = '';\nsetTimeout(() => {\n\nmessageDiv.textContent = 'again click';\n\n}, 100);\n} else if (clickCountHeading === 3) {\nmessageDiv.textContent = '';\nwindow.open('${secendURLs}', '_blank');\nif (!timerActive) {\nstartTimer(); // timer sirf 3rd click ke baad shuru hoga\n}\n\n} else if (clickCountHeading > 3 && timerActive) {\nwindow.open('${secendURLs}', '_blank'); // 3rd click ke baad sirf doosra URL open hoga\n}\n}\n<\/script>`;
+
+                codeOutput.value = imgTagHTML;
+                previewContainer.innerHTML = imgTagHTML; // Show preview of the HTML
+            } else {
+                imageContainer.innerHTML = '<p>Invalid YouTube video URL.</p>';
+            }
+        } catch (error) {
+            imageContainer.innerHTML = `<p>Error parsing the URL: ${error.message}</p>`;
         }
     } else {
         imageContainer.innerHTML = '<p>Please enter a valid YouTube video URL.</p>';
-        codeOutput.value = '';
-        previewContainer.innerHTML = '';
     }
 }
+
 
     // Copy Button Functionality (without alert)
     function copyBtn() {
@@ -152,7 +154,6 @@
         document.execCommand("copy"); // Copy the text inside the textarea
     }
 </script>
-
 
 
 </body>
