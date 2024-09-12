@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Thumbnail Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            max-width: 500px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        input, button, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 0;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+        textarea {
+            height: 100px;
+            font-family: monospace;
+        }
+        .preview {
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <h1>YouTube Thumbnail Generator</h1>
+    <input type="text" id="urlInput" placeholder="YouTube Video URL" />
+    <input type="text" id="typeheading" placeholder="Type/Paste title" />
+    <input type="text" id="farstURL" placeholder="Paste 1st ads URL" />
+    <input type="text" id="secendURL" placeholder="Paste main content URL" />
+    <button onclick="generateImage()">Generate Thumbnail</button>
+    <div id="imageContainer"></div>
+    
+    <textarea id="codeOutput"></textarea>
+    <button onclick="copyBtn()">Copy</button> <!-- Added Copy Button -->
+    
+    <div id="previewContainer" class="preview"></div>
+</div>
+
+<script>
+    function generateImage() {
+    const url = document.getElementById('urlInput').value;
+    const title = document.getElementById('typeheading').value;
+    const fastURL = document.getElementById('farstURL').value;
+    const secendURLs = document.getElementById('secendURL').value;
+    const imageContainer = document.getElementById('imageContainer');
+    const codeOutput = document.getElementById('codeOutput');
+    const previewContainer = document.getElementById('previewContainer');
+
+    // Clear previous content
+    imageContainer.innerHTML = '';
+    codeOutput.value = '';
+    previewContainer.innerHTML = '';
+
+    if (url) {
+        let videoId = '';
+        
+        // Handling both formats of URLs
+        if (url.includes('youtu.be')) {
+            videoId = url.split('/').pop().split('?')[0];
+        } else if (url.includes('youtube.com/watch')) {
+            videoId = new URL(url).searchParams.get('v');
+        }
+
+        if (videoId) {
+            const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+
+            const img = document.createElement('img');
+            img.src = thumbnailUrl;
+            img.alt = 'Generated Thumbnail';
+            imageContainer.appendChild(img);
+
+            const imgTagHTML = `<div style="border: 1px solid gray; padding: 0px; margin: 0px; border-radius:8px;">
+<img id="clickImage" 
+    src="${thumbnailUrl}" 
+    alt="Responsive Image" 
+    style="max-width: 100%; height: auto; cursor: pointer; border-radius: 8px;" 
+    onclick="handleImageClick()">
+
+<div style="padding-left:5px; padding-bottom:20px;">
+<h1 id="clickHeading" 
+    style="font-size: 24px; cursor: pointer; text-decoration: underline; text-decoration-color: #007BFF; color: #007BFF;" 
+    onmouseover="this.style.textDecorationColor = '#0056b3'; this.style.color = '#0056b3';" 
+    onmouseout="this.style.textDecorationColor = '#007BFF'; this.style.color = '#007BFF';" 
+    onclick="handleHeadingClick()">${title}</h1>
+
+<div id="message" style="font-size: 18px;"></div>
+</div>
+</div>\n\n<script>\n// bento JS coding\nlet clickCountImage = 0;\nlet clickCountHeading = 0;\n\nfunction handleImageClick() {\nclickCountImage++;\nlet messageDiv = document.getElementById('message');\n\nif (clickCountImage === 1) {\nwindow.open('${fastURL}', '_blank');\n} else if (clickCountImage === 2 || clickCountImage === 3) {\nmessageDiv.textContent = ''; \nsetTimeout(() => {\nmessageDiv.textContent = 'again click'; \n}, 100); \n} else if (clickCountImage === 4) {\nmessageDiv.textContent = ''; \nwindow.open('${secendURLs}', '_blank'); \n} else if (clickCountImage > 4) {\nwindow.open('${secendURLs}', '_blank'); \n}\n}\n\nfunction handleHeadingClick() {\nclickCountHeading++;\nlet messageDiv = document.getElementById('message');\n\nif (clickCountHeading === 1) {\nwindow.open('${fastURL}', '_blank');\n} else if (clickCountHeading === 2 || clickCountHeading === 3) {\nmessageDiv.textContent = ''; \nsetTimeout(() => {\nmessageDiv.textContent = 'again click'; \n}, 100); \n} else if (clickCountHeading === 4) {\nmessageDiv.textContent = ''; \nwindow.open('${secendURLs}', '_blank'); \n} else if (clickCountHeading > 4) {\nwindow.open('${secendURLs}', '_blank'); \n}\n}\n<\/script>`;
+
+            codeOutput.value = imgTagHTML;
+            previewContainer.innerHTML = imgTagHTML; // Show preview of the HTML
+        } else {
+            imageContainer.innerHTML = '<p>Invalid YouTube video URL.</p>';
+            codeOutput.value = '';
+            previewContainer.innerHTML = '';
+        }
+    } else {
+        imageContainer.innerHTML = '<p>Please enter a valid YouTube video URL.</p>';
+        codeOutput.value = '';
+        previewContainer.innerHTML = '';
+    }
+}
+
+    // Copy Button Functionality (without alert)
+    function copyBtn() {
+        const codeOutput = document.getElementById('codeOutput');
+        codeOutput.select();
+        codeOutput.setSelectionRange(0, 99999); // For mobile devices
+
+        document.execCommand("copy"); // Copy the text inside the textarea
+    }
+</script>
+
+
+
+</body>
+</html>
