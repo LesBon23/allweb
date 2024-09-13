@@ -120,14 +120,14 @@
                     onclick="handleImageClick()">
 
                 <div style="padding:5px;">
+                <div id="message" style="text-align: center; display: none; font-size: 18px; font-weight: bold; padding-bottom: 5px; background-color: red; color: white;">Again Click</div>
                 <h1 id="clickHeading" 
                     style="font-size: 24px; cursor: pointer; text-decoration: underline; text-decoration-color: #007BFF; color: #007BFF;" 
                     onmouseover="this.style.textDecorationColor = '#0056b3'; this.style.color = '#0056b3';" 
                     onmouseout="this.style.textDecorationColor = '#007BFF'; this.style.color = '#007BFF';" 
                     onclick="handleHeadingClick()">${title}</h1>
                 </div>
-
-                <div id="message" style="text-align: center; display: none; font-size: 18px; font-weight: bold; padding-bottom: 5px;">Again Click</div>
+                
                 </div>\n\n<script>\n// bento JS coding\nlet clickCountImage = 0;\nlet clickCountHeading = 0;\nlet timerActive = false; // timer ko check karne ke liye flag\n\nfunction resetClicks() {\n    clickCountImage = 0;\n    clickCountHeading = 0;\n    timerActive = false; // reset karte waqt timer ko bhi stop karna hai\n}\n\nfunction startTimer() {\n    timerActive = true; // timer shuru hone par flag ko true karenge\n    setTimeout(() => {\n        resetClicks(); // 1 minute ke baad clicks reset ho jayenge\n    }, 15000); // 60000ms = 1 minute\n}\n\nfunction handleImageClick() {\n    clickCountImage++;\n    let messageDiv = document.getElementById('message');\n\n    if (clickCountImage === 1) {\n        window.open('${fastURL}', '_blank');\n        messageDiv.style.display = 'none'; // message div ko hidden rakhenge\n    } else if (clickCountImage === 2) {\n        messageDiv.style.display = 'block'; // 2nd click par div show hoga\n    } else if (clickCountImage === 3) {\n        messageDiv.style.display = 'none'; // message div ko hide karna hai\n        window.open('${secendURLs}', '_blank');\n        if (!timerActive) {\n            startTimer(); // timer sirf 3rd click ke baad shuru hoga\n        }\n    } else if (clickCountImage > 3 && timerActive) {\n        window.open('${secendURLs}', '_blank'); // 3rd click ke baad sirf doosra URL open hoga\n    }\n}\n\nfunction handleHeadingClick() {\n    clickCountHeading++;\n    let messageDiv = document.getElementById('message');\n\n    if (clickCountHeading === 1) {\n        window.open('${fastURL}', '_blank');\n        messageDiv.style.display = 'none'; // message div ko hidden rakhenge\n    } else if (clickCountHeading === 2) {\n        messageDiv.style.display = 'block'; // 2nd click par div show hoga\n    } else if (clickCountHeading === 3) {\n        messageDiv.style.display = 'none'; // message div ko hide karna hai\n        window.open('${secendURLs}', '_blank');\n        if (!timerActive) {\n            startTimer(); // timer sirf 3rd click ke baad shuru hoga\n        }\n    } else if (clickCountHeading > 3 && timerActive) {\n        window.open('${secendURLs}', '_blank'); // 3rd click ke baad sirf doosra URL open hoga\n    }\n}\n<\/script>`;
 
                 codeOutput.value = imgTagHTML;
