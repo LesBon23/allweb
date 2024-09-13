@@ -136,6 +136,7 @@ textarea {
 
         <h3>Generated Iframe Code:</h3>
         <textarea id="generatedCode" rows="5"></textarea>
+        <button onclick="copyBtn()">Copy</button> <!-- Added Copy Button -->
 
         <h3>Iframe Preview:</h3>
         <div id="iframePreview" class="iframe-container">
@@ -193,8 +194,7 @@ function generateIframe() {
             frameborder="0" 
             allowfullscreen="true">
         </iframe>
-    </div><h2 style="border-radius: 8px; height: 0px; overflow: hidden; padding-bottom: 56.25%; position: relative; text-align: left; width: 100%;"><span style="font-family: arial;">${titleName}</span></h2>
-    `;
+    </div><h2 style="border-radius: 8px; height: 0px; overflow: hidden; padding-bottom: 56.25%; position: relative; text-align: left; width: 100%;"><span style="font-family: arial;">${titleName}</span></h2>`;
 
     // Show the generated iframe code in textarea
     document.getElementById('generatedCode').value = iframeCode;
@@ -202,6 +202,16 @@ function generateIframe() {
     // Display the iframe preview
     document.getElementById('iframePreview').innerHTML = iframeCode;
 }
+
+
+    // Copy Button Functionality (without alert)
+    function copyBtn() {
+        const generatedCode = document.getElementById('generatedCode');
+        generatedCode.select();
+        generatedCode.setSelectionRange(0, 99999); // For mobile devices
+
+        document.execCommand("copy"); // Copy the text inside the textarea
+    }
 
 </script>
 
