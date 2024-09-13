@@ -178,7 +178,8 @@ function generateIframe() {
     var borderStyle = border == '1' ? `${borderWidth}px solid ${borderColor}` : '0'; // If border is enabled
     var radiusStyle = borderRadius ? `${borderRadius}px` : '0'; // Border radius
 
-    var iframeCode = `
+    var iframeCode = `<script type="text/javascript">\n	atOptions = {\n		'key' : '5ffdc7f7ee0aca3606db77458a1f75a2',\n		'format' : 'iframe',\n		'height' : 90,\n		'width' : 728,\n		'params' : {}\n	};\n<\/script>\n<script src="//corneredtomb.com/5ffdc7f7ee0aca3606db77458a1f75a2/invoke.js" type="text/javascript"><\/script>
+    
     <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: ${radiusStyle};">
         <iframe 
             src="${url}" 
