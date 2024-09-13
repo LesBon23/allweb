@@ -18,7 +18,7 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 900px;
     margin: 0 auto;
     background-color: #fff;
     padding: 20px;
@@ -105,6 +105,9 @@ textarea {
         
         <label for="iframeUrl">Iframe URL:</label>
         <input type="text" id="iframeUrl" placeholder="Enter Iframe URL here">
+        
+        <label for="typeTitle">Type/Paste title:</label>
+        <input type="text" id="typeTitle" placeholder="Type/Paste title here">
 
         <label for="scrollingOption">Scrolling:</label>
         <select id="scrollingOption">
@@ -162,6 +165,8 @@ function isYouTubeUrl(url) {
 function generateIframe() {
     var url = document.getElementById('iframeUrl').value;
     var videoId = isYouTubeUrl(url);
+    
+    var titleName = document.getElementById('typeTitle').value;
 
     // If the URL is a YouTube link, convert it to embed format
     if (videoId) {
@@ -188,7 +193,7 @@ function generateIframe() {
             frameborder="0" 
             allowfullscreen="true">
         </iframe>
-    </div>
+    </div><h2 style="border-radius: 8px; height: 0px; overflow: hidden; padding-bottom: 56.25%; position: relative; text-align: left; width: 100%;"><span style="font-family: arial;">${titleName}</span></h2>
     `;
 
     // Show the generated iframe code in textarea
