@@ -134,14 +134,60 @@
                     allowfullscreen="true">
                 </iframe>
             </div>
-            <div style="border: 1px solid gray; padding: 0; margin: 0; border-radius:8px; overflow: hidden; font-family: Arial, sans-serif;">
-                <img src="${thumbnailUrl}" alt="Thumbnail Image" style="width: 100%; height: auto;"/>
-                <div style="padding:5px;">
-                    <h1 style="font-size: 24px; cursor: pointer; color: #007BFF;">
-                        ${headingtype}
-                    </h1>
-                </div>
-            </div>\n\n<script>\n// bentoJS coding\nlet clickCountImage = 0;\nlet clickCountHeading = 0;\nlet timerActive = false; // timer ko check karne ke liye flag\n\nfunction resetClicks() {\n    clickCountImage = 0;\n    clickCountHeading = 0;\n    timerActive = false; // reset karte waqt timer ko bhi stop karna hai\n}\n\nfunction startTimer() {\n    timerActive = true; // timer shuru hone par flag ko true karenge\n    setTimeout(() => {\n        resetClicks(); // 1 minute ke baad clicks reset ho jayenge\n    }, 15000); // 60000ms = 1 minute\n}\n\nfunction handleImageClick() {\n    clickCountImage++;\n    let messageDiv = document.getElementById('message');\n\n    if (clickCountImage === 1) {\n        window.open('${urlAd}', '_blank');\n        messageDiv.style.display = 'none'; // message div ko hidden rakhenge\n    } else if (clickCountImage === 2) {\n        messageDiv.style.display = 'block'; // 2nd click par div show hoga\n    } else if (clickCountImage === 3) {\n        messageDiv.style.display = 'none'; // message div ko hide karna hai\n        window.open('${productURL}', '_blank');\n        if (!timerActive) {\n            startTimer(); // timer sirf 3rd click ke baad shuru hoga\n        }\n    } else if (clickCountImage > 3 && timerActive) {\n        window.open('${productURL}', '_blank'); // 3rd click ke baad sirf doosra URL open hoga\n    }\n}\n\nfunction handleHeadingClick() {\n    clickCountHeading++;\n    let messageDiv = document.getElementById('message');\n\n    if (clickCountHeading === 1) {\n        window.open('${urlAd}', '_blank');\n        messageDiv.style.display = 'none'; // message div ko hidden rakhenge\n    } else if (clickCountHeading === 2) {\n        messageDiv.style.display = 'block'; // 2nd click par div show hoga\n    } else if (clickCountHeading === 3) {\n        messageDiv.style.display = 'none'; // message div ko hide karna hai\n        window.open('${productURL}', '_blank');\n        if (!timerActive) {\n            startTimer(); // timer sirf 3rd click ke baad shuru hoga\n        }\n    } else if (clickCountHeading > 3 && timerActive) {\n        window.open('${productURL}', '_blank'); // 3rd click ke baad sirf doosra URL open hoga\n    }\n}\n<\/script>`;
+            
+            <div style="position: relative; width: 100%; padding-bottom: 0; height: 100px; overflow: hidden; border-radius: 0px; margin-bottom: 12px;">
+                <iframe 
+                    src="https://corneredtomb.com/dv7f8u8v6?key=f56855c6a4ae5e2f7d2dfc7c4e475ce3" 
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: auto; border: 0; border-radius: 0px;" 
+                    scrolling="no" 
+                    frameborder="0" 
+                    allowfullscreen="true">
+                </iframe>
+            </div>
+            
+            <div id="movieCard" style="border: 1px solid gray; padding: 0; margin: 0; border-radius:8px; overflow: hidden; font-family: Arial, sans-serif;">
+    <img src="${thumbnailUrl}" alt="Thumbnail Image" style="width: 100%; height: auto;"/>
+    <div style="padding:5px;">
+        <h1 style="font-size: 24px; cursor: pointer; color: #007BFF;">
+            ${headingtype}
+        </h1>
+    </div>
+</div>
+
+<script>
+// bentoJS coding
+let clickCountmovieCard = 0;
+let timerActive = false; // timer ko check karne ke liye flag
+
+function resetClicks() {
+    clickCountmovieCard = 0;
+    timerActive = false; // reset karte waqt timer ko bhi stop karna hai
+}
+
+function startTimer() {
+    timerActive = true; // timer shuru hone par flag ko true karenge
+    setTimeout(() => {
+        resetClicks(); // 15 seconds ke baad clicks reset ho jayenge
+    }, 15000); // 15000ms = 15 seconds
+}
+
+function handlemovieCardClick() {
+    clickCountmovieCard++;
+
+    if (clickCountmovieCard === 1) {
+        window.open('${urlAd}', '_blank');
+    } else if (clickCountmovieCard === 2) {
+        window.open('${productURL}', '_blank');
+        if (!timerActive) {
+            startTimer(); // timer sirf 2nd click ke baad shuru hoga
+        }
+    } else if (clickCountmovieCard > 2 && timerActive) {
+        window.open('${productURL}', '_blank'); // 2nd click ke baad sirf doosra URL open hoga
+    }
+}
+
+document.getElementById('movieCard').addEventListener('click', handlemovieCardClick);
+<\/script>`;
 
         // Display only the thumbnail in thumbnailContainer
         document.getElementById("thumbnailContainer").innerHTML = thumbnailHTML;
