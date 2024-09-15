@@ -5,84 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive YouTube Card Maker</title>
     <style>
-        /* Basic styling for the page */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f4f4f9;
-        }
+    /* Basic styling for the page */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #e9ecef;
+        color: #495057;
+    }
 
-        .container {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 20px;
-            max-width: 500px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
+    .container {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 25px;
+        max-width: 600px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
 
-        h1 {
-            font-size: 24px;
-            color: #333;
-        }
+    h1 {
+        font-size: 28px;
+        color: #343a40;
+        margin-bottom: 15px;
+        text-align: center;
+    }
 
-        input, button, textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 0;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-        }
+    label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+    }
 
-        button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 10px;
-        }
+    input, button, textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        box-sizing: border-box;
+    }
 
-        textarea {
-            height: 200px;
-            max-height: 250px
-            resize: vertical;
-            font-family: monospace;
-        }
+    input {
+        font-size: 16px;
+    }
 
-        .preview {
-            margin-top: 20px;
-        }
-    </style>
+    button {
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    textarea {
+        height: 150px;
+        font-family: 'Courier New', Courier, monospace;
+        resize: vertical;
+    }
+
+    .preview {
+        margin-top: 20px;
+    }
+
+    #thumbnailContainer {
+        text-align: center;
+    }
+
+    #htmlPreview {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 15px;
+        background-color: #f8f9fa;
+    }
+</style>
+
 </head>
 <body>
 
     <div class="container">
         <h1>Card Maker</h1>
         
+        <label for="typeheading">Type or Paste Title</label>
         <input type="text" id="typeheading" placeholder="Type/Paste title" />
         
+        <label for="urlInput">YouTube video URL</label>
         <input type="text" id="urlInput" placeholder="Enter YouTube video URL">
         
+        <label for="Adname">Ad Name (Optional)</label>
         <input type="text" id="Adname" placeholder="Ad name here">
         
+        <label for="AdURLs">Ad URL (Compalsery)</label>
         <input type="text" id="AdURLs" placeholder="Ad URL here">
         
+        <label for="ProductURLs">Product URL (Compalsery)</label>
         <input type="text" id="ProductURLs" placeholder="Product URL here">
 
         <!-- Button to extract thumbnail -->
@@ -92,11 +117,13 @@
         <div id="thumbnailContainer"></div>
         
         <!-- Textarea for HTML content -->
+        <label for="htmlContent">HTML Output Code (Copy)</label>
         <textarea id="htmlContent" class="html-Content" placeholder="HTML content will appear here"></textarea>
         
         <button onclick="copyCodeHtml()">Copy HTML</button>
         
         <!-- Preview of HTML content -->
+        <label for="htmlPreview">HTML Output Preview</label>
         <div id="htmlPreview"></div>
     </div>
 
