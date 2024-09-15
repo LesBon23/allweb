@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Thumbnail Extractor</title>
+    <title>Responsive YouTube Thumbnail Generator</title>
     <style>
         /* Basic styling for the page */
         body {
@@ -73,12 +73,11 @@
 <body>
 
     <div class="container">
-        <h1>YouTube Thumbnail Extractor</h1>
-
+        <h1>YouTube Thumbnail Generator</h1>
         
         <input type="text" id="typeheading" placeholder="Type/Paste title" />
         
-        <input type="text" id="youtubeUrl" placeholder="YouTube video ka link daalain...">
+        <input type="text" id="urlInput" placeholder="Enter YouTube video URL">
         
         <input type="text" id="Adname" placeholder="Ad name here">
         
@@ -87,99 +86,86 @@
         <input type="text" id="ProductURLs" placeholder="Product URL here">
 
         <!-- Button to extract thumbnail -->
-        <button onclick="extractThumbnail()">Generate Thumbnail</button>
-
-        <!-- Image tag to show the extracted thumbnail -->
-        <img id="thumbnail">
-
-        <!-- Textarea to display the HTML code for the thumbnail -->
-        <textarea id="codeOutput" readonly placeholder="Yahan HTML code show hoga..."></textarea>
+        <button onclick="generateThumbnail()">Generate Thumbnail</button>
+        
+        <!-- Thumbnail Image Container -->
+        <div id="thumbnailContainer"></div>
+        
+        <!-- Textarea for HTML content -->
+        <textarea id="htmlContent" class="html-Content" placeholder="HTML content will appear here"></textarea>
         
         <button onclick="copyCodeHtml()">Copy HTML</button>
-
-        <!-- Div to display the preview of the HTML content -->
-        <div id="preview" class="preview"></div>
+        
+        <!-- Preview of HTML content -->
+        <div id="htmlPreview"></div>
     </div>
 
     <script>
-        // Function to extract YouTube video ID and get thumbnail
-        function extractThumbnail() {
-            const url = document.getElementById('youtubeUrl').value.trim();
-            const headingtype = document.getElementById ('typeheading').value;
-            const adName = document.getElementById('Adname').value;
-            const urlAd = document.getElementById ('AdURLs').value;
-            const productURL = document.getElementById ('ProductURLs').value;
-
-            // Video ID nikalne ke liye teeno tarah ke URLs handle kar rahe hain
-            let videoId;
-
-            // 1. Agar URL "v=" ke saath hai (normal YouTube URL)
-            if (url.includes("v=")) {
-                videoId = url.split('v=')[1]?.split('&')[0];
-            }
-            // 2. Agar URL youtu.be format mein hai
-            else if (url.includes("youtu.be")) {
-                videoId = url.split('youtu.be/')[1]?.split('?')[0];
-            }
-            // 3. Agar mobile URL (m.youtube.com) hai
-            else if (url.includes("m.youtube.com/watch")) {
-                videoId = url.split('v=')[1]?.split('&')[0];
-            }
-
-            // Agar video ID mil gaya to thumbnail extract karo
-            if (videoId) {
-                const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-                document.getElementById('thumbnail').src = thumbnailUrl;
-
-                // HTML img code generate karo aur textarea mein show karo
-                const imgHtmlCode = `<h2 style="border-radius: 8px; position: relative; overflow: hidden; text-align: left; width: 100%;"><span style="font-family: arial;">${adName}</span></h2>
-
-<div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 0px; margin-bottom: 12px;">
-        <iframe 
-            src="${urlAd}" 
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 0px;" 
-            scrolling="no" 
-            frameborder="0" 
-            allowfullscreen="true">
-        </iframe>
-        </div>
-        
-        <div style="border: 1px solid gray; padding: 0; margin: 0; border-radius:8px; overflow: hidden; font-family: Arial, sans-serif;">
-                <img id="clickImage" 
-                    src="${thumbnailUrl}" 
-                    alt="Responsive Image" 
-                    style="width: 100%; height: auto; cursor: pointer;" 
-                    onclick="handleImageClick()">
-
-                <div style="padding:5px;">
-                <div id="message" style="text-align: center; display: none; font-size: 18px; font-weight: bold; padding: 5px 5px; background-color: red; color: white;">Again Click</div>
-                <h1 id="clickHeading" 
-                    style="font-size: 24px; cursor: pointer; text-decoration: underline; text-decoration-color: #007BFF; color: #007BFF;" 
-                    onmouseover="this.style.textDecorationColor = '#0056b3'; this.style.color = '#0056b3';" 
-                    onmouseout="this.style.textDecorationColor = '#007BFF'; this.style.color = '#007BFF';" 
-                    onclick="handleHeadingClick()">${headingtype}</h1>
-                </div>
-                
-                </div>\n\n<script>\n// bento JS coding\nlet clickCountImage = 0;\nlet clickCountHeading = 0;\nlet timerActive = false; // timer ko check karne ke liye flag\n\nfunction resetClicks() {\n    clickCountImage = 0;\n    clickCountHeading = 0;\n    timerActive = false; // reset karte waqt timer ko bhi stop karna hai\n}\n\nfunction startTimer() {\n    timerActive = true; // timer shuru hone par flag ko true karenge\n    setTimeout(() => {\n        resetClicks(); // 1 minute ke baad clicks reset ho jayenge\n    }, 15000); // 60000ms = 1 minute\n}\n\nfunction handleImageClick() {\n    clickCountImage++;\n    let messageDiv = document.getElementById('message');\n\n    if (clickCountImage === 1) {\n        window.open('${urlAd}', '_blank');\n        messageDiv.style.display = 'none'; // message div ko hidden rakhenge\n    } else if (clickCountImage === 2) {\n        messageDiv.style.display = 'block'; // 2nd click par div show hoga\n    } else if (clickCountImage === 3) {\n        messageDiv.style.display = 'none'; // message div ko hide karna hai\n        window.open('${productURL}', '_blank');\n        if (!timerActive) {\n            startTimer(); // timer sirf 3rd click ke baad shuru hoga\n        }\n    } else if (clickCountImage > 3 && timerActive) {\n        window.open('${productURL}', '_blank'); // 3rd click ke baad sirf doosra URL open hoga\n    }\n}\n\nfunction handleHeadingClick() {\n    clickCountHeading++;\n    let messageDiv = document.getElementById('message');\n\n    if (clickCountHeading === 1) {\n        window.open('${urlAd}', '_blank');\n        messageDiv.style.display = 'none'; // message div ko hidden rakhenge\n    } else if (clickCountHeading === 2) {\n        messageDiv.style.display = 'block'; // 2nd click par div show hoga\n    } else if (clickCountHeading === 3) {\n        messageDiv.style.display = 'none'; // message div ko hide karna hai\n        window.open('${productURL}', '_blank');\n        if (!timerActive) {\n            startTimer(); // timer sirf 3rd click ke baad shuru hoga\n        }\n    } else if (clickCountHeading > 3 && timerActive) {\n        window.open('${productURL}', '_blank'); // 3rd click ke baad sirf doosra URL open hoga\n    }\n}\n<\/script>`;
-                document.getElementById('codeOutput').value = imgHtmlCode;
-
-                // HTML code ka live preview set karo
-                document.getElementById('preview').innerHTML = imgHtmlCode;
-            } else {
-                alert('Ghalat URL hai, dobara check karain.');
-                document.getElementById('codeOutput').value = ''; // clear textarea
-                document.getElementById('preview').innerHTML = ''; // clear preview
-            }
+        function extractVideoId(url) {
+            const regex = /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
         }
+
+        function generateThumbnail() {
+    const url = document.getElementById("urlInput").value;
+    const headingtype = document.getElementById('typeheading').value;
+    const adName = document.getElementById('Adname').value;
+    const urlAd = document.getElementById('AdURLs').value;
+	const productURL = document.getElementById('ProductURLs').value;
+    const videoId = extractVideoId(url);
+    
+    if (videoId) {
+        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+
+        // Sirf thumbnail ko thumbnailContainer main dikhana
+        const thumbnailHTML = `<img src="${thumbnailUrl}" alt="Thumbnail Image" style="width: 100%; height: auto;"/>`;
+
+        // Puri HTML structure jo textarea aur htmlPreview main show hogi (ads ke sath)
+        const fullHTML = `<h2 style="border-radius: 8px; text-align: left; width: 100%;">
+                <span style="font-family: arial;">${adName}</span>
+            </h2>
+            <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 0px; margin-bottom: 12px;">
+                <iframe 
+                    src="${urlAd}" 
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 0px;" 
+                    scrolling="no" 
+                    frameborder="0" 
+                    allowfullscreen="true">
+                </iframe>
+            </div>
+            <div style="border: 1px solid gray; padding: 0; margin: 0; border-radius:8px; overflow: hidden; font-family: Arial, sans-serif;">
+                <img src="${thumbnailUrl}" alt="Thumbnail Image" style="width: 100%; height: auto;"/>
+                <div style="padding:5px;">
+                    <h1 style="font-size: 24px; cursor: pointer; color: #007BFF;">
+                        ${headingtype}
+                    </h1>
+                </div>
+            </div>\n\n<script>\n// bentoJS coding\nlet clickCountImage = 0;\nlet clickCountHeading = 0;\nlet timerActive = false; // timer ko check karne ke liye flag\n\nfunction resetClicks() {\n    clickCountImage = 0;\n    clickCountHeading = 0;\n    timerActive = false; // reset karte waqt timer ko bhi stop karna hai\n}\n\nfunction startTimer() {\n    timerActive = true; // timer shuru hone par flag ko true karenge\n    setTimeout(() => {\n        resetClicks(); // 1 minute ke baad clicks reset ho jayenge\n    }, 15000); // 60000ms = 1 minute\n}\n\nfunction handleImageClick() {\n    clickCountImage++;\n    let messageDiv = document.getElementById('message');\n\n    if (clickCountImage === 1) {\n        window.open('${urlAd}', '_blank');\n        messageDiv.style.display = 'none'; // message div ko hidden rakhenge\n    } else if (clickCountImage === 2) {\n        messageDiv.style.display = 'block'; // 2nd click par div show hoga\n    } else if (clickCountImage === 3) {\n        messageDiv.style.display = 'none'; // message div ko hide karna hai\n        window.open('${productURL}', '_blank');\n        if (!timerActive) {\n            startTimer(); // timer sirf 3rd click ke baad shuru hoga\n        }\n    } else if (clickCountImage > 3 && timerActive) {\n        window.open('${productURL}', '_blank'); // 3rd click ke baad sirf doosra URL open hoga\n    }\n}\n\nfunction handleHeadingClick() {\n    clickCountHeading++;\n    let messageDiv = document.getElementById('message');\n\n    if (clickCountHeading === 1) {\n        window.open('${urlAd}', '_blank');\n        messageDiv.style.display = 'none'; // message div ko hidden rakhenge\n    } else if (clickCountHeading === 2) {\n        messageDiv.style.display = 'block'; // 2nd click par div show hoga\n    } else if (clickCountHeading === 3) {\n        messageDiv.style.display = 'none'; // message div ko hide karna hai\n        window.open('${productURL}', '_blank');\n        if (!timerActive) {\n            startTimer(); // timer sirf 3rd click ke baad shuru hoga\n        }\n    } else if (clickCountHeading > 3 && timerActive) {\n        window.open('${productURL}', '_blank'); // 3rd click ke baad sirf doosra URL open hoga\n    }\n}\n<\/script>`;
+
+        // Display only the thumbnail in thumbnailContainer
+        document.getElementById("thumbnailContainer").innerHTML = thumbnailHTML;
+
+        // Display full HTML structure in textarea and htmlPreview
+        document.getElementById("htmlContent").value = fullHTML;
+        document.getElementById("htmlPreview").innerHTML = fullHTML;
+
+    } else {
+        document.getElementById("thumbnailContainer").innerHTML = "<p style='color: red;'>Invalid URL. Please enter a valid YouTube URL.</p>";
+        document.getElementById("htmlContent").value = "";
+        document.getElementById("htmlPreview").innerHTML = "";
+    }
+}
 
     // Copy Button Functionality (without alert)
     function copyCodeHtml() {
-        const codeOutput = document.getElementById('codeOutput');
-        codeOutput.select();
-        codeOutput.setSelectionRange(0, 99999); // For mobile devices
+        const htmlContent = document.getElementById('htmlContent');
+        htmlContent.select();
+        htmlContent.setSelectionRange(0, 99999); // For mobile devices
 
         document.execCommand("copy"); // Copy the text inside the textarea
     }
+
     </script>
 
 </body>
