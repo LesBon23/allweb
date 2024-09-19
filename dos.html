@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ad Website</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .Main-Container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .top-box {
+            width: 100%;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            background-color: #FF6600;
+            font-size: 20px;
+        }
+        .movie-card-btn {
+            border: 3px solid #E85C0D;
+            padding: 10px;
+            width: 300px;
+            height: 550px;
+            margin: 10px;
+            border-radius: 8px;
+            text-align: center;
+            background-color: #384B70;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        @media screen and (max-width: 600px) {
+            .movie-card-btn {
+                width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+  
+    <div class="Main-Container">
+        <div class="top-box">
+          <p id="clickCounts">0</p>
+        </div>
+        <div id="movieCardBox"></div>
+    </div>
+    
+    <script>
+        // Movie data
+        const movies = [
+          {
+            "title": "Ad One",
+            "BtnURL": "https://corneredtomb.com/k5m6giq6g?key=e8fb6cc0d135c3a8a3b93ac6c880fba5",
+          },
+        ];
+
+        let clickCount = 0;
+
+        // Movie cards generate karna
+        const movieCardBox = document.getElementById('movieCardBox');
+        const clickCounts = document.getElementById('clickCounts');
+
+        movies.forEach((movie, index) => {
+          const movieBtn = document.createElement('div');
+          movieBtn.classList.add('movie-card-btn');
+          movieBtn.textContent = movie.title;
+
+          movieBtn.addEventListener('click', () => {
+            clickCount++;
+            clickCounts.textContent = clickCount;
+            window.open(movie.BtnURL, '_blank');  // Button click par BtnURL open hoga
+          });
+
+          movieCardBox.appendChild(movieBtn);
+        });
+    </script>
+
+</body>
+</html>
