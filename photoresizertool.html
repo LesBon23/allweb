@@ -5,189 +5,239 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Resizer Tool</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0;
-            background-color: #f3f4f6;
+            min-height: 100vh;
+            background-color: #f0f0f0;
         }
-
         .container {
-            background: #fff;
+            background: white;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             width: 100%;
         }
-
-        .container h1 {
+        h2 {
             text-align: center;
             margin-bottom: 20px;
         }
-
-        input[type="file"],
-        input[type="text"] {
+        input[type="file"], input[type="url"], input[type="number"] {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
+            padding: 8px;
+            margin: 10px 0;
+        }
+        #imageBox, #resizedImageBox {
+            text-align: center;
+            margin: 10px 0;
+        }
+        #imageBox img, #resizedImageBox img {
+            max-width: 100%;
+            height: auto;
             border: 1px solid #ddd;
         }
-
-        .controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .controls label {
-            margin-right: 10px;
-        }
-
-        .controls input[type="number"] {
-            width: 60px;
-        }
-
-        .controls input[type="checkbox"] {
-            margin-left: 5px;
-        }
-
         button {
             width: 100%;
             padding: 10px;
-            background-color: #4CAF50;
+            background-color: #28a745;
             color: white;
             border: none;
             border-radius: 5px;
+            margin: 10px 0;
             cursor: pointer;
-            margin-bottom: 10px;
         }
-
         button:hover {
-            background-color: #45a049;
+            background-color: #218838;
         }
-
-        img {
-            max-width: 100%;
-            margin-bottom: 20px;
+        #importBtn {
+            background-color: #17a2b8;
+        }
+        #importBtn:hover {
+            background-color: #138496;
+        }
+        #resetBtn {
+            background-color: #ffc107;
+        }
+        #resetBtn:hover {
+            background-color: #e0a800;
+        }
+        #downloadBtn {
+            background-color: #007bff;
+        }
+        #downloadBtn:hover {
+            background-color: #0056b3;
+        }
+        label {
             display: block;
-        }
-
-        canvas {
-            display: none;
+            margin: 5px 0;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Image Resizer Tool</h1>
-        <input type="file" id="fileInput" accept="image/*">
-        <input type="text" id="urlInput" placeholder="Enter image URL">
-        <img id="displayImage" src="" alt="Selected Image" style="display: none;">
-        <div class="controls">
-            <div>
-                <label for="widthInput">Width:</label>
-                <input type="number" id="widthInput" placeholder="Width">
-            </div>
-            <div>
-                <label for="heightInput">Height:</label>
-                <input type="number" id="heightInput" placeholder="Height">
-            </div>
-            <div>
-                <label>
-                    Maintain Aspect Ratio:
-                    <input type="checkbox" id="aspectRatio" checked>
-                </label>
-            </div>
-        </div>
-        <button id="resizeButton">Resize Image</button>
-        <img id="resizedImage" src="" alt="Resized Image" style="display: none;">
-        <button id="downloadButton" style="display: none;">Download Resized Image</button>
-        <canvas id="canvas"></canvas>
-    </div>
 
-    <script>
-        const fileInput = document.getElementById('fileInput');
-        const urlInput = document.getElementById('urlInput');
-        const widthInput = document.getElementById('widthInput');
-        const heightInput = document.getElementById('heightInput');
-        const aspectRatioCheckbox = document.getElementById('aspectRatio');
-        const resizeButton = document.getElementById('resizeButton');
-        const downloadButton = document.getElementById('downloadButton');
-        const displayImage = document.getElementById('displayImage');
-        const resizedImage = document.getElementById('resizedImage');
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        let image = new Image();
+<div class="container">
+    <h2>Image Resizer Tool</h2>
 
-        fileInput.addEventListener('change', function (e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (event) {
-                    image.src = event.target.result;
-                    displayImage.src = event.target.result;
-                    displayImage.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        });
+    <!-- Image Input from File -->
+    <input type="file" id="imageInput" accept="image/*">
+    
+    <!-- URL Input for Image -->
+    <input type="url" id="urlInput" placeholder="Enter image URL">
+    
+    <!-- Import Button for URL -->
+    <button id="importBtn">Import Image from URL</button>
+    
+    <!-- Image Display -->
+    <div id="imageBox"></div>
+    
+    <!-- Aspect Ratio Controls -->
+    <label>Width (px):</label>
+    <input type="number" id="widthInput">
+    
+    <label>Height (px):</label>
+    <input type="number" id="heightInput">
 
-        urlInput.addEventListener('input', function () {
-            image.src = urlInput.value;
-            displayImage.src = urlInput.value;
-            displayImage.style.display = 'block';
-        });
+    <!-- Aspect Ratio Checkbox -->
+    <label>
+        <input type="checkbox" id="aspectRatioCheckbox" checked> Maintain Aspect Ratio
+    </label>
 
-        image.onload = function () {
-            widthInput.value = image.width;
-            heightInput.value = image.height;
+    <!-- Resize and Reset Buttons -->
+    <button id="resizeBtn">Resize Image</button>
+    <button id="resetBtn">Reset</button>
+
+    <!-- Resized Image Display -->
+    <div id="resizedImageBox"></div>
+
+    <!-- Download Button -->
+    <button id="downloadBtn">Download Resized Image</button>
+</div>
+
+<script>
+    const imageInput = document.getElementById('imageInput');
+    const urlInput = document.getElementById('urlInput');
+    const importBtn = document.getElementById('importBtn');
+    const widthInput = document.getElementById('widthInput');
+    const heightInput = document.getElementById('heightInput');
+    const aspectRatioCheckbox = document.getElementById('aspectRatioCheckbox');
+    const resizeBtn = document.getElementById('resizeBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const imageBox = document.getElementById('imageBox');
+    const resizedImageBox = document.getElementById('resizedImageBox');
+
+    let originalImage = null;
+    let originalWidth = 0;
+    let originalHeight = 0;
+
+    // Function to load image and set width and height
+    function loadImage(img) {
+        img.onload = () => {
+            originalImage = img;
+            originalWidth = img.width;
+            originalHeight = img.height;
+
+            widthInput.value = originalWidth;
+            heightInput.value = originalHeight;
+
+            imageBox.innerHTML = '';
+            imageBox.appendChild(img);
+        };
+    }
+
+    // Image input (File)
+    imageInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            const img = new Image();
+            img.src = e.target.result;
+            loadImage(img);
         };
 
-        widthInput.addEventListener('input', function () {
-            if (aspectRatioCheckbox.checked) {
-                heightInput.value = Math.round((image.height / image.width) * widthInput.value);
-            }
-        });
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    });
 
-        heightInput.addEventListener('input', function () {
-            if (aspectRatioCheckbox.checked) {
-                widthInput.value = Math.round((image.width / image.height) * heightInput.value);
-            }
-        });
+    // Import Button for URL Input
+    importBtn.addEventListener('click', () => {
+        const img = new Image();
+        img.crossOrigin = "Anonymous"; // For cross-origin images
+        img.src = urlInput.value;
+        loadImage(img);
+    });
 
-        resizeButton.addEventListener('click', function () {
-            if (image.src) {
-                const width = parseInt(widthInput.value, 10);
-                const height = parseInt(heightInput.value, 10);
-                canvas.width = width;
-                canvas.height = height;
-                ctx.drawImage(image, 0, 0, width, height);
+    // Aspect Ratio Handling
+    widthInput.addEventListener('input', () => {
+        if (aspectRatioCheckbox.checked && originalWidth > 0 && originalHeight > 0) {
+            const aspectRatio = originalWidth / originalHeight;
+            heightInput.value = Math.round(widthInput.value / aspectRatio);
+        }
+    });
 
-                // Display the resized image
-                resizedImage.src = canvas.toDataURL('image/png');
-                resizedImage.style.display = 'block';
+    heightInput.addEventListener('input', () => {
+        if (aspectRatioCheckbox.checked && originalWidth > 0 && originalHeight > 0) {
+            const aspectRatio = originalWidth / originalHeight;
+            widthInput.value = Math.round(heightInput.value * aspectRatio);
+        }
+    });
 
-                downloadButton.style.display = 'block'; // Show download button after resize
-            } else {
-                alert('Please upload an image or enter a valid image URL.');
-            }
-        });
+    // Resize Image
+    resizeBtn.addEventListener('click', () => {
+        if (!originalImage) return;
 
-        downloadButton.addEventListener('click', function () {
-            canvas.toBlob(function (blob) {
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'resized-image.png';
-                a.click();
-                URL.revokeObjectURL(url);
-            });
-        });
-    </script>
+        const newWidth = parseInt(widthInput.value, 10);
+        const newHeight = parseInt(heightInput.value, 10);
+
+        const canvas = document.createElement('canvas');
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(originalImage, 0, 0, newWidth, newHeight);
+
+        resizedImageBox.innerHTML = '';
+        const resizedImg = new Image();
+        resizedImg.src = canvas.toDataURL();
+        resizedImageBox.appendChild(resizedImg);
+
+        downloadBtn.onclick = () => {
+            const link = document.createElement('a');
+            link.href = resizedImg.src;
+            link.download = 'resized-image.png';
+            link.click();
+        };
+    });
+
+    // Reset Image Size and Resized Image
+    resetBtn.addEventListener('click', () => {
+        widthInput.value = originalWidth;
+        heightInput.value = originalHeight;
+
+        // Reset resized image to original size
+        resizedImageBox.innerHTML = '';
+        const canvas = document.createElement('canvas');
+        canvas.width = originalWidth;
+        canvas.height = originalHeight;
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(originalImage, 0, 0, originalWidth, originalHeight);
+
+        const resetImg = new Image();
+        resetImg.src = canvas.toDataURL();
+        resizedImageBox.appendChild(resetImg);
+    });
+</script>
+
 </body>
 </html>
