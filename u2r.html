@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urdu to Roman Urdu Translator</title>
+    <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(to right, #e9ecef, #f8f9fa);
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        background-color: #ffffff;
+        margin: 20px auto;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        overflow: hidden; /* Prevents content from overflowing */
+    }
+
+    .container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    h2 {
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 20px;
+        font-size: 26px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    textarea {
+        width: calc(100% - 20px); /* Adjusts width to prevent overflow */
+        height: 150px;
+        padding: 10px;
+        border-radius: 8px;
+        border: 2px solid #007bff;
+        resize: none;
+        font-size: 16px;
+        color: #495057;
+        transition: border-color 0.3s;
+        margin-bottom: 15px; /* Spacing between textareas */
+    }
+    
+    #outputText {
+      margin-top: 10px;
+      height: 250px;
+    }
+
+    textarea:focus {
+        border-color: #0056b3;
+        outline: none;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        transition: background-color 0.3s, transform 0.2s;
+        font-weight: bold;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 600px) {
+        .container {
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 22px; /* Smaller heading on mobile */
+        }
+
+        textarea {
+            font-size: 14px;
+        }
+
+        button {
+            font-size: 16px;
+        }
+    }
+</style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Urdu to Roman Urdu Translator</h2>
+        <textarea id="inputText" rows="5" placeholder="Urdu mein likhein..."></textarea>
+        <button onclick="translateText()">Translate</button>
+        <textarea id="outputText" rows="5" placeholder="Roman Urdu ka tarjumah yahaan dikhai dega..."></textarea>
+    </div>
+
+    <script>
+        function translateText() {
+    var urduText = document.getElementById("inputText").value;
+
+    // Translation dictionary
+    var translationMap = {
+"سٹی42:": "City42:",
+"سٹی42": "City42",
+"سٹی": "City",
+"پورے": "Poorey",
+"گھر": "Ghar",
+"کا": "Ka",
+"خرچہ": "Kharcha",
+"میری": "Meri",
+"بہن": "Behen",
+"کے": "Ke",
+"ذمّے": "Zimme",
+"تھا،": "Tha,",
+"فاروق": "Farooq",
+"اگر": "Agar",
+"ہمارے": "Hamarey",
+"دروازہ": "Darwaza",
+"کھٹکھٹاتا": "Khatkhatata",
+"تو": "To",
+"آج": "Aaj",
+"یہ": "Yeh",
+"دن": "Din",
+"دیکھنے": "Dekhne",
+"کو": "Ko",
+"نہ": "Na",
+"ملتا۔": "Milta.",
+"کہنا": "Kehna",
+"ہے": "Hai",
+"لیڈی": "Lady",
+"پولیس": "Police",
+"کانسٹیبل": "Constable",
+"صومن": "Soman",
+"بھائی": "Bhai",
+"افضال": "Afzal",
+"جنہیں": "Jinhain",
+"ان": "Un",
+"ساتھی": "Saathi",
+"اہلکار": "Ahelkaar",
+"فائرنگ": "Firing",
+"کر": "Kar",
+"قتل": "Qatal",
+"دیا": "Diya",
+"اور": "Aur",
+"خود": "Khud",
+"بیٹھ": "Baith",
+"گرفتار": "Giraftar",
+"ہونے": "Hone",
+"انتظار": "Intezaar",
+"کرنے": "Karne",
+"لگا۔": "Laga.",
+"پُرتشدد": "Pur-Tashadud",
+"مظاہروں": "Muzahiroon",
+"سے": "Se",
+"نمٹنے": "Nimatne",
+"والے": "Waley",
+"یونٹ": "Unit",
+"حصّہ": "Hissa",
+"تھیں۔": "Theen.",
+"میں": "Main",
+"نے": "Ne",
+"منگل": "Mangal",
+"لاہور": "Lahore",
+"علاقے": "Ilaqey",
+"ہربنس": "Harbans",
+"پورہ": "Pura",
+"خاتون": "Khatun",
+"مبینہ": "Mubayyana",
+"طور": "Taur",
+"پر": "Par",
+"محمد": "Muhammad",
+"نامی": "Nami",
+"اس": "Is",
+"وقت": "Waqt",
+"جب": "Jab",
+"دونوں": "Dono",
+"تھانے": "Thaney",
+"حدود": "Hudood",
+"کنال": "Canal",
+"روڈ": "Road",
+"گرین": "Green",
+"ایریا": "Area",
+"بیٹھے": "Baithe",
+"آپس": "Aapas",
+"بات": "Baat",
+"چیت": "Cheet",
+"کرتے": "Karte",
+"جھگڑ": "Jhaghar",
+"پڑےتھے۔": "Padey They.",
+"بتایا": "Bataya",
+"بی": "BA",
+"بعد": "Baad",
+"بھرتی": "Bharti",
+"تھیں": "Theen",
+"گذشتہ": "Guzishta",
+"پانچ": "Paanch",
+"برس": "Baras",
+"حیثیت": "Haisiyat",
+"فرائض": "Faraiz",
+"انجام": "Anjam",
+"دے": "De",
+"رہی": "Rahi",
+"ہم": "Hum",
+"چار": "Char",
+"دو": "Do",
+"بہنیں": "Behnain",
+"ہیں": "Hain",
+"جن": "Jin",
+"چھوٹے": "Chhotey",
+"زیرِتعلیم": "Zair-e-Taleem",
+"جبکہ": "Jabkay",
+"بڑا": "Bara",
+"بیرون": "Bairon",
+"ملک": "Mulk",
+"ہوتا": "Hota",
+"ہے۔": "Hai.",
+"میرا": "Mera",
+"ایک": "Aik",
+"بازو": "Baazu",
+"نہیں": "Nahi",
+"اخراجات": "Akhrajaat",
+"دیکھتی": "Dekhti",
+"تھی۔": "Thi.",
+"کی": "Ki",
+"کہ": "Keh",
+"اے": "A",
+"ہوئی": "Hui",
+"لیے": "Liye",
+"حکام": "Hukam",
+"مطابق": "Mutabiq",
+"ملزم": "Mulzim",
+"مقتولہ": "Maqtoola",
+"کئی": "Kai",
+"برسوں": "Barsoon",
+"دوسرے": "Dosray",
+"ساتھ": "Saath",
+"تعلق": "Taluq",
+"تھے": "They",
+"ملتے": "Milte",
+"رہتے": "Rehte",
+"تھے۔": "They.",
+"ڈیوٹی": "Duty",
+"آفیسر": "Officer",
+"نےبتایا": "Ney Bataya",
+"ابتدائی": "Ibtidai",
+"معلوم": "Maloom",
+"ہوا": "Hua",
+"شادی": "Shaadi",
+"کرنا": "Karna",
+"چاہتا": "Chahta",
+"تھا": "Tha",
+"تاہم": "Taham",
+"اسے": "Usay",
+"رابطے": "Rabtay",
+"جس": "Jis",
+"تلخی": "Talkhi",
+"پیدا": "Paida",
+"ہوگئی۔": "Ho Gayi.",
+"متعلقہ": "Mutaliqa",
+"جانتے": "Jante",
+"کسی": "Kisi",
+"وہ": "Woh",
+"بھی": "Bhi",
+"آفیسر": "Officer",
+"شخص": "Shakhs",
+"رابطہ": "Rabta",
+"روکا": "Roka",
+"قائل": "Qail",
+"کوشش": "Koshish",
+"راضی": "Raazi",
+"ہوئی۔": "Hui.",
+"بیلٹ": "Belt",
+"بحث": "Bahas",
+"رہے": "Rahe",
+"لڑکے": "Ladkay",
+"پستول": "Pistool",
+"نکال": "Nikaal",
+"تین": "Teen",
+"فائر": "Fire",
+"دیئے۔": "Diye.",
+"ایس": "S",
+"ایچ": "H",
+"او": "O",
+"عاصم": "Asim",
+"حمید": "Hameed",
+"تفتیش": "Tafteesh",
+"یہی": "Yahi",
+"پسند": "Pasand",
+"کرتا": "Karta",
+"انکار": "Inkar",
+"گولی": "Goli",
+"مار": "Maar",
+"دی۔": "Di.",
+"مقدمے": "Muqadmay",
+"مدعی": "Mudai",
+"انہیں": "Unhain",
+"فون": "Phone",
+"اطلاع": "Ittila",
+"دی": "Di",
+"ہماری": "Hamari",
+"بجے": "Bajay",
+"گئی": "Gayi",
+"قریب": "Qareeb",
+"کہا": "Kaha",
+"تمہاری": "Tumhari",
+"آ": "Aa",
+"لاش": "Laash",
+"اٹھا": "Utha",
+"لو۔": "Lo.",
+"ڈسکہ؛": "Daska;",
+"آسمانی": "Asmani",
+"بجلی": "Bijli",
+"گرنے": "Girnay",
+"40سالہ": "40 Sala",
+"جاں": "Jaan",
+"بحق": "Bahaq",
+
+        "0": "0",
+        "1": "1",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5",
+        "6": "6",
+        "7": "7",
+        "8": "8",
+        "9": "9",
+        ".": ".",
+        ",": ",",
+        "!": "!",
+        "?": "?",
+        ":": ":",
+        ";": ";",
+        "(": "(",
+        ")": ")",
+        "@": "@",
+        "#": "#",
+        "$": "$",
+        "-": "-",
+        "+": "+",
+        "*": "*",
+        "\"": "\"",
+        "'": "'",
+        "~": "~",
+        "`": "`",
+        "|": "|",
+        "•": "•",
+        "√": "√",
+        "π": "π",
+        "÷": "÷",
+        "×": "×",
+        "§": "§",
+        "∆": "∆",
+        "£": "£",
+        "¢": "¢",
+        "€": "€",
+        "¥": "¥",
+        "^": "^",
+        "°": "°",
+        "=": "=",
+        "{": "{",
+        "}": "}",
+        "\\": "\\",
+        "%": "%",
+        "©": "©",
+        "®": "®",
+        "™": "™",
+        "✓": "✓",
+        "[": "[",
+        "]": "]",
+        "<": "<",
+        ">": ">",
+        "ِ": "ِ",
+        "ّ": "ّ",
+        "ُ": "ُ",
+        "ٗ": "ٗ",
+        "ٖ": "ٖ",
+        "ٰ": "ٰ",
+        "ً": "ً",
+        "َ": "َ",
+        "ٔ": "ٔ",
+        "ٓ": "ٓ",
+        "ـ": "ـ",
+        "ْ": "ْ",
+        "٘": "٘",
+        "ٕ": "ٕ",
+        "ٌ": "ٌ",
+        "ٍ": "ٍ",
+        "؛": "؛",
+        "؟": "؟"
+    };
+
+    // Urdu text ko Roman Urdu mein convert karna
+    var romanUrduText = urduText.replace(/[\u0600-\u06FF0-9.,!?:;()@#$\-+*"'~`|•√π÷×§∆£¢€¥^°={}\\%©®™✓\[\]<>\u0610-\u06FF]+/g, function(match) {
+        return translationMap[match] || match;  // Replace match if found, otherwise keep original
+    });
+
+    document.getElementById("outputText").value = romanUrduText;
+}
+
+    </script>
+
+</body>
+</html>
