@@ -400,31 +400,33 @@
         }
 
         .Pop-Movies {
-            /*background-color: #F780C1;*/
-            padding: 10px 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-y: auto;
-            gap: 20px;
-            width: 100%;
-        }
+    /* background-color: #F780C1; */
+    padding: 10px 10px;
+    display: flex;
+    justify-content: center; /* center alignment */
+    align-items: flex-start; /* start alignment for better display */
+    overflow-y: auto; /* vertical scrolling */
+    gap: 20px; /* gap between movie cards */
+    width: 100%;
+    flex-wrap: nowrap; /* prevent wrapping */
+}
 
-        @media (max-width: 896px) {
-            .Pop-Movies {
-                /*background-color: #F780C1;*/
-                padding: 20px 10px;
-                justify-content: left;
-                align-items: start;
-                overflow-y: auto;
-                display: flex;
-                gap: 20px;
-                width: 100%; 
-                margin: auto; 
-            }
-       }
+@media (max-width: 896px) {
+    .Pop-Movies {
+        /* background-color: #F780C1; */
+        padding: 20px 10px;
+        justify-content: flex-start; /* left alignment */
+        align-items: flex-start; /* start alignment */
+        overflow-y: auto;
+        display: flex;
+        gap: 20px;
+        width: 100%; 
+        margin: auto; 
+        flex-wrap: nowrap; /* prevent wrapping */
+    }
+}
 
-        #PopMovies .movie-card {
+#PopMovies .movie-card {
     background-color: #fff;
     border-radius: 5px;
     cursor: pointer;
@@ -434,13 +436,17 @@
     flex-direction: column;
     align-items: center;
     position: relative;
+    width: 200px; /* fixed width */
+    height: 200px; /* fixed height */
+    overflow: hidden; /* hide overflow */
+    flex: 0 0 200px; /* prevent shrinking and ensure fixed width */
 }
 
 #PopMovies .image-container {
     position: relative;
-    height: 200px;
-    width: 200px;
-    overflow: hidden;
+    height: 100%; /* full height of the card */
+    width: 100%; /* full width of the card */
+    overflow: hidden; /* hide overflow */
     border-radius: 5px;
 }
 
