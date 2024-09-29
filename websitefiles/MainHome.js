@@ -138,3 +138,63 @@ window.addEventListener('popstate', function() {
     displayMovies('CardContainer', start, end);
     highlightActivePage();
 });
+
+
+
+
+
+
+
+
+
+
+// Skeleton Loading Function
+function showSkeletonLoading(containerId, numSkeletons) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = ''; // Clear previous content
+
+    for (let i = 0; i < numSkeletons; i++) {
+        const skeletonCard = document.createElement('div');
+        skeletonCard.classList.add('movie-card');
+
+        const skeletonImage = document.createElement('div');
+        skeletonImage.classList.add('skeleton', 'image', 'loading');
+
+        const skeletonText = document.createElement('div');
+        skeletonText.classList.add('skeleton', 'text', 'loading');
+
+        const skeletonGenre = document.createElement('div');
+        skeletonGenre.classList.add('skeleton', 'genre', 'loading');
+
+        skeletonCard.appendChild(skeletonImage);
+        skeletonCard.appendChild(skeletonText);
+        skeletonCard.appendChild(skeletonGenre);
+
+        container.appendChild(skeletonCard);
+    }
+}
+
+// On page load, show skeleton loading for all containers
+document.addEventListener('DOMContentLoaded', function() {
+    // Show skeleton loading for main CardContainer
+    showSkeletonLoading('CardContainer', 6); // Show 6 skeleton cards
+
+    // Show skeleton loading for PopMovies
+    showSkeletonLoading('PopMovies', 4); // Show 3 skeleton cards
+
+    // Show skeleton loading for secCardContainer
+    showSkeletonLoading('secCardContainer', 4); // Show 3 skeleton cards
+
+    // Show skeleton loading for thardCardContainer
+    showSkeletonLoading('thardCardContainer', 4); // Show 3 skeleton cards
+
+    // Simulate loading movies after 2 seconds (replace this with actual movie loading logic)
+    setTimeout(function() {
+        const start = 0;
+        const end = 5;
+        displayMovies('CardContainer', start, end);
+        displayMovies('PopMovies', start, 3);
+        displayMovies('secCardContainer', start, 3);
+        displayMovies('thardCardContainer', start, 3);
+    }, 2000); // 2 seconds delay
+});
