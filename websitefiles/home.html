@@ -7,38 +7,42 @@
     <title>Movie Website</title>
     <link rel="stylesheet" href="https://lesbon23.github.io/allweb/websitefiles/MainStyles.css">
     <style>
+    	
     </style>
 </head>
 <body>
     <header>
             <div class="header-top">
-            <h1>Senma Movies</h1>
-        		 <a class="open-btn" href="https://lesbon23.github.io/allweb/websitefiles/A.html">
+            	<h1>Senma Movies</h1>
+        		<a class="open-btn" href="https://lesbon23.github.io/allweb/websitefiles/A.html">
   <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgH-A7doWtqT62LztWTBS5JgKoPpYnOiuzYJXLrZxXMZsRTr-YRlGsxviPnHUKHeRX8oIL59sONYSwFwB7O7Q71mebHOj7th8ckr6u27kkCk80DGjM94ZFDPyxfLkpLS1uRT8qlIyM5wxTaM2gDx3AX0_WZPDrYWfzqjMCfyt0Hy_bLpPb5Oa1CHtAmQGU/s1600/a1.png" alt="Movie Website Logo">
 </a>
             </div>
         
-        <div class="header-bottom">
-            <div class="header-right" id="headerRight">
+        	<div class="header-bottom">
+            	<div class="header-right" id="headerRight">
                     <button class="close-btn" id="closeBtn">
                 		<i class="fa-solid fa-xmark"></i>
                     </button>
                     <input type="text" id="searchInput" placeholder="Search...">
                     <button class="search-btn" onclick="searchData()">Search</button>
-            </div>
-            <div class="header-left">
-                <nav>
-                    <ul>
-                        <li><a href="#"><i class="fa-solid fa-house"></i></a></li>
-                        <li><a href="#"><i class="fa-solid fa-phone"></i></a></li>
-                        <li><a href="#"><i class="fa-solid fa-circle-info"></i></a></li>
-            <li><button class="cato-btn" id="catoBtn">
-            	<i class="fa-solid fa-bars"></i>
-            </button></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+            	</div>
+                
+            	<div class="header-left">
+                    <nav>
+                        <ul>
+                            <li><a href="#"><i class="fa-solid fa-house"></i></a></li>
+                            <li><a href="#"><i class="fa-solid fa-phone"></i></a></li>
+                            <li><a href="#"><i class="fa-solid fa-circle-info"></i></a></li>
+                			<li>
+                            	<button class="cato-btn" id="catoBtn">
+                    				<i class="fa-solid fa-bars"></i>
+                				</button>
+                            </li>
+                        </ul>
+                    </nav>
+               </div>
+        	</div>
     </header>
 	
     <!--- <header>
@@ -83,33 +87,27 @@
         </div>
     </div>
 
-    <div class="SecCato-Box" id="CategoryBox">
-        <!-- Add your ad content here -->
-    </div>
+    <div class="CatoBtn-Box" id="CategoryBox"></div>
 
     <div class="adva-box">
-        <!-- Add your ad content here -->
         <p>Advertisement Two</p>
     </div>
 
     <div class="Box-Three">
         <main class="movies-card-Box">
         	<div class="movies-card-Head">
-                <input type="checkbox"  name="checkbox" class="check-Box" id="actionCheckbox" value="action" checked>
             	<h1>Senma Movies</h1>
             </div>
             
-            <div class="card-Container" id="CardContainer">
+            <div class="card-Container" id="CardContainer"></div>
             
+            <div class="page-num-Box">
+                <div id="paginationBox"></div>
+                <button class="last-btn"  id="lastBtn">Last</button>
             </div>
-      	<div class="page-num-Box">
-            <div id="paginationBox"></div>
-            <button class="last-btn"  id="lastBtn">Last</button>
-        </div>
                 
-            <div class="sec-card-Container" id="secCardContainer">
+            <div class="sec-card-Container" id="secCardContainer"></div>
             
-            </div>
         </main>
         
         <div class="movies-category-box" id="moviesCategoryBox">
@@ -117,23 +115,22 @@
                 <h2>Top Trending</h2>
             </div>
             
-            <div class="thard-card-Container" id="thardCardContainer">
-            	
-            </div>
+            <div class="thard-card-Container" id="thardCardContainer"></div>
+            
         	<div class="cato-top-box-two">
                 <h2>Categories</h2>
     			<button class="cato-close-btn" id="catoCloseBtn">
                 	<i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
-            <ul id="buttons-container">
-            </ul>
         </div>
     </div>
         
     <footer>
         <p>&copy; 2024 Movie Website. All rights reserved.</p>
     </footer>
+    
+    
     
     <script src="https://lesbon23.github.io/allweb/websitefiles/MainHome.js"></script>
 
