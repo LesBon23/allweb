@@ -175,6 +175,110 @@
         .search-btn:hover {
             background-color: #ccc;
         }
+
+        .page-num-Box {
+            background-color: #f0f0f0;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            margin: 20px;
+            border-radius: 5px;
+            gap: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; 
+            overflow-x: auto;
+        }
+
+        @media (max-width: 500px) {
+            .page-num-Box {
+                background-color: #f0f0f0;
+                text-align: center;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                padding: 10px;
+                border-radius: 0px;
+                gap: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between; 
+                overflow-x: auto;
+            }
+        }
+
+        .page-num-Box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex; 
+            width: 100%;
+            max-width: 120px;
+            overflow-x: auto;
+        }
+
+
+        /* Style for pagination links container */
+        #paginationBox {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Style for individual pagination links */
+        #paginationBox a {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #f0f0f0;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Hover effect for pagination links */
+        #paginationBox a:hover {
+            background-color: #ccc;
+            color: #000;
+        }
+
+        /* Active page link style */
+        #paginationBox a.active {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 500px) {
+            #paginationBox {
+                flex-wrap: wrap;
+            }
+
+            #paginationBox a {
+                margin-bottom: 5px;
+            }
+        }
+
+        .last-btn {
+            padding: 10px 15px;
+            border: none;
+            background-color: #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .last-btn:hover {
+            background-color: #ccc;
+        }
+
+        @media screen and (max-width: 600px) {
+            .page-num-Box ul li {
+                margin-right: 5px;
+            }
+
+            .last-btn {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
