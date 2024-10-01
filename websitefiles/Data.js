@@ -89,6 +89,15 @@ const movies = [
         "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSV9q1cf43ZrsrnmI0GYnUa4wNDjNzWG-P4g&usqp=CAU",
         "TiltId": "j2j3j0"
     },
+    {
+        "title": "PK Two 2",
+        "heading": "PK two 2",
+        "description": "PK two is new movie of Amir khan",
+        "genre": "Comedy, Drama",
+        "genreId": "Comedy Drama", // Genre ID
+        "image": "https://via.placeholder.com/200",
+        "TiltId": "A4B9C8"
+    },
 {
     "title": "Julayi",
     "heading": "Julayi",
