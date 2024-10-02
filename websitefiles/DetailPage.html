@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,9 +40,70 @@
         </div>
     </div>
     
-    <div class="sec-card-Container" id="secCardContainer"></div>
+    <div class="Related-card-Container" id="RelatedCardContainer"></div>
     
-    <script src="https://lesbon23.github.io/allweb/websitefiles/Data.js"></script> <!-- Load the movie details data -->
+    <script src="https://lesbon23.github.io/allweb/websitefiles/Data.js"></script>
+    
+    
+<!--- Related Movies Cards JS code file --->
+<script>
+// Function to create a Related movie cards element
+function createMovieCard(movie) {
+    const movieCard = document.createElement('a');
+    movieCard.classList.add('movie-card');
+    movieCard.href = `https://lesbon23.github.io/allweb/websitefiles/DetailPage.html?movie=${movie.TiltId}`; // Set href to open in the same tab with TiltId
+
+    const imageContainer = document.createElement('div');
+    imageContainer.classList.add('image-container');
+
+    const image = document.createElement('img');
+    image.src = movie.image;
+    image.alt = movie.title;
+
+    const textContainer = document.createElement('div');
+    textContainer.classList.add('text-container');
+
+    const title = document.createElement('h3');
+    title.textContent = movie.title;
+
+    const description = document.createElement('p');
+    description.textContent = movie.description;
+    description.classList.add('description');
+
+    const genre = document.createElement('p');
+    genre.textContent = movie.genre;
+    genre.classList.add('genre');
+
+    imageContainer.appendChild(image);
+    movieCard.appendChild(imageContainer);
+    textContainer.appendChild(title);
+    textContainer.appendChild(description);
+    textContainer.appendChild(genre);
+    movieCard.appendChild(textContainer);
+
+    return movieCard;
+}
+
+// Function to display related movies based on the current movie heading
+function displayRelatedMovies() {
+    const heading = document.getElementById('heading').innerText; // Get the current movie heading
+    const relatedMovies = movies.filter(movie => movie.heading.includes(heading)); // Filter related movies based on heading
+
+    const relatedContainer = document.getElementById('RelatedCardContainer');
+    relatedContainer.innerHTML = ''; // Clear any previous related movies
+
+    // Display only 4 related movie cards
+    relatedMovies.slice(0, 4).forEach(movie => {
+        const movieCard = createMovieCard(movie);
+        relatedContainer.appendChild(movieCard);
+    });
+}
+
+// Call displayRelatedMovies after DOM content is loaded
+document.addEventListener('DOMContentLoaded', displayRelatedMovies);
+
+</script>
+
 
 <script>
     // Function to get URL parameter by name
