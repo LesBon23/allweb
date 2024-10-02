@@ -47,7 +47,12 @@
     
 <!--- Related Movies Cards JS code file --->
 <script>
-// Function to create a Related movie cards element
+// Function to filter related movies based on title and heading
+function getRelatedMovies(title) {
+    return movies.filter(movie => movie.title.includes(title));
+}
+
+// Function to create a Related movie card element
 function createMovieCard(movie) {
     const movieCard = document.createElement('a');
     movieCard.classList.add('movie-card');
@@ -84,22 +89,24 @@ function createMovieCard(movie) {
     return movieCard;
 }
 
-// Function to display related movies based on the current movie heading
+// Function to display related movies in the RelatedCardContainer
 function displayRelatedMovies() {
-    const heading = document.getElementById('heading').innerText; // Get the current movie heading
-    const relatedMovies = movies.filter(movie => movie.heading.includes(heading)); // Filter related movies based on heading
+    const heading = document.getElementById('heading').innerText;
 
-    const relatedContainer = document.getElementById('RelatedCardContainer');
-    relatedContainer.innerHTML = ''; // Clear any previous related movies
+    // Filter related movies based on title and heading
+    const relatedMovies = getRelatedMovies(heading);
 
-    // Display only 4 related movie cards
+    const relatedCardContainer = document.getElementById('RelatedCardContainer');
+    relatedCardContainer.innerHTML = ''; // Clear previous related movies
+
+    // Display only 4 related movies
     relatedMovies.slice(0, 4).forEach(movie => {
         const movieCard = createMovieCard(movie);
-        relatedContainer.appendChild(movieCard);
+        relatedCardContainer.appendChild(movieCard);
     });
 }
 
-// Call displayRelatedMovies after DOM content is loaded
+// Call the function to display related movies after DOM is fully loaded
 document.addEventListener('DOMContentLoaded', displayRelatedMovies);
 
 </script>
