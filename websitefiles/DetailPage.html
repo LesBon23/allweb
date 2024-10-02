@@ -47,16 +47,11 @@
     
 <!--- Related Movies Cards JS code file --->
 <script>
-// Function to filter related movies based on title and heading
-function getRelatedMovies(title) {
-    return movies.filter(movie => movie.title.includes(title));
-}
-
-// Function to create a Related movie card element
+// Function to create a Related movie cards element
 function createMovieCard(movie) {
     const movieCard = document.createElement('a');
     movieCard.classList.add('movie-card');
-    movieCard.href = `https://lesbon23.github.io/allweb/websitefiles/DetailPage.html?movie=${movie.TiltId}`; // Set href to open in the same tab with TiltId
+    movieCard.href = `https://lesbon23.github.io/allweb/websitefiles/DetailPage.html?movie=${movie.TiltId}`;
 
     const imageContainer = document.createElement('div');
     imageContainer.classList.add('image-container');
@@ -86,29 +81,37 @@ function createMovieCard(movie) {
     textContainer.appendChild(genre);
     movieCard.appendChild(textContainer);
 
+    // Add click event listener to open B.html
+    movieCard.addEventListener('click', function(event) {
+        if (event.ctrlKey || event.metaKey) {
+            event.preventDefault();
+            window.open(`https://lesbon23.github.io/allweb/websitefiles/DetailPage.html?movie=${movie.TiltId}`, '_blank');
+        }
+    });
+
     return movieCard;
 }
 
-// Function to display related movies in the RelatedCardContainer
+// Function to display related movie cards based on title and heading
 function displayRelatedMovies() {
     const heading = document.getElementById('heading').innerText;
 
-    // Filter related movies based on title and heading
-    const relatedMovies = getRelatedMovies(heading);
+    // Filter movies based on title and heading
+    const relatedMovies = movies.filter(movie => movie.title === heading);
 
-    const relatedCardContainer = document.getElementById('RelatedCardContainer');
-    relatedCardContainer.innerHTML = ''; // Clear previous related movies
+    // Limit to only 4 movies
+    const moviesToDisplay = relatedMovies.slice(0, 4);
 
-    // Display only 4 related movies
-    relatedMovies.slice(0, 4).forEach(movie => {
+    const container = document.getElementById('RelatedCardContainer');
+    container.innerHTML = ''; // Clear previous cards
+
+    moviesToDisplay.forEach(movie => {
         const movieCard = createMovieCard(movie);
-        relatedCardContainer.appendChild(movieCard);
+        container.appendChild(movieCard);
     });
 }
 
-// Call the function to display related movies after DOM is fully loaded
 document.addEventListener('DOMContentLoaded', displayRelatedMovies);
-
 </script>
 
 
