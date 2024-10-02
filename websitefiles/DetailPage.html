@@ -43,6 +43,81 @@
     <div class="Related-card-Container" id="RelatedCardContainer"></div>
     
     <script src="https://lesbon23.github.io/allweb/websitefiles/Data.js"></script>
+    
+    
+<!--- Related Movies Cards JS code file --->
+<script>
+
+
+    // Function to create a related movie card element
+    function createMovieCard(movie) {
+        const movieCard = document.createElement('a');
+        movieCard.classList.add('movie-card');
+        movieCard.href = `https://lesbon23.github.io/allweb/websitefiles/DetailPage.html?movie=${movie.TiltId}`;
+
+        const imageContainer = document.createElement('div');
+        imageContainer.classList.add('image-container');
+
+        const image = document.createElement('img');
+        image.src = movie.image;
+        image.alt = movie.title;
+
+        const textContainer = document.createElement('div');
+        textContainer.classList.add('text-container');
+
+        const title = document.createElement('h3');
+        title.textContent = movie.title;
+
+        const description = document.createElement('p');
+        description.textContent = movie.description;
+        description.classList.add('description');
+
+        const genre = document.createElement('p');
+        genre.textContent = movie.genre;
+        genre.classList.add('genre');
+
+        imageContainer.appendChild(image);
+        movieCard.appendChild(imageContainer);
+        textContainer.appendChild(title);
+        textContainer.appendChild(description);
+        textContainer.appendChild(genre);
+        movieCard.appendChild(textContainer);
+
+        // Add click event listener to open in a new tab if Ctrl or Command is pressed
+        movieCard.addEventListener('click', function(event) {
+            if (event.ctrlKey || event.metaKey) {
+                event.preventDefault();
+                window.open(`https://lesbon23.github.io/allweb/websitefiles/DetailPage.html?movie=${movie.TiltId}`, '_blank');
+            }
+        });
+
+        return movieCard;
+    }
+
+    // Function to display movies
+    function displayMovies(moviesToDisplay) {
+        const RelatedCardContainer= document.getElementById('RelatedCardContainer');
+        RelatedCardContainer.innerHTML = ''; // Clear previous content
+
+        moviesToDisplay.forEach(movie => {
+            const movieCard = createMovieCard(movie);
+            RelatedCardContainer.appendChild(movieCard);
+        });
+    }
+
+    // Get the heading from <h1> and filter the movies
+    const heading = document.getElementById('heading').innerText;
+
+    const filteredMovies = movies.filter(movie => movie.title === heading);
+
+    // Display the filtered movies
+    if (filteredMovies.length > 0) {
+        displayMovies(filteredMovies);
+    } else {
+        document.getElementById('RelatedCardContainer').innerHTML = '<p>No movies found</p>';
+    }
+</script>
+
 
 <script>
     // Function to get URL parameter by name
