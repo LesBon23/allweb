@@ -45,6 +45,9 @@
     <script src="https://lesbon23.github.io/allweb/websitefiles/Data.js"></script>
     
     
+
+
+
 <script>
     // Function to get URL parameter by name
     function getUrlParameter(name) {
@@ -137,68 +140,11 @@
                     createImageElement('Movie-Highlight-Image', movie[key], helightPhotsContainer);
                 }
             });
-
-            // Call the function to display related movies
-            displayRelatedMovies(movie.heading);
         } else {
             document.getElementById('movieDetails').innerText = 'Movie details not found.';
         }
     }
 
-    // Function to create a related movie card element
-    function createMovieCard(movie) {
-        const movieCard = document.createElement('a');
-        movieCard.classList.add('movie-card');
-        movieCard.href = `https://lesbon23.github.io/allweb/websitefiles/DetailPage.html?movie=${movie.TiltId}`;
-
-        const imageContainer = document.createElement('div');
-        imageContainer.classList.add('image-container');
-
-        const image = document.createElement('img');
-        image.src = movie.image;
-        image.alt = movie.title;
-
-        const textContainer = document.createElement('div');
-        textContainer.classList.add('text-container');
-
-        const title = document.createElement('h3');
-        title.textContent = movie.title;
-
-        const description = document.createElement('p');
-        description.textContent = movie.description;
-        description.classList.add('description');
-
-        const genre = document.createElement('p');
-        genre.textContent = movie.genre;
-        genre.classList.add('genre');
-
-        imageContainer.appendChild(image);
-        movieCard.appendChild(imageContainer);
-        textContainer.appendChild(title);
-        textContainer.appendChild(description);
-        textContainer.appendChild(genre);
-        movieCard.appendChild(textContainer);
-
-        return movieCard;
-    }
-
-    // Function to display related movies based on heading
-    function displayRelatedMovies(currentHeading) {
-        const relatedMovies = movies.filter(movie => movie.heading === currentHeading && movie.TiltId !== movies.find(m => m.heading === currentHeading).TiltId);
-        const RelatedCardContainer = document.getElementById('RelatedCardContainer');
-        RelatedCardContainer.innerHTML = ''; // Clear previous content
-
-        if (relatedMovies.length > 0) {
-            relatedMovies.forEach(movie => {
-                const movieCard = createMovieCard(movie);
-                RelatedCardContainer.appendChild(movieCard);
-            });
-        } else {
-            RelatedCardContainer.innerHTML = '<p>No related movies found</p>';
-        }
-    }
-
-    // Run when the DOM is fully loaded
     document.addEventListener('DOMContentLoaded', displayMovieDetails);
 </script>
 
