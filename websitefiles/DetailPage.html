@@ -88,9 +88,9 @@ function displayFilteredMovies() {
     // Get the text from the <h1> tag
     const h1Text = document.querySelector('#heading').textContent.toLowerCase();
     
-    // Filter movies that have titles starting with the <h1> text (for both partial and full matches)
+    // Filter movies that have titles containing any part of the <h1> text
     const filteredMovies = movies.filter(movie => 
-        movie.title.toLowerCase().startsWith(h1Text) || h1Text.startsWith(movie.title.toLowerCase())
+        movie.title.toLowerCase().includes(h1Text) || h1Text.includes(movie.title.toLowerCase())
     );
 
     // Get the container to display the filtered movies
@@ -106,6 +106,7 @@ function displayFilteredMovies() {
 
 // Call the function to display movies when the page loads
 window.onload = displayFilteredMovies;
+
 </script>
 
 
