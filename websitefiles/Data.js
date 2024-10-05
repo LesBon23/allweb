@@ -144,7 +144,7 @@ const movies = [
     "genre": "Acton, Comedy",
     "genreId": "Action Comedy",
     "ColumsOfHelightDivBox": "3",
-    "TiltId": "b2j3k2",
+    "TiltId": "fm7jkp9",
     "Motiesimage1st": "https://via.placeholder.com/200",
     "Motiesimage2nd": "https://via.placeholder.com/200",
     "Motiesimage3rd": "https://via.placeholder.com/200",
