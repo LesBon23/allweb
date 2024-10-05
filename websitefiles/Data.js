@@ -100,7 +100,7 @@ const movies = [
     },
 {
     "title": "Julayi Qureshi",
-    "heading": "Julayi",
+    "heading": "Julayi Qureshi",
     "image": "https://upload.wikimedia.org/wikipedia/en/2/2d/Julai_poster.jpg",
     "Mainimage": "https://upload.wikimedia.org/wikipedia/en/2/2d/Julai_poster.jpg",
     "tailvideo": "https://www.youtube.com/embed/jxYa6VkL4Oc?si=VupHKeIkiijbFz-1",
