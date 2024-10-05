@@ -45,7 +45,66 @@
     <script src="https://lesbon23.github.io/allweb/websitefiles/Data.js"></script>
     
     
+<script>
+// Function to create a movie card
+function createMovieCard(movie) {
+    const movieCard = document.createElement('a');
+    movieCard.classList.add('movie-card');
+    movieCard.href = `https://lesbon23.github.io/allweb/websitefiles/DetailPage.html?movie=${movie.TiltId}`; 
 
+    const imageContainer = document.createElement('div');
+    imageContainer.classList.add('image-container');
+
+    const image = document.createElement('img');
+    image.src = movie.image;
+    image.alt = movie.title;
+
+    const textContainer = document.createElement('div');
+    textContainer.classList.add('text-container');
+
+    const title = document.createElement('h3');
+    title.textContent = movie.title;
+
+    const description = document.createElement('p');
+    description.textContent = movie.description;
+    description.classList.add('description');
+
+    const genre = document.createElement('p');
+    genre.textContent = movie.genre;
+    genre.classList.add('genre');
+
+    imageContainer.appendChild(image);
+    movieCard.appendChild(imageContainer);
+    textContainer.appendChild(title);
+    textContainer.appendChild(description);
+    textContainer.appendChild(genre);
+    movieCard.appendChild(textContainer);
+
+    return movieCard;
+}
+
+// Function to display filtered movies in "RelatedCardContainer"
+function displayFilteredMovies() {
+    // Get the text from the <h1> tag
+    const h1Text = document.querySelector('#heading').textContent.toLowerCase();
+    
+    // Filter movies that have titles matching the <h1> text partially
+    const filteredMovies = movies.filter(movie => movie.title.toLowerCase().includes(h1Text));
+
+    // Get the container to display the filtered movies
+    const relatedCardContainer = document.querySelector('#RelatedCardContainer');
+    relatedCardContainer.innerHTML = ''; // Clear any previous content
+
+    // Create and append movie cards for the filtered movies
+    filteredMovies.forEach(movie => {
+        const movieCard = createMovieCard(movie);
+        relatedCardContainer.appendChild(movieCard);
+    });
+}
+
+// Call the function to display movies when the page loads
+window.onload = displayFilteredMovies;
+</script>
 
 
 <script>
