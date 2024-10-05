@@ -121,6 +121,8 @@ const movies = [
     },
     {
         "title": "PK",
+        "heading": "PK",
+        "Mainimage": "https://via.placeholder.com/200",
         "description": "An alien stranded on Earth learns about human society and religious practices while searching for his lost spaceship, leading to humorous and poignant encounters.",
         "genre": "Comedy, Drama",
         "genreId": "Comedy Drama", // Genre ID
@@ -166,6 +168,7 @@ const movies = [
     {
         "title": "Two 2 PK Hindi",
         "heading": "PK two 2",
+        "Mainimage": "https://via.placeholder.com/200",
         "description": "PK two is new movie of Amir khan",
         "genre": "Comedy, Drama",
         "genreId": "Comedy Drama", // Genre ID
@@ -332,6 +335,7 @@ const movies = [
     {
         "title": "PK Two 2",
         "heading": "PK two 2",
+        "Mainimage": "https://via.placeholder.com/200",
         "description": "PK two is new movie of Amir khan",
         "genre": "Comedy, Drama",
         "genreId": "Comedy Drama", // Genre ID
@@ -357,6 +361,8 @@ const movies = [
     },
     {
         "title": "PK 3",
+        "heading": "PK 3",
+        "Mainimage": "https://via.placeholder.com/200",
         "description": "An alien stranded on Earth learns about human society and religious practices while searching for his lost spaceship, leading to humorous and poignant encounters.",
         "genre": "Comedy, Drama",
         "genreId": "Comedy Drama", // Genre ID
