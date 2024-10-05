@@ -120,44 +120,13 @@ const movies = [
         "TiltId": "j2j3j0"
     },
     {
-        "title": "PK Two 2",
-        "heading": "PK two 2",
-        "description": "PK two is new movie of Amir khan",
+        "title": "PK",
+        "description": "An alien stranded on Earth learns about human society and religious practices while searching for his lost spaceship, leading to humorous and poignant encounters.",
         "genre": "Comedy, Drama",
         "genreId": "Comedy Drama", // Genre ID
         "image": "https://via.placeholder.com/200",
-        "TiltId": "A4B9C8"
+        "TiltId": "A2B2C2"
     },
-{
-    "title": "Julayi Qureshi",
-    "heading": "Julayi Qureshi",
-    "image": "https://upload.wikimedia.org/wikipedia/en/2/2d/Julai_poster.jpg",
-    "Mainimage": "https://upload.wikimedia.org/wikipedia/en/2/2d/Julai_poster.jpg",
-    "tailvideo": "https://www.youtube.com/embed/jxYa6VkL4Oc?si=VupHKeIkiijbFz-1",
-    "description": "Julayi (transl. Vagabond) is a 2012 Indian Telugu-language action comedy film written and directed by Trivikram Srinivas,[citation needed] and produced by S. Radha Krishna under Haarika & Hassine Creations banner. The film stars an ensemble cast including Allu Arjun, Ileana D'Cruz, Sonu Sood, Rajendra Prasad, Rao Ramesh, Kota Srinivasa Rao, Brahmaji, Tanikella Bharani and Sheetal Menon. The soundtrack was composed by Devi Sri Prasad, with cinematography handled by Chota K. Naidu and his brother Shyam K. Naidu, and editing done by Prawin Pudi.",
-    "descriptionone": "Julayi (transl. Vagabond) is a 2012 Indian Telugu-language action comedy film written and directed by Trivikram Srinivas,[citation needed] and produced by S. Radha Krishna under Haarika & Hassine Creations banner. The film stars an ensemble cast including Allu Arjun, Ileana D'Cruz, Sonu Sood, Rajendra Prasad, Rao Ramesh, Kota Srinivasa Rao, Brahmaji, Tanikella Bharani and Sheetal Menon. The soundtrack was composed by Devi Sri Prasad, with cinematography handled by Chota K. Naidu and his brother Shyam K. Naidu, and editing done by Prawin Pudi.\n\nThe film was released worldwide on 9 August 2012 to positive reviews, and was commercially successful. The film has garnered the Nandi Award for Best Popular Feature Film.[1] It was remade into Tamil titled as Saagasam.",
-    "descriptiontwo": "Allu Arjun as Ravindra Ravi Narayan\nIleana D'Cruz as Madhu, Ravi's love interest\nSonu Sood as Bittu\nRajendra Prasad as DIG Sitaram IPS (Ravi's friend and guru)\nKota Srinivasa Rao as MLA Varadarajulu\nTanikella Bharani as Narayana Murthy, Ravi's father\nBrahmanandam as Pickpocket, whom Sitaram has kept as a servant\nAli as Cameo Appearance\nRao Ramesh as ACP Raja Manikyam IPS\nBrahmaji as Travel Murthy (Travel Agent)\nShafi as Lala, Bittu's brother\nM. S. Narayana as Sub-Inspector Valmiki\nDharmavarapu Subramanyam as Madhu's father\nSheetal Menon as Devayani, Bittu's wife\nTulasi as Kameswari\nHema as Sujata\nPragathi as Lalita\nSreemukhi as Raji, Ravi's sister\nRavi Prakash as Dhanushkoti, Bittu's henchman\nPradeep Machiraju as Ravi's friend working in fm studio\nSaptagiri as Ravi's friend\nAmit Tiwari as Bittu's henchman\nVamsi Krishna as Bittu's henchman\nPosani Krishna Murali as Club Owner\nGautam Raju as Police Constable\nSivannarayana as Tea Seller\nKalpika Ganesh as Neha\nShravan as Sattaru\nPrabhu as Prabhu\nVennela Kishore as deaf customer in Cafe\nRaghu Babu as customer in bar\nAnanth Babu as Priest\nDhanraj as Patient in Hospital\nRajitha as Ravi's neighbor\nSunny as Thief\nVenkata Giridhar Vajja as Bike Guy\nUdaya Bhanu in an item number\nRaju Sundaram (cameo appearance in a song)\nPrakash Raj (voiceover)",
-    "descriptionThree": "",
-    "MetaName": "NiQ",
-    "MetaDescriptionOne": "Julayi (transl. Vagabond) is a 2012 Indian Telugu-language action comedy film written and directed by Trivikram Srinivas,[citation needed] and produced by S. Radha Krishna under Haarika & Hassine Creations banner. The film stars an ensemble cast including Allu Arjun, Ileana D'Cruz, Sonu Sood, Rajendra Prasad, Rao Ramesh, Kota Srinivasa Rao, Brahmaji, Tanikella Bharani and Sheetal Menon. The soundtrack was composed by Devi Sri Prasad, with cinematography handled by Chota K. Naidu and his brother Shyam K. Naidu, and editing done by Prawin Pudi.",
-    "MetaKeywords": "",
-    "genre": "Acton, Comedy",
-    "genreId": "Action Comedy",
-    "ColumsOfHelightDivBox": "3",
-    "TiltId": "fm7jkp9",
-    "Motiesimage1st": "https://via.placeholder.com/200",
-    "Motiesimage2nd": "https://via.placeholder.com/200",
-    "Motiesimage3rd": "https://via.placeholder.com/200",
-    "Motiesimage4th": "https://via.placeholder.com/200",
-    "Motiesimage5th": "https://via.placeholder.com/200",
-    "Motiesimage6th": "https://via.placeholder.com/200",
-    "Motiesimage7th": "https://via.placeholder.com/200",
-    "Motiesimage8th": "https://via.placeholder.com/200",
-    "Motiesimage9th": "https://via.placeholder.com/200",
-    "Motiesimage10th": "https://via.placeholder.com/200",
-    "Motiesimage11th": "https://via.placeholder.com/200",
-    "Motiesimage12th": "https://via.placeholder.com/200"
-},
 {
     "title": "Fast X",
     "heading": "Fast X",
@@ -194,6 +163,15 @@ const movies = [
     "Motiesimage17th": "https://via.placeholder.com/800",
     "Motiesimage18th": "https://via.placeholder.com/800"
 },
+    {
+        "title": "Two 2 PK Hindi",
+        "heading": "PK two 2",
+        "description": "PK two is new movie of Amir khan",
+        "genre": "Comedy, Drama",
+        "genreId": "Comedy Drama", // Genre ID
+        "image": "https://via.placeholder.com/200",
+        "TiltId": "A4G9VM"
+    },
     {
         "title": "Bachna Ae Haseeno",
         "heading": "Bachna Ae Haseeno",
@@ -352,6 +330,15 @@ const movies = [
         "TiltId": "A3B3C3"
     },
     {
+        "title": "PK Two 2",
+        "heading": "PK two 2",
+        "description": "PK two is new movie of Amir khan",
+        "genre": "Comedy, Drama",
+        "genreId": "Comedy Drama", // Genre ID
+        "image": "https://via.placeholder.com/200",
+        "TiltId": "A4B9MF"
+    },
+    {
         "title": "Dangal",
         "description": "Based on a true story, a former wrestler trains his daughters to compete in the male-dominated sport of wrestling, challenging societal norms.",
         "genre": "Biographical, Sports",
@@ -361,20 +348,20 @@ const movies = [
         "TiltId": "A1B1C1"
     },
     {
-        "title": "PK",
-        "description": "An alien stranded on Earth learns about human society and religious practices while searching for his lost spaceship, leading to humorous and poignant encounters.",
-        "genre": "Comedy, Drama",
-        "genreId": "Comedy Drama", // Genre ID
-        "image": "https://via.placeholder.com/200",
-        "TiltId": "A2B2C2"
-    },
-    {
         "title": "Bajrangi Bhaijaan",
         "description": "A devoted man undertakes a journey to reunite a mute Pakistani girl with her family in India, overcoming barriers of language, culture, and politics.",
         "genre": "Drama, Comedy",
         "genreId": "Drama Comedy", // Genre ID
         "image": "https://via.placeholder.com/200",
         "TiltId": "A3B3C3"
+    },
+    {
+        "title": "PK 3",
+        "description": "An alien stranded on Earth learns about human society and religious practices while searching for his lost spaceship, leading to humorous and poignant encounters.",
+        "genre": "Comedy, Drama",
+        "genreId": "Comedy Drama", // Genre ID
+        "image": "https://via.placeholder.com/200",
+        "TiltId": "Max78B"
     },
     {
         "title": "Devdas",
