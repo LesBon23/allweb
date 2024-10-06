@@ -83,30 +83,34 @@ function createMovieCard(movie) {
     return movieCard;
 }
 
-// Function to display filtered movies in "RelatedCardContainer"
-function displayFilteredMovies() {
-    // Get the text from the <h1> tag
-    const h1Text = document.querySelector('#heading').textContent.toLowerCase();
-    
-    // Filter movies that have titles containing any part of the <h1> text
-    const filteredMovies = movies.filter(movie => 
-        movie.title.toLowerCase().includes(h1Text) || h1Text.includes(movie.title.toLowerCase())
-    );
 
-    // Get the container to display the filtered movies
+// Function to display related movies in the "RelatedCardContainer"
+function displayRelatedMovies() {
+    // Get the text from the <h1> tag (current movie title)
+    const currentMovieTitle = document.querySelector('#heading').textContent;
+
+    // Find the index of the current movie
+    const currentIndex = movies.findIndex(movie => movie.title === currentMovieTitle);
+
+    // Filter out the current movie from the list
+    const filteredMovies = movies.filter(movie => movie.title !== currentMovieTitle);
+
+    // Get the next 4 movies starting from the current movie's index
+    let relatedMovies = [];
+    for (let i = 1; i <= 4; i++) {
+        relatedMovies.push(filteredMovies[(currentIndex + i) % filteredMovies.length]);
+    }
+
+    // Get the container to display the related movies
     const relatedCardContainer = document.querySelector('#RelatedCardContainer');
     relatedCardContainer.innerHTML = ''; // Clear any previous content
 
-    // Create and append movie cards for the filtered movies
-    filteredMovies.forEach(movie => {
+    // Create and append movie cards for the related movies
+    relatedMovies.forEach(movie => {
         const movieCard = createMovieCard(movie);
         relatedCardContainer.appendChild(movieCard);
     });
 }
-
-// Call the function to display movies when the page loads
-window.onload = displayFilteredMovies;
-
 </script>
 
 
