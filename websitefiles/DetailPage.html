@@ -85,41 +85,44 @@ function createMovieCard(movie) {
 
 // Function to display related movies in the "RelatedCardContainer"
 function displayRelatedMovies() {
-    // Pehle <h1> tag se current movie ka title get karo
+    // Get the text from the <h1> tag (current movie title)
     const currentMovieTitle = document.querySelector('#heading').textContent;
 
-    // Ab current movie ka index dhundo list mein
+    // Find the index of the current movie
     const currentIndex = movies.findIndex(movie => movie.title === currentMovieTitle);
 
-    // Related movies ko yahan store karenge
-    let relatedMovies = [];
+    // Create arrays for matching and unmatching movies
+    const matchingMovies = [];
+    const unmatchingMovies = [];
 
-    // Pehli movie starting se le lo
-    let firstRelatedIndex = (currentIndex + 1) % movies.length;
-    relatedMovies.push(movies[firstRelatedIndex]);
+    // Loop through the movies to categorize them
+    movies.forEach((movie, index) => {
+        if (movie.title !== currentMovieTitle) {
+            // Add to matching if it contains similar text
+            if (movie.title.includes(currentMovieTitle.split(' ')[0]) || movie.title.includes(currentMovieTitle.split(' ')[1])) {
+                matchingMovies.push(movie);
+            } else {
+                unmatchingMovies.push(movie);
+            }
+        }
+    });
 
-    // Agli do related movies ko add karo
-    let secondRelatedIndex = (firstRelatedIndex + 1) % movies.length;
-    relatedMovies.push(movies[secondRelatedIndex]);
+    // Get the related movies array, first 3 matching and then one unmatching
+    let relatedMovies = matchingMovies.slice(0, 3);
 
-    let thirdRelatedIndex = (secondRelatedIndex + 1) % movies.length;
-    relatedMovies.push(movies[thirdRelatedIndex]);
-
-    // Ab ek unmatching movie find karo jo related nahi hai
-    const unmatchingMovies = movies.filter(movie => 
-        !relatedMovies.includes(movie) && movie.title !== currentMovieTitle
-    );
-    
-    if (unmatchingMovies.length > 0) {
-        const randomUnmatchingMovie = unmatchingMovies[Math.floor(Math.random() * unmatchingMovies.length)];
-        relatedMovies.push(randomUnmatchingMovie); // Unmatching movie add karo
+    // If we have less than 3 matching movies, fill with unmatching
+    if (relatedMovies.length < 3 && unmatchingMovies.length > 0) {
+        relatedMovies.push(unmatchingMovies[0]);
+    } else if (unmatchingMovies.length > 0) {
+        // Ensure we always add one unmatching movie
+        relatedMovies.push(unmatchingMovies[Math.floor(Math.random() * unmatchingMovies.length)]);
     }
 
-    // RelatedCardContainer ko get karo jahan ye movies display karni hain
+    // Get the container to display the related movies
     const relatedCardContainer = document.querySelector('#RelatedCardContainer');
-    relatedCardContainer.innerHTML = ''; // Purani movies clear karo
+    relatedCardContainer.innerHTML = ''; // Clear any previous content
 
-    // Ab har related movie ka card banao aur display karo
+    // Create and append movie cards for the related movies
     relatedMovies.forEach(movie => {
         const movieCard = createMovieCard(movie);
         relatedCardContainer.appendChild(movieCard);
