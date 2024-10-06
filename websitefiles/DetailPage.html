@@ -92,13 +92,23 @@ function displayRelatedMovies() {
     // Find the index of the current movie
     const currentIndex = movies.findIndex(movie => movie.title === currentMovieTitle);
 
-    // Filter out the current movie from the list
-    const filteredMovies = movies.filter(movie => movie.title !== currentMovieTitle);
-
-    // Get the next 4 movies starting from the current movie's index
+    // Initialize an array to hold the related movies
     let relatedMovies = [];
-    for (let i = 1; i <= 4; i++) {
-        relatedMovies.push(filteredMovies[(currentIndex + i) % filteredMovies.length]);
+
+    // Loop to pick the next 4 movies excluding the current one
+    let count = 0;
+    let i = currentIndex + 1;
+    
+    while (count < 4) {
+        if (i >= movies.length) {
+            i = 0; // If index goes beyond the list, start from the beginning
+        }
+
+        if (movies[i].title !== currentMovieTitle) {
+            relatedMovies.push(movies[i]); // Only add movies that are not the current one
+            count++;
+        }
+        i++;
     }
 
     // Get the container to display the related movies
