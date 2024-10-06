@@ -83,41 +83,42 @@ function createMovieCard(movie) {
     return movieCard;
 }
 
-
-
-// Function to calculate string similarity (basic approach)
-function getSimilarity(str1, str2) {
-    const commonWords = str1.split(" ").filter(word => str2.includes(word)).length;
-    return commonWords;
-}
-
-// Function to display related movies
+// Function to display related movies in the "RelatedCardContainer"
 function displayRelatedMovies() {
+    // Get the text from the <h1> tag (current movie title)
     const currentMovieTitle = document.querySelector('#heading').textContent;
 
-    // Filter movies with the highest similarity, excluding the current movie
-    const matchingMovies = movies.filter(movie => 
-        movie.title !== currentMovieTitle && getSimilarity(currentMovieTitle, movie.title) > 0
-    );
+    // Find all matching movies
+    const matchingMovies = movies.filter(movie => movie.title.includes(currentMovieTitle));
 
-    // Get one unmatching movie
-    const unmatchingMovies = movies.filter(movie => getSimilarity(currentMovieTitle, movie.title) === 0);
-    const randomUnmatchingMovie = unmatchingMovies[Math.floor(Math.random() * unmatchingMovies.length)];
+    // Filter out the current movie from the list
+    const filteredMovies = movies.filter(movie => movie.title !== currentMovieTitle);
 
-    // Select the next 3 matching movies
+    // Prepare related movies array
     let relatedMovies = [];
-    for (let i = 0; i < 3; i++) {
-        relatedMovies.push(matchingMovies[i % matchingMovies.length]);
-    }
     
-    // Add the unmatching movie
-    relatedMovies.push(randomUnmatchingMovie);
+    // Add matching movies
+    relatedMovies.push(...matchingMovies.slice(0, 1)); // Start with one matching movie
+    
+    // Add the next 2 matching movies if they exist
+    if (matchingMovies.length > 1) {
+        relatedMovies.push(...matchingMovies.slice(1, 3));
+    }
 
-    // Display the related movies
+    // If we have less than 3 related movies, fill with unmatching movies
+    while (relatedMovies.length < 4) {
+        // Select a random unmatching movie
+        const unmatchingMovie = filteredMovies[Math.floor(Math.random() * filteredMovies.length)];
+        if (!relatedMovies.includes(unmatchingMovie)) {
+            relatedMovies.push(unmatchingMovie);
+        }
+    }
+
+    // Get the container to display the related movies
     const relatedCardContainer = document.querySelector('#RelatedCardContainer');
-    relatedCardContainer.innerHTML = ''; // Clear previous content
+    relatedCardContainer.innerHTML = ''; // Clear any previous content
 
-    // Create movie cards for related movies
+    // Create and append movie cards for the related movies
     relatedMovies.forEach(movie => {
         const movieCard = createMovieCard(movie);
         relatedCardContainer.appendChild(movieCard);
