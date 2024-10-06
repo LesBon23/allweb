@@ -83,21 +83,30 @@ function createMovieCard(movie) {
     return movieCard;
 }
 
-// Function to display related movies
+// Function to display related movies in the "RelatedCardContainer"
 function displayRelatedMovies() {
+    // Get the text from the <h1> tag (current movie title)
     const currentMovieTitle = document.querySelector('#heading').textContent;
-    const currentMovie = movies.find(movie => movie.title === currentMovieTitle);
-    
-    const matchingMovies = movies.filter(movie => movie.genreId === currentMovie.genreId && movie.title !== currentMovie.title);
-    const unmatchingMovies = movies.filter(movie => movie.genreId !== currentMovie.genreId);
-    
-    // Get the next 3 matching movies
-    const relatedMovies = matchingMovies.slice(0, 3);
-    
-    // Get 1 random unmatching movie
-    const randomUnmatchingMovie = unmatchingMovies[Math.floor(Math.random() * unmatchingMovies.length)];
-    relatedMovies.push(randomUnmatchingMovie);
-    
+
+    // Find the index of the current movie
+    const currentIndex = movies.findIndex(movie => movie.title === currentMovieTitle);
+
+    // Filter out the current movie from the list
+    const filteredMovies = movies.filter(movie => movie.title !== currentMovieTitle);
+
+    // Find matching movies based on genre
+    let matchingMovies = filteredMovies.filter(movie => movie.genreId.includes(movies[currentIndex].genreId.split(' ')[0]));
+
+    // Get first matching movies
+    let relatedMovies = matchingMovies.slice(0, 3);
+
+    // Find one unmatching movie
+    let unmatchingMovie = filteredMovies.find(movie => !movie.genreId.includes(movies[currentIndex].genreId.split(' ')[0]));
+
+    if (unmatchingMovie) {
+        relatedMovies.push(unmatchingMovie);
+    }
+
     // Get the container to display the related movies
     const relatedCardContainer = document.querySelector('#RelatedCardContainer');
     relatedCardContainer.innerHTML = ''; // Clear any previous content
