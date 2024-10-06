@@ -120,6 +120,116 @@ const movies = [
         "TiltId": "j2j3j0"
     },
     {
+        "title": "Echoes of Time",
+        "heading": "Echoes of Time",
+        "Mainimage": "https://via.placeholder.com/200",
+        "description": "A mysterious adventure unfolds as echoes of the past influence the future.",
+        "genre": "Adventure, Sci-Fi",
+        "genreId": "Adventure Sci-Fi",
+        "image": "https://via.placeholder.com/200",
+        "TiltId": "a29ops"
+    },
+    {
+        "title": "Journey Through Time",
+        "heading": "Journey Through Time",
+        "Mainimage": "https://via.placeholder.com/200",
+        "description": "An epic tale of travelers venturing through different eras to uncover secrets.",
+        "genre": "Fantasy, Adventure",
+        "genreId": "Fantasy Adventure",
+        "image": "https://via.placeholder.com/200",
+        "TiltId": "B9rTQ9"
+    },
+    {
+        "title": "The Edge of Time",
+        "heading": "The Edge of Time",
+        "Mainimage": "https://via.placeholder.com/200",
+        "description": "A thriller about scientists pushing the boundaries of time travel.",
+        "genre": "Thriller, Sci-Fi",
+        "genreId": "Thriller Sci-Fi",
+        "image": "https://via.placeholder.com/200",
+        "TiltId": "G7y2pQ"
+    },
+    {
+        "title": "Frozen in Time",
+        "heading": "Frozen in Time",
+        "Mainimage": "https://via.placeholder.com/200",
+        "description": "A heartwarming story of a family stuck in a moment that changes their lives forever.",
+        "genre": "Drama, Family",
+        "genreId": "Drama Family",
+        "image": "https://via.placeholder.com/200",
+        "TiltId": "z4NkQ8"
+    },
+    {
+        "title": "Beyond Time’s Reach",
+        "heading": "Beyond Time’s Reach",
+        "Mainimage": "https://via.placeholder.com/200",
+        "description": "A futuristic journey exploring realms untouched by time itself.",
+        "genre": "Sci-Fi, Action",
+        "genreId": "Sci-Fi Action",
+        "image": "https://via.placeholder.com/200",
+        "TiltId": "X5u9pZ"
+    },
+    {
+        "title": "Time of the Fallen",
+        "heading": "Time of the Fallen",
+        "Mainimage": "https://via.placeholder.com/200",
+        "description": "The last days of a fallen empire where time becomes their worst enemy.",
+        "genre": "Action, Historical",
+        "genreId": "Action Historical",
+        "image": "https://via.placeholder.com/200",
+        "TiltId": "H6k2Rq"
+    },
+    {
+        "title": "A Glimpse of Time",
+        "heading": "A Glimpse of Time",
+        "Mainimage": "https://via.placeholder.com/200",
+        "description": "A curious child discovers a device that shows brief moments from the future.",
+        "genre": "Family, Sci-Fi",
+        "genreId": "Family Sci-Fi",
+        "image": "https://via.placeholder.com/200",
+        "TiltId": "R2zL8s"
+    },
+    {
+        "title": "Timekeeper’s Secret",
+        "heading": "Timekeeper’s Secret",
+        "Mainimage": "https://via.placeholder.com/200",
+        "description": "A legendary timekeeper holds a secret that could change the course of history.",
+        "genre": "Mystery, Adventure",
+        "genreId": "Mystery Adventure",
+        "image": "https://via.placeholder.com/200",
+        "TiltId": "J7tY9w"
+    },
+    {
+        "title": "In the Heart of Time",
+        "heading": "In the Heart of Time",
+        "Mainimage": "https://via.placeholder.com/200",
+        "description": "A love story that transcends time itself, set in both the past and future.",
+        "genre": "Romance, Fantasy",
+        "genreId": "Romance Fantasy",
+        "image": "https://via.placeholder.com/200",
+        "TiltId": "L9qT5d"
+    },
+    {
+        "title": "Caught in Time’s Web",
+        "heading": "Caught in Time’s Web",
+        "Mainimage": "https://via.placeholder.com/200",
+        "description": "A detective must solve a crime by piecing together events from different timelines.",
+        "genre": "Crime, Thriller",
+        "genreId": "Crime Thriller",
+        "image": "https://via.placeholder.com/200",
+        "TiltId": "M6eQ3n"
+    },
+    {
+        "title": "Time’s Final Hour",
+        "heading": "Time’s Final Hour",
+        "Mainimage": "https://via.placeholder.com/200",
+        "description": "The countdown to the end of time has begun, and only one man can stop it.",
+        "genre": "Action, Sci-Fi",
+        "genreId": "Action Sci-Fi",
+        "image": "https://via.placeholder.com/200",
+        "TiltId": "P4vR2k"
+    },
+    {
         "title": "PK",
         "heading": "PK",
         "Mainimage": "https://via.placeholder.com/200",
