@@ -95,11 +95,11 @@ function displayRelatedMovies() {
     // Initialize an array to hold the related movies
     let relatedMovies = [];
 
-    // Loop to pick the next 4 movies excluding the current one
+    // Loop to pick the next 3 matching movies excluding the current one
     let count = 0;
     let i = currentIndex + 1;
     
-    while (count < 4) {
+    while (count < 3) {
         if (i >= movies.length) {
             i = 0; // If index goes beyond the list, start from the beginning
         }
@@ -109,6 +109,17 @@ function displayRelatedMovies() {
             count++;
         }
         i++;
+    }
+
+    // Now pick one unmatching movie (not in the relatedMovies or current movie)
+    const unmatchingMovies = movies.filter(movie => 
+        !relatedMovies.includes(movie) && movie.title !== currentMovieTitle
+    );
+
+    if (unmatchingMovies.length > 0) {
+        // Randomly select one unmatching movie to display
+        const randomUnmatchingMovie = unmatchingMovies[Math.floor(Math.random() * unmatchingMovies.length)];
+        relatedMovies.push(randomUnmatchingMovie); // Add it to the list
     }
 
     // Get the container to display the related movies
