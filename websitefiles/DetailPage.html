@@ -87,42 +87,36 @@ function createMovieCard(movie) {
 function displayRelatedMovies() {
     // Get the text from the <h1> tag (current movie title)
     const currentMovieTitle = document.querySelector('#heading').textContent;
-
-    // Find all matching movies
-    const matchingMovies = movies.filter(movie => movie.title.includes(currentMovieTitle));
-
-    // Filter out the current movie from the list
-    const filteredMovies = movies.filter(movie => movie.title !== currentMovieTitle);
-
-    // Prepare related movies array
-    let relatedMovies = [];
     
-    // Add matching movies
-    relatedMovies.push(...matchingMovies.slice(0, 1)); // Start with one matching movie
+    // Filter the movies that include any part of the current movie title
+    const filteredMovies = movies.filter(movie => 
+        movie.title !== currentMovieTitle && 
+        currentMovieTitle.split(' ').some(word => movie.title.includes(word))
+    );
+
+    // Randomly pick a non-matching movie
+    const nonMatchingMovies = movies.filter(movie => movie.title !== currentMovieTitle && !filteredMovies.includes(movie));
     
-    // Add the next 2 matching movies if they exist
-    if (matchingMovies.length > 1) {
-        relatedMovies.push(...matchingMovies.slice(1, 3));
-    }
-
-    // If we have less than 3 related movies, fill with unmatching movies
-    while (relatedMovies.length < 4) {
-        // Select a random unmatching movie
-        const unmatchingMovie = filteredMovies[Math.floor(Math.random() * filteredMovies.length)];
-        if (!relatedMovies.includes(unmatchingMovie)) {
-            relatedMovies.push(unmatchingMovie);
-        }
-    }
-
     // Get the container to display the related movies
     const relatedCardContainer = document.querySelector('#RelatedCardContainer');
     relatedCardContainer.innerHTML = ''; // Clear any previous content
 
     // Create and append movie cards for the related movies
-    relatedMovies.forEach(movie => {
-        const movieCard = createMovieCard(movie);
-        relatedCardContainer.appendChild(movieCard);
+    filteredMovies.forEach((movie, index) => {
+        // Skip the first movie if it is the same as the current movie
+        if (index < 3) {
+            const movieCard = createMovieCard(movie);
+            relatedCardContainer.appendChild(movieCard);
+        }
     });
+
+    // Add one random non-matching movie card
+    if (nonMatchingMovies.length > 0) {
+        const randomIndex = Math.floor(Math.random() * nonMatchingMovies.length);
+        const randomNonMatchingMovie = nonMatchingMovies[randomIndex];
+        const nonMatchingCard = createMovieCard(randomNonMatchingMovie);
+        relatedCardContainer.appendChild(nonMatchingCard);
+    }
 }
 
 // Call the function to display movies when the page loads
