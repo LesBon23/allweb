@@ -89,7 +89,7 @@
     const data = Object.fromEntries(formData);
 
     // Sending data to Google Sheets using a Google Script Web App
-    const response = await fetch("YOUR_GOOGLE_SCRIPT_URL", {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbwpUVBKEu4tcDENxunpkR-3mUQ9Jl_fHZi46Zm1w9skJ7OXFMdfsOKwM0MVV7YNZzWL/exec", {
         method: "POST",
         body: JSON.stringify(data),
     });
