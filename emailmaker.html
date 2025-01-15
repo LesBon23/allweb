@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS to Inline Style Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .converter-container {
+            max-width: 800px;
+            width: 100%;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .converter-container textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .converter-container button {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .converter-container button:hover {
+            background-color: #45a049;
+        }
+        .output {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="converter-container">
+        <h2>CSS to Inline Style Converter</h2>
+        <textarea id="cssInput" placeholder="Enter your CSS here..."></textarea>
+        <textarea id="htmlInput" placeholder="Enter your HTML here..."></textarea>
+        <button onclick="convertToInline()">Convert to Inline Styles</button>
+        <h3>Output:</h3>
+        <textarea id="output" class="output"></textarea>
+    </div>
+
+    <script>
+        function convertToInline() {
+            const cssInput = document.getElementById('cssInput').value;
+            const htmlInput = document.getElementById('htmlInput').value;
+            const outputElement = document.getElementById('output');
+
+            try {
+                const styleElement = document.createElement('style');
+                styleElement.textContent = cssInput;
+                document.head.appendChild(styleElement);
+
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = htmlInput;
+
+                const styleSheet = [...document.styleSheets].find(sheet => sheet.ownerNode === styleElement);
+                const rules = styleSheet ? styleSheet.cssRules : [];
+
+                for (const rule of rules) {
+                    if (rule.type === CSSRule.STYLE_RULE) {
+                        const elements = tempDiv.querySelectorAll(rule.selectorText);
+                        elements.forEach(element => {
+                            for (let i = 0; i < rule.style.length; i++) {
+                                const property = rule.style[i];
+                                element.style[property] = rule.style.getPropertyValue(property);
+                            }
+                        });
+                    }
+                }
+
+                document.head.removeChild(styleElement);
+                outputElement.textContent = tempDiv.innerHTML;
+            } catch (error) {
+                outputElement.textContent = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
