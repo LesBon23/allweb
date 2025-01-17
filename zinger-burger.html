@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nouman Iftikhar - Portfolio</title>
+    <title>Nouman Iftikhar - Portfolio Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script&family=Pacifico&display=swap" rel="stylesheet">
     <style>
@@ -150,8 +150,7 @@
         <h1>Zinger Burger</h1>
         <div class="ZingerAbout">
             <p id="mainContainer">
-                Zinger Burger ek crispy aur juicy fried chicken patty ka laziz combination hai jo soft aur freshly toasted bun ke darmiyan serve hota hai. Is mein creamy mayonnaise, crunchy lettuce, aur flavorful spices ka 
-                <input type="text" id="perfectInput" value="perfect" readonly> blend hota hai jo har bite ko irresistible banata hai. Ye burger apne unique texture aur <span id="mouthwatering">mouthwatering</span> taste ki wajah se har fast-food lover ke liye ek favorite treat hai.
+                Zinger Burger ek crispy aur <input type="text" id="perfectInput" value="juicy fried" readonly> chicken patty ka laziz combination hai jo soft aur freshly toasted bun ke darmiyan serve hota hai. Is mein creamy mayonnaise, crunchy lettuce, aur flavorful spices ka perfect blend hota hai jo har bite ko irresistible banata hai. Ye burger apne unique texture aur <span id="mouthwatering">mouthwatering</span> taste ki wajah se har fast-food lover ke liye ek favorite treat hai.
             </p>
     		<div class="gradient-image"></div>
       	</div>
@@ -160,6 +159,9 @@
             <div class="secret-box">
                 <div class="secret-box-recipy">
                     <h3>Zinger Marination</h3>
+                    <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkCGjHqklZSrTTVUzUzzJyPz-Ln_sW-ulAD3ywzbn3ibGoZgIEy1ZZ0vpAbQpI28oFeiPJ_-dNwLIUja8v3MZESlbmNOlvQCjMD0uCLZV40RSBcVNltx3BFAByStjNWlVQdXrDPkutJuMj9WgiwhozwjsvM5DQxPsAilAPEC3B_Va4M-S1bq4wAqZjYpY/s1600/1000109799.jpg">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkCGjHqklZSrTTVUzUzzJyPz-Ln_sW-ulAD3ywzbn3ibGoZgIEy1ZZ0vpAbQpI28oFeiPJ_-dNwLIUja8v3MZESlbmNOlvQCjMD0uCLZV40RSBcVNltx3BFAByStjNWlVQdXrDPkutJuMj9WgiwhozwjsvM5DQxPsAilAPEC3B_Va4M-S1bq4wAqZjYpY/s1600/1000109799.jpg" alt="Thumbnail Image" style="width: 100px; height: auto;"/>
+                    </a>
                     <table>
                        <tr>
                           <th>Items</th>
@@ -263,7 +265,7 @@
 
     perfectInput.addEventListener('blur', () => {
         if (perfectInput.value.trim() !== '4') {
-            perfectInput.value = 'perfect';
+            perfectInput.value = 'juicy fried';
             perfectInput.setAttribute('readonly', 'true');
         }
         adjustInputSize(perfectInput); // Reset size if changed
@@ -273,7 +275,7 @@
     document.addEventListener('click', (event) => {
         if (!mainContainer.contains(event.target)) {
             secretBox.style.display = 'none';
-            perfectInput.value = 'perfect';
+            perfectInput.value = 'juicy fried';
             perfectInput.setAttribute('readonly', 'true');
             adjustInputSize(perfectInput);
             clickOrder = [];
