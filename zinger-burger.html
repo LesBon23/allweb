@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouman Iftikhar - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+        }
+        
+        .section {
+            padding: 20px;
+            min-height: 100vh;
+            background: #fff;
+            color: #333;
+            border: 0; /* Pehle se set borders ko remove karne ke liye */
+            border-bottom: 12px solid; /* Border thickness set karen */
+            border-image: linear-gradient(135deg, #3498db, #8e44ad) 1;
+        }
+
+        .section h1 {
+            border-bottom: 2px solid #8e44ad;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .ZingerAbout {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: flex-start;
+            background: white;
+            gap: 10%;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .ZingerAbout p {
+            max-width: 600px;
+            line-height: 1.5;
+        }
+        .gradient-image {
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            background: linear-gradient(to left, rgba(228, 43, 34, 0), rgba(228, 43, 34, 0.3)), 
+                        url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe7ILQSkTE4XlsM6yNsUIt4y-nIKOF9EdOgA&usqp=CAU');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            aspect-ratio: 16/9; /* Optional: Image ratio */
+        }
+
+        #perfectInput {
+            border: none;
+            border-bottom: 0px solid black;
+            font-family: inherit;
+            font-size: inherit;
+            text-align: center;
+            display: inline-block;
+            width: auto; /* Auto-adjust width */
+        }
+
+        .secret-box {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            min-height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .secret-box-recipy {
+            background: #fff;
+            padding: 20px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 1151px) {
+
+          .ZingerAbout {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: flex-start;
+              align-items: center;
+              gap: 0px;
+          }
+          
+          .gradient-image {
+              width: 100%;
+              max-width: 100vw;
+              height: auto;
+              background: linear-gradient(to left, rgba(228, 43, 34, 0), rgba(228, 43, 34, 0.3)), 
+                          url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe7ILQSkTE4XlsM6yNsUIt4y-nIKOF9EdOgA&usqp=CAU');
+              background-size: cover;
+              background-position: center;
+              background-repeat: no-repeat;
+              aspect-ratio: 16/9; /* Optional: Image ratio */
+              border-radius: 8px 8px 0px 0px;
+          }
+
+          .ZingerAbout p {
+              line-height: 1.5;
+              order: 2;
+              background: #fff;
+              padding-top: 15px;
+              padding-right: 15px;
+              border-radius: 0px 10px 0px 0px;
+          }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="section zingerBurger" >
+        <h1>Zinger Burger</h1>
+        <div class="ZingerAbout">
+            <p id="mainContainer">
+                Zinger Burger ek crispy aur juicy fried chicken patty ka laziz combination hai jo soft aur freshly toasted bun ke darmiyan serve hota hai. Is mein creamy mayonnaise, crunchy lettuce, aur flavorful spices ka 
+                <input type="text" id="perfectInput" value="perfect" readonly> blend hota hai jo har bite ko irresistible banata hai. Ye burger apne unique texture aur <span id="mouthwatering">mouthwatering</span> taste ki wajah se har fast-food lover ke liye ek favorite treat hai.
+            </p>
+    		<div class="gradient-image"></div>
+      	</div>
+    </div>
+        
+            <div class="secret-box">
+                <div class="secret-box-recipy">
+                    <h3>Zinger Marination</h3>
+                    <table>
+                       <tr>
+                          <th>Items</th>
+                          <th>Grams</th>
+                       </tr>
+                       
+                       <tr>
+                          <td>Chilli Souce</td>
+                          <td>6 kg</td>
+                       </tr>
+                       <tr>
+                           <td>Ginger Powder</td>
+                           <td>200 gm</td>
+                       </tr>
+                       <tr>
+                           <td>Garlic Powder</td>
+                           <td>200 gm</td>
+                       </tr>
+                       <tr>
+                           <td>China Salt</td>
+                           <td>60 gm</td>
+                      </tr>
+                      <tr>
+                          <td>Zera</td>
+                          <td>20 gm</td>
+                      </tr>
+                      <tr>
+                          <td>Dhania Powder</td>
+                          <td>50 gm</td>
+                      </tr>
+                      <tr>
+                          <td>Gol Crush Red Chili</td>
+                          <td>50 gm</td>
+                      </tr>
+                      <tr>
+                          <td>Salt</td>
+                          <td>170 gm</td>
+                      </tr>
+                 </table>
+                        <!--- <p>Congratulations! You unlocked the secret content.</p> --->
+             </div>
+         </div>
+
+    <script>
+    const points = document.querySelectorAll('.point');
+    const secretBox = document.querySelector('.secret-box');
+    const mainContainer = document.getElementById('mainContainer');
+    const mouthwateringText = document.getElementById('mouthwatering');
+    const perfectInput = document.getElementById('perfectInput');
+    let clickOrder = [];
+
+    // Adjust input size based on its text
+    function adjustInputSize(input) {
+        const tempSpan = document.createElement('span');
+        tempSpan.style.visibility = 'hidden';
+        tempSpan.style.fontFamily = getComputedStyle(input).fontFamily;
+        tempSpan.style.fontSize = getComputedStyle(input).fontSize;
+        tempSpan.innerText = input.value;
+        document.body.appendChild(tempSpan);
+        input.style.width = `${tempSpan.offsetWidth + 2}px`; // Adjust width
+        input.style.height = `${tempSpan.offsetHeight}px`; // Adjust height
+        document.body.removeChild(tempSpan);
+    }
+
+    adjustInputSize(perfectInput);
+
+    // Functionality for point clicking
+    points.forEach(point => {
+        point.addEventListener('click', () => {
+            const pointNumber = point.getAttribute('data-point');
+            clickOrder.push(pointNumber);
+
+            if (clickOrder.join('') === '123') {
+                secretBox.style.display = 'flex';
+            } else if (clickOrder.length > 3) {
+                clickOrder = [];
+                secretBox.style.display = 'none';
+            }
+        });
+    });
+
+    // Functionality for copying "mouthwatering"
+    mouthwateringText.addEventListener('copy', () => {
+        secretBox.style.display = 'flex';
+    });
+
+    // Functionality for "perfect" input
+    perfectInput.addEventListener('click', () => {
+        perfectInput.removeAttribute('readonly');
+        perfectInput.focus();
+    });
+
+    perfectInput.addEventListener('input', () => {
+        if (perfectInput.value.trim() === '4') {
+            secretBox.style.display = 'flex';
+        } else {
+            secretBox.style.display = 'none';
+        }
+        adjustInputSize(perfectInput); // Adjust size while typing
+    });
+
+    perfectInput.addEventListener('blur', () => {
+        if (perfectInput.value.trim() !== '4') {
+            perfectInput.value = 'perfect';
+            perfectInput.setAttribute('readonly', 'true');
+        }
+        adjustInputSize(perfectInput); // Reset size if changed
+    });
+
+    // Hide secret-box and reset all states when clicking outside mainContainer
+    document.addEventListener('click', (event) => {
+        if (!mainContainer.contains(event.target)) {
+            secretBox.style.display = 'none';
+            perfectInput.value = 'perfect';
+            perfectInput.setAttribute('readonly', 'true');
+            adjustInputSize(perfectInput);
+            clickOrder = [];
+        }
+    });
+</script>
+
+
+
+</body>
+</html>
