@@ -1,3 +1,9 @@
+<!---
+
+is website main URL image ka size and border radius change nahi hota hai.
+
+--->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,51 +12,75 @@
     <title>Image Resizer Tool</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
             margin: 0;
-            background-color: #f3f4f6;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
         }
 
         .container {
             background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
             max-width: 400px;
             width: 100%;
+            text-align: center;
+            transition: transform 0.3s;
         }
 
         .container h1 {
-            text-align: center;
+            font-size: 24px;
+            color: #ff6b6b;
             margin-bottom: 20px;
         }
 
         input[type="file"],
         input[type="text"],
-        input[type="number"] {
+        input[type="number"],
+        select {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
             border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        input[type="file"] {
+            padding: 5px;
+            background: #ff6b6b;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="file"]::-webkit-file-upload-button {
+            display: none;
         }
 
         .controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+            text-align: left;
         }
 
         .controls label {
-            margin-right: 10px;
+            display: block;
+            color: #555;
+            margin-bottom: 5px;
+            font-weight: bold;
         }
 
         .controls input[type="number"] {
-            width: 60px;
+            width: calc(100% - 20px);
+            display: inline-block;
+        }
+
+        .controls select {
+            width: calc(100% - 20px);
+            display: inline-block;
         }
 
         .controls input[type="checkbox"] {
@@ -59,29 +89,44 @@
 
         button {
             width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
+            padding: 12px;
+            background: #ff6b6b;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            margin-bottom: 10px;
+            font-size: 16px;
+            transition: background 0.3s;
         }
 
         button:hover {
-            background-color: #45a049;
+            background: #e55757;
         }
 
         img,
         #resizedImage {
             max-width: 100%;
-            margin-bottom: 20px;
+            margin-top: 20px;
             display: block;
-            border-radius: 0;
+            border-radius: 10px;
         }
 
         canvas {
             display: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px 20px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            button {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -92,28 +137,23 @@
         <input type="text" id="urlInput" placeholder="Enter image URL">
         <img id="displayImage" src="" alt="Selected Image" style="display: none;">
         <div class="controls">
-            <div>
-                <label for="widthInput">Width:</label>
-                <input type="number" id="widthInput" placeholder="Width">
-            </div>
-            <div>
-                <label for="heightInput">Height:</label>
-                <input type="number" id="heightInput" placeholder="Height">
-            </div>
-            <div>
-                <label for="borderRadiusInput">Border Radius:</label>
-                <input type="number" id="borderRadiusInput" placeholder="Radius">
-                <select id="borderRadiusUnit">
-                    <option value="px">px</option>
-                    <option value="%">%</option>
-                </select>
-            </div>
-            <div>
-                <label>
-                    Maintain Aspect Ratio:
-                    <input type="checkbox" id="aspectRatio" checked>
-                </label>
-            </div>
+            <label for="widthInput">Width:</label>
+            <input type="number" id="widthInput" placeholder="Width">
+            
+            <label for="heightInput">Height:</label>
+            <input type="number" id="heightInput" placeholder="Height">
+            
+            <label for="borderRadiusInput">Border Radius:</label>
+            <input type="number" id="borderRadiusInput" placeholder="Radius">
+            <select id="borderRadiusUnit">
+                <option value="px">px</option>
+                <option value="%">%</option>
+            </select>
+            
+            <label>
+                Maintain Aspect Ratio:
+                <input type="checkbox" id="aspectRatio" checked>
+            </label>
         </div>
         <button id="resizeButton">Resize Image</button>
         <img id="resizedImage" src="" alt="Resized Image" style="display: none;">
