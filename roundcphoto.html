@@ -6,47 +6,72 @@
     <title>Round Corner Image Tool</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
         .container {
+            max-width: 100%;
+            width: 90%;
             max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #f4f4f4;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
         }
 
         h1 {
-            text-align: center;
+            color: #ff6f61;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         #imageInput {
             margin-bottom: 20px;
             display: block;
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ff6f61;
+            border-radius: 10px;
+            transition: border-color 0.3s;
+        }
+
+        #imageInput:hover {
+            border-color: #ff9472;
         }
 
         #imagePreviewContainer {
             display: none;
             text-align: center;
+            margin-bottom: 20px;
         }
 
         #imagePreview {
             max-width: 100%;
             height: auto;
+            border: 5px solid #ff6f61;
+            border-radius: 10px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
             display: none;
-            margin: 0 auto; /* Center the image */
         }
 
         .slider-container {
             margin-top: 10px;
+            text-align: left;
         }
 
         .slider {
             width: 100%;
+            cursor: pointer;
         }
 
         .value-box {
@@ -57,10 +82,16 @@
 
         .value-box label {
             margin-right: 10px;
+            font-weight: bold;
+            color: #ff6f61;
         }
 
         .value-box input {
             width: 100px;
+            padding: 5px;
+            border: 2px solid #ff6f61;
+            border-radius: 5px;
+            text-align: center;
         }
 
         #RoundButton,
@@ -68,11 +99,18 @@
             display: none;
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: #007bff;
+            background: linear-gradient(45deg, #ff6f61, #ff9472);
             color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        #RoundButton:hover,
+        #downloadButton:hover {
+            transform: scale(1.05);
         }
 
         #previewContainer {
@@ -85,8 +123,25 @@
             max-width: 100%;
             height: auto;
             display: none;
-            margin: 0 auto; /* Center the image */
-            border-radius: 10px; /* Rounded corners */
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .value-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .value-box input {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -107,7 +162,7 @@
             </div>
         </div>
         <button id="RoundButton">Round Corner Image</button>
-        <button id="downloadButton">Download Rounded Corner Image</button>
+        <button id="downloadButton">Download Rounded Image</button>
         <div id="previewContainer">
             <h2>Preview:</h2>
             <img id="previewImage" src="" alt="Preview">
