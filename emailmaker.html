@@ -3,68 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS to Inline Style Converter</title>
+    <title>CSS Inliner Tool</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
             margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
-        .converter-container {
-            max-width: 800px;
+
+        .tool-container {
             width: 100%;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            max-width: 800px;
+            background: #ffffff;
             padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease;
         }
-        .converter-container textarea {
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        textarea {
             width: 100%;
             height: 150px;
+            padding: 15px;
             margin-bottom: 15px;
-            padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 8px;
             font-family: monospace;
+            font-size: 14px;
+            resize: vertical;
+            box-sizing: border-box;
+            transition: all 0.3s;
         }
-        .converter-container button {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #4CAF50;
+
+        textarea:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #007BFF, #00c6ff);
             color: white;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            border-radius: 25px;
             font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+            transition: background 0.3s;
         }
-        .converter-container button:hover {
-            background-color: #45a049;
+
+        button:hover {
+            background: linear-gradient(45deg, #0056b3, #009acd);
         }
+
         .output {
-            background-color: #f8f9fa;
-            padding: 10px;
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            margin-top: 20px;
+            background: #f8f9fa;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 8px;
             font-family: monospace;
             white-space: pre-wrap;
             word-wrap: break-word;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .tool-container {
+                padding: 15px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            textarea {
+                height: 120px;
+            }
+
+            .output {
+                height: 120px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="converter-container">
-        <h2>CSS to Inline Style Converter</h2>
-        <textarea id="cssInput" placeholder="Enter your CSS here..."></textarea>
-        <textarea id="htmlInput" placeholder="Enter your HTML here..."></textarea>
+    <div class="tool-container">
+        <h1>CSS Inliner Tool</h1>
+        <p>Paste your CSS and HTML below to convert external CSS into inline styles.</p>
+
+        <textarea id="cssInput" placeholder="Enter CSS here..."></textarea>
+        <textarea id="htmlInput" placeholder="Enter HTML here..."></textarea>
+
         <button onclick="convertToInline()">Convert to Inline Styles</button>
-        <h3>Output:</h3>
-        <textarea id="output" class="output"></textarea>
+
+        <h3>Converted HTML:</h3>
+        <textarea id="output" class="output" readonly></textarea>
     </div>
 
     <script>
